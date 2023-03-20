@@ -9,3 +9,6 @@
 ^\.github$
 ^codecov\.yml$
 ^tmp$
+^Dockerfile$
+^.dockerignore$
+^index.md$
