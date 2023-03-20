@@ -33,7 +33,8 @@ jobs:
       - name: Restore packages
         shell: Rscript {0}
         run: |
-          install.packages("reader")
+          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
+          renv::restore()
 
       - name: Test coverage
         run: |
