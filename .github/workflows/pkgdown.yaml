@@ -19,7 +19,6 @@ jobs:
       group: pkgdown-${{ github.event_name != 'pull_request' || github.run_id }}
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
-      RENV_CONFIG_REPOS_OVERRIDE: https://cloud.r-project.org
       RENV_PATHS_ROOT: ~/.local/share/renv
     steps:
       - uses: actions/checkout@v3
@@ -41,7 +40,7 @@ jobs:
       - name: Restore packages
         shell: Rscript {0}
         run: |
-          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
+          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv", repos = c(CRAN = "https://cloud.r-project.org"))
           renv::restore()
           renv::install('.')
 
