@@ -22,6 +22,14 @@ jobs:
         with:
           use-public-rspm: true
 
+      - name: Install system dependencies
+        run: |
+          brew update
+          brew install libgit2 openssl
+          brew link --force openssl
+          mkdir -p ~/.Renviron
+          echo 'PATH="/usr/local/opt/openssl/bin:${PATH}"' >> ~/.Renviron
+
       - name: Cache packages
         uses: actions/cache@v1
         with:
@@ -33,7 +41,8 @@ jobs:
       - name: Restore packages
         shell: Rscript {0}
         run: |
-          install.packages("reader")
+          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv")
+          renv::restore()
 
       - name: Test coverage
         run: |
