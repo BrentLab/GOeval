@@ -51,7 +51,7 @@ jobs:
       - name: Restore packages
         shell: Rscript {0}
         run: |
-          if (!requireNamespace("renv", quietly = TRUE)) install.packages("renv", repos = c(CRAN = "https://cloud.r-project.org"))
+          if (!requireNamespace("renv", quietly = TRUE)) install.packages("reader")
           renv::restore()
           renv::install('rcmdcheck')
 
