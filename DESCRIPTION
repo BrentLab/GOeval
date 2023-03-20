@@ -1,12 +1,21 @@
 Package: GOeval
-Title: What the Package Does (One Line, Title Case)
+Title: Gene Regulatory Network Evaluation Using Gene Ontology
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
+    person("Thomas", "Westbrook", , "westbrookt@wustl.edu", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+Description: This package provides functions to easily run gene set enrichment
+              analysis on multiple subsets of a gene regulatory network as well
+              as permuted versions of the network using the 'WebGestaltR' package.
+              It also provides functions to help assess the quality of biological
+              information captured by the network via metrics calculated from
+              the enrichment results.
+License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
+Suggests: 
+    covr,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+URL: https://westbrooktm.github.io/GOeval/
