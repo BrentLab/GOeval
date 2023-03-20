@@ -31,11 +31,8 @@ jobs:
 
       - name: Install system dependencies
         run: |
-          brew update
-          brew install libgit2 openssl
-          brew link --force openssl
-          mkdir -p ~/.Renviron
-          echo 'PATH="/usr/local/opt/openssl/bin:${PATH}"' >> ~/.Renviron
+          sudo apt-get update
+          sudo apt-get install -y libcurl4-openssl-dev libssl-dev libgit2-dev
 
       - name: Cache packages
         uses: actions/cache@v1
