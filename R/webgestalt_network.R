@@ -6,6 +6,10 @@
 #'
 #' @importFrom WebGestaltR idMapping
 #' @importFrom WebGestaltR loadGeneSet
+#' @importFrom utils read.table
+#' @importFrom utils write.table
+#' @importFrom utils write.csv
+#' @importFrom stats xtabs
 #'
 #' @param network_path path to the network or network subset to evaluate
 #' @param reference_set path to the set of all genes possibly included in the network

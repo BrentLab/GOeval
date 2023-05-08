@@ -91,7 +91,6 @@ plot_metrics <- function(metric_dfs_by_net, title_text, subtitle_text, sum = TRU
         line_plot <- line_plot + ggplot2::geom_line(medians[medians$method == net,], mapping = ggplot2::aes(x = size, y = median, color = method, group = method), linewidth = 1.5, linetype="dotted")
       }
       plot(line_plot)
-      plot.new()
     }
   }
 
