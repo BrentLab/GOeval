@@ -1,4 +1,3 @@
-# placeholder test
 test_that("proper tfId length", {
   tmp <- system.file("tmp", package = "GOeval")
   summaries_path <- file.path(tmp, "GO_summaries", "edn_top", "edn", "p0")

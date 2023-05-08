@@ -10,7 +10,7 @@ get_network_metrics(
   network_size,
   organism,
   get_sum,
-  get_percent_sig,
+  get_percent,
   get_mean,
   get_median,
   get_annotation_overlap,
@@ -32,7 +32,7 @@ the number of TFs that have summary files.}
 log base 10 of the p-value for the top term of each TF minus 3 times the total
 number of TFs.}
 
-\item{get_percent_sig}{bool whether to get the 'percent_sig' metric, which is the
+\item{get_percent}{bool whether to get the 'percent' metric, which is the
 percent of TFs with at least one GO term with a FDR < 0.05}
 
 \item{get_mean}{bool whether to get the 'mean' metric, which is the mean negative

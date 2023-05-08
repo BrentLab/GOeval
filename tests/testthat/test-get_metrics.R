@@ -3,7 +3,7 @@ suppressMessages(library(WebGestaltR))
 
 test_that("get_metrics runs with annotation overlap", {
   tmp <- system.file("tmp", package = "GOeval")
-  webgestalt_results <- file.path(tmp, "GO_summaries", "edn_top")
+  webgestalt_results <- file.path(tmp, "GO_summaries", "np3_npVm_top")
 
   go <- as.data.frame(get_ontology(file = "http://purl.obolibrary.org/obo/go/go-basic.obo", extract_tags = "everything"))
   go <- go[go$namespace == 'biological_process',]

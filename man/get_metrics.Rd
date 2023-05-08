@@ -9,7 +9,7 @@ get_metrics(
   directory,
   organism = "hsapiens",
   get_sum = TRUE,
-  get_percent_sig = FALSE,
+  get_percent = FALSE,
   get_mean = FALSE,
   get_median = FALSE,
   get_annotation_overlap = FALSE,
@@ -29,7 +29,7 @@ for each network of interest}
 log base 10 of the p-value for the top term of each TF minus 3 times the total
 number of TFs.}
 
-\item{get_percent_sig}{bool whether to get the 'percent_sig' metric, which is the
+\item{get_percent}{bool whether to get the 'percent' metric, which is the
 percent of TFs with at least one GO term with a FDR < 0.05}
 
 \item{get_mean}{bool whether to get the 'mean' metric, which is the mean negative

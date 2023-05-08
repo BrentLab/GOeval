@@ -1,0 +1,44 @@
+---
+title: "GOeval"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{GOeval}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+Steps to use this package from original network to graphing the results:
+1. subset_network to create network subsets with the top-weighted edges
+2. webgestalt_network on each of the network subsets to generate ORA results
+3. get_metrics on the stored ORA results to calculate summary statistics for plotting
+4. plot_metrics using the output of get_metrics
+
+```{r setup}
+library(GOeval)
+```
+
+```{r}
+# 1.
+# subset_network()
+
+# 2.
+# commented out for now for easy compiling of the vignette
+# webgestalt_network()
+```
+
+```{r}
+# 3.
+# metrics <- get_metrics()
+
+# 4.
+# pdf(file.path("figures", figure_name), 7, 5)
+# plot_metrics(metrics)
+# dev.off()
+```

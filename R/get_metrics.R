@@ -58,7 +58,7 @@ get_annotation_overlap <- function(terms, organism, go_ann, go_reg) {
 #' @param get_sum bool whether to get the 'sum' metric, which is the sum of the negative
 #'  log base 10 of the p-value for the top term of each TF minus 3 times the total
 #'  number of TFs.
-#' @param get_percent_sig bool whether to get the 'percent_sig' metric, which is the
+#' @param get_percent bool whether to get the 'percent' metric, which is the
 #'  percent of TFs with at least one GO term with a FDR < 0.05
 #' @param get_mean bool whether to get the 'mean' metric, which is the mean negative
 #'  log base 10 of the p-value for the top term of each TF
@@ -71,12 +71,12 @@ get_annotation_overlap <- function(terms, organism, go_ann, go_reg) {
 #'  WebGestaltR::loadGeneSet.
 #' @param go_reg a data.frame of the regulatory relationships between GO terms.
 #'  Obtain with ontologyIndex::get_ontology.
-get_network_metrics <- function(full_terms, network_size, organism, get_sum, get_percent_sig, get_mean, get_median, get_annotation_overlap, go_ann = NULL, go_reg = NULL) {
+get_network_metrics <- function(full_terms, network_size, organism, get_sum, get_percent, get_mean, get_median, get_annotation_overlap, go_ann = NULL, go_reg = NULL) {
   # heuristically chosen
   penalty <- 3
   if (!any(is.na(full_terms))) {
     terms <- full_terms[match(unique(full_terms$tfId), full_terms$tfId), ]
-    percent_sig <- 100 * sum(terms$FDR < 0.05) / network_size
+    percent <- 100 * sum(terms$FDR < 0.05) / network_size
     neglogp <- -log10(terms$pValue)
     # cap -logp values due to rounding to 0 for pval < 1E-16
     neglogp <- ifelse(is.finite(neglogp), neglogp, 16)
@@ -87,14 +87,14 @@ get_network_metrics <- function(full_terms, network_size, organism, get_sum, get
       prior_ann <- 0
     }
   } else {
-    percent_sig <- 0
+    percent <- 0
     neglogp_zeros <- rep(0, network_size)
     prior_ann <- 0
   }
   return(c(
-    sum(neglogp_zeros - penalty), percent_sig, mean(neglogp_zeros),
+    sum(neglogp_zeros - penalty), percent, mean(neglogp_zeros),
     median(neglogp_zeros), prior_ann
-  )[c(get_sum, get_percent_sig, get_mean, get_median, get_annotation_overlap)])
+  )[c(get_sum, get_percent, get_mean, get_median, get_annotation_overlap)])
 }
 
 #' get a data.frame that contains specified metrics for all networks that have a
@@ -113,7 +113,7 @@ get_network_metrics <- function(full_terms, network_size, organism, get_sum, get
 #' @param get_sum bool whether to get the 'sum' metric, which is the sum of the negative
 #'  log base 10 of the p-value for the top term of each TF minus 3 times the total
 #'  number of TFs.
-#' @param get_percent_sig bool whether to get the 'percent_sig' metric, which is the
+#' @param get_percent bool whether to get the 'percent' metric, which is the
 #'  percent of TFs with at least one GO term with a FDR < 0.05
 #' @param get_mean bool whether to get the 'mean' metric, which is the mean negative
 #'  log base 10 of the p-value for the top term of each TF
@@ -130,7 +130,7 @@ get_network_metrics <- function(full_terms, network_size, organism, get_sum, get
 #'  in parallel or sequentially
 #'
 #' @export
-get_metrics <- function(directory, organism = "hsapiens", get_sum = TRUE, get_percent_sig = FALSE, get_mean = FALSE, get_median = FALSE, get_annotation_overlap = FALSE, go_ann = NULL, go_reg = NULL, parallel = TRUE) {
+get_metrics <- function(directory, organism = "hsapiens", get_sum = TRUE, get_percent = FALSE, get_mean = FALSE, get_median = FALSE, get_annotation_overlap = FALSE, go_ann = NULL, go_reg = NULL, parallel = TRUE) {
   # start = Sys.time()
 
   networks_list <- list.dirs(directory, full.names = TRUE, recursive = FALSE)
@@ -146,7 +146,7 @@ get_metrics <- function(directory, organism = "hsapiens", get_sum = TRUE, get_pe
       network_size <- as.integer(stringr::word(readme, start = 3, end = 3, sep = stringr::fixed(" ")))
       paths <- list.dirs(net, full.names = TRUE, recursive = FALSE)
       p_terms <- mapply(get_terms, paths, 16, SIMPLIFY = FALSE)
-      result <- t(mapply(get_network_metrics, p_terms, network_size, organism, get_sum, get_percent_sig, get_mean, get_median, get_annotation_overlap, MoreArgs = list(go_ann = go_ann, go_reg = go_reg)))
+      result <- t(mapply(get_network_metrics, p_terms, network_size, organism, get_sum, get_percent, get_mean, get_median, get_annotation_overlap, MoreArgs = list(go_ann = go_ann, go_reg = go_reg)))
       return(result)
     }, mc.cores = parallelly::availableCores())
   } else {
@@ -156,7 +156,7 @@ get_metrics <- function(directory, organism = "hsapiens", get_sum = TRUE, get_pe
       network_size <- as.integer(stringr::word(readme, start = 3, end = 3, sep = stringr::fixed(" ")))
       paths <- list.dirs(net, full.names = TRUE, recursive = FALSE)
       p_terms <- mapply(get_terms, paths, 16, SIMPLIFY = FALSE)
-      return(t(mapply(get_network_metrics, p_terms, network_size, organism, get_sum, get_percent_sig, get_mean, get_median, get_annotation_overlap, MoreArgs = list(go_ann = go_ann, go_reg = go_reg))))
+      return(t(mapply(get_network_metrics, p_terms, network_size, organism, get_sum, get_percent, get_mean, get_median, get_annotation_overlap, MoreArgs = list(go_ann = go_ann, go_reg = go_reg))))
     })
   }
 
