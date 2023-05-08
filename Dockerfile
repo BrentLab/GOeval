@@ -23,7 +23,8 @@ RUN  apt-get update && \
       libfontconfig1-dev \
       libharfbuzz-dev \
       libfribidi-dev \
-      libtiff-dev
+      libtiff-dev \
+      libglpk-dev
 
 
 # Clean up
