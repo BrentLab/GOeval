@@ -28,5 +28,8 @@ Imports:
     parallelly,
     reader,
     stringr,
-    WebGestaltR
+    tidyr,
+    dplyr,
+    WebGestaltR,
+    ggplot2
 VignetteBuilder: knitr

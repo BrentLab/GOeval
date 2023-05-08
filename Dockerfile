@@ -19,12 +19,12 @@ RUN  apt-get update && \
         build-essential \
         libssl-dev \
         libxml2-dev \
+        libglpk-dev \
       libcurl4-openssl-dev \
       libfontconfig1-dev \
       libharfbuzz-dev \
       libfribidi-dev \
-      libtiff-dev \
-      libglpk-dev
+      libtiff-dev
 
 
 # Clean up
