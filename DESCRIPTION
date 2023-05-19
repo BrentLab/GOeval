@@ -32,5 +32,6 @@ Imports:
     dplyr,
     WebGestaltR,
     ontologyIndex,
-    ggplot2
+    ggplot2,
+    pkgdown
 VignetteBuilder: knitr

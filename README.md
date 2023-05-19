@@ -15,6 +15,6 @@ This package provides functions to systematically run over-representation analys
 You can install the development version of GOeval like so:
 
 ``` r
-# FILL THIS IN! HOW CAN PEOPLE INSTALL YOUR DEV PACKAGE?
+devtools::install_github("westbrooktm/GOeval", ref = "dev")
 ```
 

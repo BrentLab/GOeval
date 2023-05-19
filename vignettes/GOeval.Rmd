@@ -21,24 +21,43 @@ Steps to use this package from original network to graphing the results:
 4. plot_metrics using the output of get_metrics
 
 ```{r setup}
+library(ontologyIndex)
+library(WebGestaltR)
 library(GOeval)
+#devtools::load_all()
 ```
 
 ```{r}
-# 1.
+# 1. subset_network
 # subset_network()
 
-# 2.
-# commented out for now for easy compiling of the vignette
-# webgestalt_network()
+# 2. webgestalt_network
+webgestalt_network(file.path("data", "small_net.tsv"), file.path("data", "small_net_gene_universe.txt"), file.path("data", "small_net_output"), "small_net_194", permutations = 2)
 ```
 
 ```{r}
-# 3.
-# metrics <- get_metrics()
+  output_folders <- c(file.path("data", "np3_example"), file.path("data", "marbach_example"))
 
-# 4.
-# pdf(file.path("figures", figure_name), 7, 5)
-# plot_metrics(metrics)
-# dev.off()
+  title_text = "NP3 vs Marbach et al."
+  subtitle_text = "subset for overlapping TFs"
+
+  # load regulatory relationships between GO terms for the calculation of
+  #   overlap between TF GO annotations and their targets' enriched GO terms
+  go <- as.data.frame(get_ontology(file = "http://purl.obolibrary.org/obo/go/go-basic.obo", extract_tags = "everything"))
+  go <- go[go$namespace == 'biological_process',]
+  go_reg <- go[c('id', 'regulates', 'negatively_regulates', 'positively_regulates')]
+  rm(go)
+
+  # load gene annotations with WebGestaltR::loadGeneSet
+  suppressWarnings(go_ann <- loadGeneSet(organism = "hsapiens", enrichDatabase = "geneontology_Biological_Process_noRedundant", hostName = "https://www.webgestalt.org/")$geneSet)
+
+  # 3. get_metrics
+  metric_dfs_by_net <- mapply(get_metrics, output_folders, MoreArgs=list(get_percent = TRUE, get_mean = TRUE, get_median = TRUE, get_annotation_overlap = TRUE, go_ann = go_ann, go_reg = go_reg, parallel = FALSE), SIMPLIFY = FALSE)
+
+  #pdf(file.path("data", "npVm_example.pdf"), 7, 5)
+
+  # 4. plot_metrics
+  plot_metrics(metric_dfs_by_net, title_text, subtitle_text)
+
+  #dev.off()
 ```

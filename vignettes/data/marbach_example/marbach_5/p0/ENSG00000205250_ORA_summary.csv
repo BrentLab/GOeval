@@ -1,0 +1,7 @@
+"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
+"GO:0000041","transition metal ion transport",72,1,0.0174165457184325,57.4166666666667,0.0173417559067709,1,"475","ENSG00000177556","geneontology_Biological_Process_noRedundant"
+"GO:0055076","transition metal ion homeostasis",88,1,0.0212868892114175,46.9772727272727,0.0211748800568633,1,"475","ENSG00000177556","geneontology_Biological_Process_noRedundant"
+"GO:0097485","neuron projection guidance",130,1,0.0314465408805031,31.8,0.0312011916744075,1,"56896","ENSG00000157851","geneontology_Biological_Process_noRedundant"
+"GO:0051604","protein maturation",186,1,0.0449927431059507,22.2258064516129,0.0444893163807419,1,"475","ENSG00000177556","geneontology_Biological_Process_noRedundant"
+"GO:0061564","axon development",280,1,0.0677310111272375,14.7642857142857,0.0665880963997373,1,"56896","ENSG00000157851","geneontology_Biological_Process_noRedundant"
+"GO:0006979","response to oxidative stress",295,1,0.071359458151911,14.0135593220339,0.070090577016272,1,"475","ENSG00000177556","geneontology_Biological_Process_noRedundant"

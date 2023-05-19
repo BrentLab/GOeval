@@ -1,0 +1,5 @@
+"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
+"GO:0051056","regulation of small GTPase mediated signal transduction",221,1,0.0489696432528252,20.420814479638,0.0483727833350623,1,"51306","ENSG00000031003","geneontology_Biological_Process_noRedundant"
+"GO:0036230","granulocyte activation",333,1,0.0737868380234877,13.5525525525526,0.072429650753471,1,"84418","ENSG00000120306","geneontology_Biological_Process_noRedundant"
+"GO:0043087","regulation of GTPase activity",334,1,0.0740084201196543,13.5119760479042,0.0726430570227098,1,"51306","ENSG00000031003","geneontology_Biological_Process_noRedundant"
+"GO:0002446","neutrophil mediated immunity",335,1,0.074230002215821,13.4716417910448,0.0728564387399157,1,"84418","ENSG00000120306","geneontology_Biological_Process_noRedundant"
