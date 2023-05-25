@@ -13,8 +13,6 @@ get_metrics(
   get_mean = FALSE,
   get_median = FALSE,
   get_annotation_overlap = FALSE,
-  go_ann = NULL,
-  go_reg = NULL,
   parallel = TRUE
 )
 }
@@ -41,12 +39,6 @@ log base 10 of the p-value for the top term of each TF}
 \item{get_annotation_overlap}{bool whether to get the 'annotation_overlap' metric,
 which is the percent of TFs that are annotated to a GO term for which their
 target genes are enriched}
-
-\item{go_ann}{a data.frame of annotations of genes to GO terms. Obtain with
-WebGestaltR::loadGeneSet.}
-
-\item{go_reg}{a data.frame of the regulatory relationships between GO terms.
-Obtain with ontologyIndex::get_ontology.}
 
 \item{parallel}{bool whether to get the metrics for each network in the directory
 in parallel or sequentially}

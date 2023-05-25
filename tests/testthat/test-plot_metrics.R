@@ -9,15 +9,15 @@ test_that("get_metrics and plot_metrics run", {
   title_text = "NP3"
   subtitle_text = "subset for overlapping TFs with Marbach et al."
 
-  go <- as.data.frame(get_ontology(file = "http://purl.obolibrary.org/obo/go/go-basic.obo", extract_tags = "everything"))
-  go <- go[go$namespace == 'biological_process',]
-  go_reg <- go[c('id', 'regulates', 'negatively_regulates', 'positively_regulates')]
-  rm(go)
-
-  suppressWarnings(go_ann <- loadGeneSet(organism = "hsapiens", enrichDatabase = "geneontology_Biological_Process_noRedundant", hostName = "https://www.webgestalt.org/")$geneSet)
+  # go <- as.data.frame(get_ontology(file = "http://purl.obolibrary.org/obo/go/go-basic.obo", extract_tags = "everything"))
+  # go <- go[go$namespace == 'biological_process',]
+  # go_reg <- go[c('id', 'regulates', 'negatively_regulates', 'positively_regulates')]
+  # rm(go)
+  #
+  # suppressWarnings(go_ann <- loadGeneSet(organism = "hsapiens", enrichDatabase = "geneontology_Biological_Process_noRedundant", hostName = "https://www.webgestalt.org/")$geneSet)
 
   #metric_dfs_by_net <- get_metrics(folders, get_percent = TRUE, get_mean = TRUE, get_median = TRUE, get_annotation_overlap = TRUE, go_ann = go_ann, go_reg = go_reg, parallel = FALSE)
-  metric_dfs_by_net <- mapply(get_metrics, folders, MoreArgs=list(get_percent = TRUE, get_mean = TRUE, get_median = TRUE, get_annotation_overlap = TRUE, go_ann = go_ann, go_reg = go_reg, parallel = FALSE), SIMPLIFY = FALSE)
+  metric_dfs_by_net <- mapply(get_metrics, folders, MoreArgs=list(get_percent = TRUE, get_mean = TRUE, get_median = TRUE, get_annotation_overlap = TRUE, parallel = FALSE), SIMPLIFY = FALSE)
 
   expect_equal(length(metric_dfs_by_net[[1]]), 5)
 
