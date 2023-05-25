@@ -16,6 +16,22 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Suggests: 
     covr,
+    knitr,
+    rmarkdown,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 URL: https://westbrooktm.github.io/GOeval/
+Imports: 
+    data.table,
+    gtools,
+    parallel,
+    parallelly,
+    reader,
+    stringr,
+    tidyr,
+    dplyr,
+    WebGestaltR,
+    ontologyIndex,
+    ggplot2,
+    pkgdown
+VignetteBuilder: knitr

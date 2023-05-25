@@ -16,9 +16,10 @@ RUN  apt-get update && \
       software-properties-common \
       dirmngr \
       wget \
-        build-essential \
-        libssl-dev \
-        libxml2-dev \
+      build-essential \
+      libssl-dev \
+      libxml2-dev \
+      libglpk-dev \
       libcurl4-openssl-dev \
       libfontconfig1-dev \
       libharfbuzz-dev \

@@ -1,0 +1,7 @@
+"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
+"GO:0006813","potassium ion transport",87,1,0.0192776423664968,51.8735632183908,0.0191857932117315,1,"3750","ENSG00000102057","geneontology_Biological_Process_noRedundant"
+"GO:0008202","steroid metabolic process",172,1,0.0381121205406603,26.2383720930233,0.0377510583460641,1,"51700","ENSG00000166394","geneontology_Biological_Process_noRedundant"
+"GO:0034765","regulation of ion transmembrane transport",201,1,0.0445380013294926,22.452736318408,0.0440445054698859,1,"3750","ENSG00000102057","geneontology_Biological_Process_noRedundant"
+"GO:0051260","protein homooligomerization",201,1,0.0445380013294926,22.452736318408,0.0440445054698859,1,"3750","ENSG00000102057","geneontology_Biological_Process_noRedundant"
+"GO:0015711","organic anion transport",236,1,0.0522933746953246,19.1228813559322,0.0516125468253301,1,"51700","ENSG00000166394","geneontology_Biological_Process_noRedundant"
+"GO:1901615","organic hydroxy compound metabolic process",296,1,0.0655883004653224,15.2466216216216,0.0645163587125652,1,"51700","ENSG00000166394","geneontology_Biological_Process_noRedundant"

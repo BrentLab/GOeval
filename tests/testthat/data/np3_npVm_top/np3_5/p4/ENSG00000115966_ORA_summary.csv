@@ -1,0 +1,4 @@
+"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
+"GO:0007187","G protein-coupled receptor signaling pathway, coupled to cyclic nucleotide second messenger",71,1,0.0157323288278307,63.5633802816901,0.0156713170262819,1,"11245","ENSG00000166073","geneontology_Biological_Process_noRedundant"
+"GO:0048511","rhythmic process",173,1,0.0383337026368269,26.0867052023121,0.0379684174925866,1,"11245","ENSG00000166073","geneontology_Biological_Process_noRedundant"
+"GO:0002764","immune response-regulating signaling pathway",276,1,0.0611566585419898,16.3514492753623,0.0602249088966137,1,"153579","ENSG00000165810","geneontology_Biological_Process_noRedundant"

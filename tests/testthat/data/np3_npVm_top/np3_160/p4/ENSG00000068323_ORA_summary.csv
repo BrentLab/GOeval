@@ -1,0 +1,4 @@
+"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
+"GO:0006813","potassium ion transport",87,1,0.0192776423664968,51.8735632183908,0.0191857932117315,1,"79041","ENSG00000072954","geneontology_Biological_Process_noRedundant"
+"GO:0032886","regulation of microtubule-based process",167,1,0.0370042100598272,27.0239520958084,0.0366638943329616,1,"8045","ENSG00000099849","geneontology_Biological_Process_noRedundant"
+"GO:0051493","regulation of cytoskeleton organization",375,1,0.0830932860624861,12.0346666666667,0.081371574761247,1,"8045","ENSG00000099849","geneontology_Biological_Process_noRedundant"

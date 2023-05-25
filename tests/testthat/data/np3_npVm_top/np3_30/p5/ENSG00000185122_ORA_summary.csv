@@ -1,0 +1,6 @@
+"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
+"GO:1901998","toxin transport",32,1,0.00709062707733215,141.03125,0.00707844926905532,1,"118429","ENSG00000163297","geneontology_Biological_Process_noRedundant"
+"GO:0006260","DNA replication",245,1,0.0542876135608243,18.4204081632653,0.0535537532999467,1,"6282","ENSG00000163191","geneontology_Biological_Process_noRedundant"
+"GO:0051052","regulation of DNA metabolic process",328,1,0.0726789275426546,13.7591463414634,0.0713622511267845,1,"6282","ENSG00000163191","geneontology_Biological_Process_noRedundant"
+"GO:0036230","granulocyte activation",333,1,0.0737868380234877,13.5525525525526,0.072429650753471,1,"6282","ENSG00000163191","geneontology_Biological_Process_noRedundant"
+"GO:0002446","neutrophil mediated immunity",335,1,0.074230002215821,13.4716417910448,0.0728564387399157,1,"6282","ENSG00000163191","geneontology_Biological_Process_noRedundant"

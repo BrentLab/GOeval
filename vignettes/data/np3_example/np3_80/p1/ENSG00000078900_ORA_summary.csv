@@ -1,0 +1,5 @@
+"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
+"GO:0008643","carbohydrate transport",87,1,0.0192776423664968,51.8735632183908,0.0191857932117315,1,"144195","ENSG00000173262","geneontology_Biological_Process_noRedundant"
+"GO:0007389","pattern specification process",203,1,0.0449811655218258,22.2315270935961,0.0444777751929943,1,"138162","ENSG00000160345","geneontology_Biological_Process_noRedundant"
+"GO:0104004","cellular response to environmental stimulus",218,1,0.0483048969643253,20.7018348623853,0.0477241677321224,1,"138162","ENSG00000160345","geneontology_Biological_Process_noRedundant"
+"GO:0009314","response to radiation",316,1,0.070019942388655,14.2816455696203,0.0687979877153906,1,"138162","ENSG00000160345","geneontology_Biological_Process_noRedundant"

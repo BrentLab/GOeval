@@ -1,0 +1,6 @@
+"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
+"GO:0031929","TOR signaling",96,1,0.0212718812319965,47.0104166666667,0.0211599239623546,1,"121268","ENSG00000167550","geneontology_Biological_Process_noRedundant"
+"GO:0044843","cell cycle G1/S phase transition",214,1,0.0474185685796588,21.088785046729,0.0468590031997436,1,"8462","ENSG00000172059","geneontology_Biological_Process_noRedundant"
+"GO:0051090","regulation of DNA-binding transcription factor activity",273,1,0.0604919122534899,16.5311355311355,0.0595803443790883,1,"121268","ENSG00000167550","geneontology_Biological_Process_noRedundant"
+"GO:1901652","response to peptide",321,1,0.0711278528694881,14.0591900311526,0.069866860464046,1,"8462","ENSG00000172059","geneontology_Biological_Process_noRedundant"
+"GO:0044772","mitotic cell cycle phase transition",436,1,0.0966097939286506,10.3509174311927,0.0942815246566862,1,"8462","ENSG00000172059","geneontology_Biological_Process_noRedundant"

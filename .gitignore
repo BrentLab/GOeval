@@ -54,3 +54,4 @@ rsconnect/
 # temp directory
 tmp/
 docs
+inst/doc

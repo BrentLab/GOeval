@@ -1,0 +1,8 @@
+"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
+"GO:0007018","microtubule-based movement",201,1,0.0668070019942389,14.9684908789386,0.0653373971366136,1,"144406","ENSG00000158023","geneontology_Biological_Process_noRedundant"
+"GO:1903311","regulation of mRNA metabolic process",232,1,0.0771105694659872,12.9683908045977,0.0751536488414944,1,"9513","ENSG00000129245","geneontology_Biological_Process_noRedundant"
+"GO:0032984","protein-containing complex disassembly",283,1,0.0940615998227343,10.6313309776207,0.0911530075779852,1,"128077","ENSG00000271601","geneontology_Biological_Process_noRedundant"
+"GO:0006401","RNA catabolic process",312,1,0.103700421005983,9.64316239316239,0.100167841679508,1,"9513","ENSG00000129245","geneontology_Biological_Process_noRedundant"
+"GO:0034248","regulation of cellular amide metabolic process",333,1,0.110680257035232,9.03503503503504,0.106658476806119,1,"9513","ENSG00000129245","geneontology_Biological_Process_noRedundant"
+"GO:0061919","process utilizing autophagic mechanism",407,1,0.135275869709727,7.39230139230139,0.12928136953322,1,"128077","ENSG00000271601","geneontology_Biological_Process_noRedundant"
+"GO:0010608","posttranscriptional regulation of gene expression",418,1,0.138931974296477,7.19776714513557,0.132611266841666,1,"9513","ENSG00000129245","geneontology_Biological_Process_noRedundant"

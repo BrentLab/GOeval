@@ -1,0 +1,3 @@
+"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
+"GO:0006836","neurotransmitter transport",130,1,0.0288056725016619,34.7153846153846,0.028599803706498,1,"9899","ENSG00000185518","geneontology_Biological_Process_noRedundant"
+"GO:0006898","receptor-mediated endocytosis",159,1,0.0352315532904941,28.3836477987421,0.0349231552062895,1,"136853","ENSG00000146700","geneontology_Biological_Process_noRedundant"

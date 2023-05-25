@@ -1,0 +1,8 @@
+"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
+"GO:1903509","liposaccharide metabolic process",80,1,0.0265898515399956,37.6083333333333,0.026357768878943,1,"410","ENSG00000100299","geneontology_Biological_Process_noRedundant"
+"GO:0006643","membrane lipid metabolic process",147,1,0.0488588522047419,20.4671201814059,0.0480726820830664,1,"410","ENSG00000100299","geneontology_Biological_Process_noRedundant"
+"GO:0000209","protein polyubiquitination",222,1,0.0737868380234877,13.5525525525526,0.071994663661376,1,"26118","ENSG00000109046","geneontology_Biological_Process_noRedundant"
+"GO:0072511","divalent inorganic cation transport",224,1,0.0744515843119876,13.4315476190476,0.0726270352541466,1,"84102","ENSG00000136052","geneontology_Biological_Process_noRedundant"
+"GO:0043687","post-translational protein modification",268,1,0.0890760026589852,11.226368159204,0.0864666279889433,1,"26118","ENSG00000109046","geneontology_Biological_Process_noRedundant"
+"GO:0036230","granulocyte activation",333,1,0.110680257035232,9.03503503503504,0.106658476806119,1,"410","ENSG00000100299","geneontology_Biological_Process_noRedundant"
+"GO:0002446","neutrophil mediated immunity",335,1,0.111345003323731,8.98109452736318,0.107274999580134,1,"410","ENSG00000100299","geneontology_Biological_Process_noRedundant"

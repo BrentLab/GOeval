@@ -1,0 +1,8 @@
+"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
+"GO:0050690","regulation of defense response to virus by virus",20,1,0.00483792936623125,206.7,0.00483236987318902,1,"9844","ENSG00000155849","geneontology_Biological_Process_noRedundant"
+"GO:0010324","membrane invagination",39,1,0.00943396226415094,106,0.0094122802412866,1,"9844","ENSG00000155849","geneontology_Biological_Process_noRedundant"
+"GO:0048010","vascular endothelial growth factor receptor signaling pathway",59,1,0.0142718916303822,70.0677966101695,0.0142218269325138,1,"9844","ENSG00000155849","geneontology_Biological_Process_noRedundant"
+"GO:0006909","phagocytosis",142,1,0.0343492985002419,29.112676056338,0.0340563717379019,1,"9844","ENSG00000155849","geneontology_Biological_Process_noRedundant"
+"GO:0007018","microtubule-based movement",185,1,0.0447508466376391,22.3459459459459,0.0442528331030242,1,"8632","ENSG00000187775","geneontology_Biological_Process_noRedundant"
+"GO:0002764","immune response-regulating signaling pathway",259,1,0.0626511852926947,15.96138996139,0.0616735630714831,1,"9844","ENSG00000155849","geneontology_Biological_Process_noRedundant"
+"GO:0007265","Ras protein signal transduction",291,1,0.0703918722786647,14.2061855670103,0.0691572259159686,1,"9844","ENSG00000155849","geneontology_Biological_Process_noRedundant"

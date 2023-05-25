@@ -1,0 +1,6 @@
+"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
+"GO:0048013","ephrin receptor signaling pathway",56,1,0.0124085973853313,80.5892857142857,0.012370787254794,1,"2051","ENSG00000106123","geneontology_Biological_Process_noRedundant"
+"GO:0070371","ERK1 and ERK2 cascade",160,1,0.0354531353866608,28.20625,0.0351408335292382,1,"2051","ENSG00000106123","geneontology_Biological_Process_noRedundant"
+"GO:0019932","second-messenger-mediated signaling",167,1,0.0370042100598272,27.0239520958084,0.0366638943329616,1,"83988","ENSG00000104490","geneontology_Biological_Process_noRedundant"
+"GO:0003013","circulatory system process",208,1,0.046089076002659,21.6971153846154,0.0455605198401908,1,"83988","ENSG00000104490","geneontology_Biological_Process_noRedundant"
+"GO:0018212","peptidyl-tyrosine modification",209,1,0.0463106580988256,21.5933014354067,0.0457769951135319,1,"2051","ENSG00000106123","geneontology_Biological_Process_noRedundant"
