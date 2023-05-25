@@ -1,0 +1,7 @@
+"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
+"GO:0030323","respiratory tube development",94,1,0.0208287170396632,48.0106382978723,0.0207214001042236,1,"51696","ENSG00000112406","geneontology_Biological_Process_noRedundant"
+"GO:0060491","regulation of cell projection assembly",147,1,0.0325725681364946,30.7006802721088,0.032309100272343,1,"57465","ENSG00000162065","geneontology_Biological_Process_noRedundant"
+"GO:1902115","regulation of organelle assembly",171,1,0.0378905384444937,26.3918128654971,0.0375336746475097,1,"57465","ENSG00000162065","geneontology_Biological_Process_noRedundant"
+"GO:0045930","negative regulation of mitotic cell cycle",215,1,0.0476401506758254,20.9906976744186,0.0470753311608872,1,"51696","ENSG00000112406","geneontology_Biological_Process_noRedundant"
+"GO:0044782","cilium organization",308,1,0.068247285619322,14.6525974025974,0.0670865146118355,1,"57465","ENSG00000162065","geneontology_Biological_Process_noRedundant"
+"GO:0043087","regulation of GTPase activity",334,1,0.0740084201196543,13.5119760479042,0.0726430570227098,1,"57465","ENSG00000162065","geneontology_Biological_Process_noRedundant"

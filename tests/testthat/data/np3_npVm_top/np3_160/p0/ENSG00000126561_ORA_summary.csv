@@ -1,0 +1,6 @@
+"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
+"GO:0002181","cytoplasmic translation",89,1,0.01972080655883,50.7078651685393,0.0196246607983216,1,"100526842","ENSG00000215472","geneontology_Biological_Process_noRedundant"
+"GO:0017038","protein import",168,1,0.0372257921559938,26.8630952380952,0.0368813762396468,1,"727851","ENSG00000015568","geneontology_Biological_Process_noRedundant"
+"GO:0034504","protein localization to nucleus",207,1,0.0458674939064924,21.8019323671498,0.0453440200148169,1,"727851","ENSG00000015568","geneontology_Biological_Process_noRedundant"
+"GO:0051169","nuclear transport",303,1,0.0671393751384888,14.8943894389439,0.066016045981047,1,"727851","ENSG00000015568","geneontology_Biological_Process_noRedundant"
+"GO:0043087","regulation of GTPase activity",334,1,0.0740084201196543,13.5119760479042,0.0726430570227098,1,"727851","ENSG00000015568","geneontology_Biological_Process_noRedundant"

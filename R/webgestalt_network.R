@@ -124,6 +124,6 @@ webgestalt_network <- function(network_path, reference_set, output_directory, ne
             file = file.path(output_directory,network_name,paste0("p",i-1),"README.txt"))
     }
   } else {
-    print(paste(network,"must be an existing file."))
+    print(paste(network_path,"must be an existing file."))
   }
 }

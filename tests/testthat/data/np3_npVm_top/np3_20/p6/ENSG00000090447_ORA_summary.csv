@@ -1,0 +1,6 @@
+"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
+"GO:0007018","microtubule-based movement",201,1,0.0445380013294926,22.452736318408,0.0440445054698859,1,"144406","ENSG00000158023","geneontology_Biological_Process_noRedundant"
+"GO:0046486","glycerolipid metabolic process",296,1,0.0655883004653224,15.2466216216216,0.0645163587125652,1,"64419","ENSG00000163719","geneontology_Biological_Process_noRedundant"
+"GO:0006644","phospholipid metabolic process",321,1,0.0711278528694881,14.0591900311526,0.069866860464046,1,"64419","ENSG00000163719","geneontology_Biological_Process_noRedundant"
+"GO:0016311","dephosphorylation",335,1,0.074230002215821,13.4716417910448,0.0728564387399157,1,"64419","ENSG00000163719","geneontology_Biological_Process_noRedundant"
+"GO:0061919","process utilizing autophagic mechanism",407,1,0.0901839131398183,11.0884520884521,0.088155399636507,1,"64419","ENSG00000163719","geneontology_Biological_Process_noRedundant"

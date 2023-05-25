@@ -1,0 +1,4 @@
+"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
+"GO:0043062","extracellular structure organization",190,1,0.0421005982716596,23.7526315789474,0.041659766522444,1,"1298","ENSG00000049089","geneontology_Biological_Process_noRedundant"
+"GO:0052547","regulation of peptidase activity",225,1,0.0498559716374917,20.0577777777778,0.049237260410522,1,"83982","ENSG00000119632","geneontology_Biological_Process_noRedundant"
+"GO:0045862","positive regulation of proteolysis",250,1,0.0553955240416574,18.052,0.0546313420202519,1,"83982","ENSG00000119632","geneontology_Biological_Process_noRedundant"

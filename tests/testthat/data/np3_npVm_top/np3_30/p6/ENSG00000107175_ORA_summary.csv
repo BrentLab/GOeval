@@ -1,0 +1,7 @@
+"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
+"GO:0001764","neuron migration",80,1,0.0177265676933304,56.4125,0.017648983269631,1,"460","ENSG00000152092","geneontology_Biological_Process_noRedundant"
+"GO:0015698","inorganic anion transport",87,1,0.0192776423664968,51.8735632183908,0.0191857932117315,1,"55879","ENSG00000268089","geneontology_Biological_Process_noRedundant"
+"GO:0007626","locomotory behavior",95,1,0.0210502991358298,47.5052631578947,0.0209406743093054,1,"460","ENSG00000152092","geneontology_Biological_Process_noRedundant"
+"GO:0006836","neurotransmitter transport",130,1,0.0288056725016619,34.7153846153846,0.028599803706498,1,"55879","ENSG00000268089","geneontology_Biological_Process_noRedundant"
+"GO:0098656","anion transmembrane transport",143,1,0.031686239751828,31.5594405594406,0.0314369629626449,1,"55879","ENSG00000268089","geneontology_Biological_Process_noRedundant"
+"GO:0042391","regulation of membrane potential",196,1,0.0434300908486594,23.0255102040816,0.0429609015015409,1,"55879","ENSG00000268089","geneontology_Biological_Process_noRedundant"

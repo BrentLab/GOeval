@@ -1,0 +1,3 @@
+"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
+"GO:0051321","meiotic cell cycle",153,1,0.0339020607134944,29.4967320261438,0.0336165696759068,1,"140901","ENSG00000125834","geneontology_Biological_Process_noRedundant"
+"GO:0001701","in utero embryonic development",246,1,0.0545091956569909,18.3455284552846,0.0537693201480728,1,"26115","ENSG00000170921","geneontology_Biological_Process_noRedundant"

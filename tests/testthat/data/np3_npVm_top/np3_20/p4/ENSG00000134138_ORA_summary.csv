@@ -1,0 +1,4 @@
+"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
+"GO:0007606","sensory perception of chemical stimulus",23,1,0.00509638821183248,196.217391304348,0.00509017654752997,1,"6339","ENSG00000162572","geneontology_Biological_Process_noRedundant"
+"GO:0006814","sodium ion transport",104,1,0.0230445380013295,43.3942307692308,0.0229130373135653,1,"6339","ENSG00000162572","geneontology_Biological_Process_noRedundant"
+"GO:0072511","divalent inorganic cation transport",224,1,0.0496343895413251,20.1473214285714,0.0490211779697068,1,"84102","ENSG00000136052","geneontology_Biological_Process_noRedundant"

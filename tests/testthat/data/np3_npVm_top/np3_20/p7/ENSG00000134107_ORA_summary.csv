@@ -1,0 +1,4 @@
+"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
+"GO:0010876","lipid localization",201,1,0.0445380013294926,22.452736318408,0.0440445054698859,1,"21","ENSG00000167972","geneontology_Biological_Process_noRedundant"
+"GO:0045930","negative regulation of mitotic cell cycle",215,1,0.0476401506758254,20.9906976744186,0.0470753311608872,1,"10950","ENSG00000154640","geneontology_Biological_Process_noRedundant"
+"GO:0048545","response to steroid hormone",242,1,0.0536228672723244,18.6487603305785,0.05290690544337,1,"21","ENSG00000167972","geneontology_Biological_Process_noRedundant"

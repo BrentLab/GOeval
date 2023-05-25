@@ -1,0 +1,8 @@
+"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
+"GO:0097696","STAT cascade",68,1,0.0150675825393308,66.3676470588235,0.0150116530085757,1,"55620","ENSG00000178078","geneontology_Biological_Process_noRedundant"
+"GO:0042770","signal transduction in response to DNA damage",117,1,0.0259251052514957,38.5726495726496,0.0257584951568045,1,"3090","ENSG00000177374","geneontology_Biological_Process_noRedundant"
+"GO:2001020","regulation of response to DNA damage stimulus",175,1,0.0387768668291602,25.7885714285714,0.0384030621295329,1,"3090","ENSG00000177374","geneontology_Biological_Process_noRedundant"
+"GO:0072331","signal transduction by p53 class mediator",192,1,0.0425437624639929,23.5052083333333,0.0420935763902744,1,"3090","ENSG00000177374","geneontology_Biological_Process_noRedundant"
+"GO:0018212","peptidyl-tyrosine modification",209,1,0.0463106580988256,21.5933014354067,0.0457769951135319,1,"55620","ENSG00000178078","geneontology_Biological_Process_noRedundant"
+"GO:0097193","intrinsic apoptotic signaling pathway",233,1,0.0516286284068247,19.3690987124464,0.050965036063867,1,"3090","ENSG00000177374","geneontology_Biological_Process_noRedundant"
+"GO:0198738","cell-cell signaling by wnt",307,1,0.0680257035231553,14.700325732899,0.0668724699897436,1,"3090","ENSG00000177374","geneontology_Biological_Process_noRedundant"

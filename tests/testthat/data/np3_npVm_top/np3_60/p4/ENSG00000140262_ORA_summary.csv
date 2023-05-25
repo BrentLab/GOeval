@@ -1,0 +1,7 @@
+"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
+"GO:0007498","mesoderm development",58,1,0.0128517615776645,77.8103448275862,0.0128111770674194,1,"10320","ENSG00000185811","geneontology_Biological_Process_noRedundant"
+"GO:0051291","protein heterooligomerization",73,1,0.016175493020164,61.8219178082192,0.016110970277923,1,"10320","ENSG00000185811","geneontology_Biological_Process_noRedundant"
+"GO:0006813","potassium ion transport",87,1,0.0192776423664968,51.8735632183908,0.0191857932117315,1,"3780","ENSG00000105642","geneontology_Biological_Process_noRedundant"
+"GO:0048872","homeostasis of number of cells",167,1,0.0370042100598272,27.0239520958084,0.0366638943329616,1,"10320","ENSG00000185811","geneontology_Biological_Process_noRedundant"
+"GO:0030099","myeloid cell differentiation",251,1,0.0556171061378241,17.9800796812749,0.0548467861082144,1,"10320","ENSG00000185811","geneontology_Biological_Process_noRedundant"
+"GO:0002521","leukocyte differentiation",270,1,0.05982716596499,16.7148148148148,0.0589355588932678,1,"10320","ENSG00000185811","geneontology_Biological_Process_noRedundant"

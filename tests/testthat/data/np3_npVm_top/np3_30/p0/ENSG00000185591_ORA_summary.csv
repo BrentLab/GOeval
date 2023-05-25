@@ -1,0 +1,7 @@
+"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
+"GO:0034453","microtubule anchoring",22,1,0.00731220917349878,136.757575757576,0.00729520718461418,1,"80323","ENSG00000166510","geneontology_Biological_Process_noRedundant"
+"GO:0015844","monoamine transport",28,1,0.00930644803899845,107.452380952381,0.00927863277329899,1,"222962","ENSG00000164638","geneontology_Biological_Process_noRedundant"
+"GO:1901264","carbohydrate derivative transport",52,1,0.0172834035009971,57.8589743589744,0.0171859159000675,1,"222962","ENSG00000164638","geneontology_Biological_Process_noRedundant"
+"GO:0002064","epithelial cell development",125,1,0.0415466430312431,24.0693333333333,0.040978401821599,1,"54507","ENSG00000143382","geneontology_Biological_Process_noRedundant"
+"GO:0043062","extracellular structure organization",190,1,0.0631508974074895,15.8350877192982,0.0618375861546179,1,"54507","ENSG00000143382","geneontology_Biological_Process_noRedundant"
+"GO:0015931","nucleobase-containing compound transport",209,1,0.0694659871482384,14.3955342902711,0.0678772397967403,1,"222962","ENSG00000164638","geneontology_Biological_Process_noRedundant"

@@ -1,0 +1,7 @@
+"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
+"GO:0097485","neuron projection guidance",141,1,0.0312430755594948,32.0070921985816,0.0310007469955988,1,"9260","ENSG00000196923","geneontology_Biological_Process_noRedundant"
+"GO:0006898","receptor-mediated endocytosis",159,1,0.0352315532904941,28.3836477987421,0.0349231552062895,1,"9260","ENSG00000196923","geneontology_Biological_Process_noRedundant"
+"GO:0070085","glycosylation",184,1,0.0407711056946599,24.5271739130435,0.0403577476701658,1,"57134","ENSG00000117643","geneontology_Biological_Process_noRedundant"
+"GO:0001503","ossification",202,1,0.0447595834256592,22.3415841584158,0.0442611526074561,1,"9260","ENSG00000196923","geneontology_Biological_Process_noRedundant"
+"GO:0009100","glycoprotein metabolic process",265,1,0.0587192554841569,17.0301886792453,0.0578604253762443,1,"57134","ENSG00000117643","geneontology_Biological_Process_noRedundant"
+"GO:0061564","axon development",296,1,0.0655883004653224,15.2466216216216,0.0645163587125652,1,"9260","ENSG00000196923","geneontology_Biological_Process_noRedundant"

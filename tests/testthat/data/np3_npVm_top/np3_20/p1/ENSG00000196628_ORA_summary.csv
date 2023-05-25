@@ -1,0 +1,7 @@
+"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
+"GO:0071684","organism emergence from protective structure",18,1,0.00398847773099934,250.722222222222,0.00398472126997829,1,"55723","ENSG00000105011","geneontology_Biological_Process_noRedundant"
+"GO:0034340","response to type I interferon",54,1,0.011965433192998,83.5740740740741,0.0119302992340383,1,"3430","ENSG00000068079","geneontology_Biological_Process_noRedundant"
+"GO:0006333","chromatin assembly or disassembly",112,1,0.0248171947706625,40.2946428571429,0.0246645793346763,1,"55723","ENSG00000105011","geneontology_Biological_Process_noRedundant"
+"GO:0071824","protein-DNA complex subunit organization",192,1,0.0425437624639929,23.5052083333333,0.0420935763902744,1,"55723","ENSG00000105011","geneontology_Biological_Process_noRedundant"
+"GO:0071103","DNA conformation change",193,1,0.0427653445601595,23.3834196891192,0.0423104444961403,1,"55723","ENSG00000105011","geneontology_Biological_Process_noRedundant"
+"GO:0001701","in utero embryonic development",246,1,0.0545091956569909,18.3455284552846,0.0537693201480728,1,"55723","ENSG00000105011","geneontology_Biological_Process_noRedundant"

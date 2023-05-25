@@ -2,12 +2,12 @@ library(ontologyIndex)
 suppressMessages(library(WebGestaltR))
 
 test_that("get_metrics and plot_metrics run", {
-  tmp <- system.file("tmp", package = "GOeval")
+  #tmp <- system.file("tmp", package = "GOeval")
   #folders <- c(file.path(tmp, "GO_summaries", "np3_npVm_top"), file.path(tmp, "GO_summaries", "marbach_npVm_top"))
-  folders <- c(file.path(tmp, "GO_summaries", "np3_npVm_top"), file.path(tmp, "GO_summaries", "marbach_npVm_top"))
+  folders <- c(file.path("data", "np3_npVm_top"))
 
-  title_text = "NP3 vs Marbach et al."
-  subtitle_text = "subset for overlapping TFs"
+  title_text = "NP3"
+  subtitle_text = "subset for overlapping TFs with Marbach et al."
 
   go <- as.data.frame(get_ontology(file = "http://purl.obolibrary.org/obo/go/go-basic.obo", extract_tags = "everything"))
   go <- go[go$namespace == 'biological_process',]
@@ -21,10 +21,10 @@ test_that("get_metrics and plot_metrics run", {
 
   expect_equal(length(metric_dfs_by_net[[1]]), 5)
 
-  pdf(file.path(tmp, "test-plot_metrics.pdf"), 7, 5)
+  #pdf(file.path("data", "test-plot_metrics.pdf"), 7, 5)
   # call plot_metrics
   plot_metrics(metric_dfs_by_net, title_text, subtitle_text)
-  dev.off()
+  #dev.off()
 
   expect_equal(2 * 2, 4)
 

@@ -1,0 +1,4 @@
+"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
+"GO:0018208","peptidyl-proline modification",42,1,0.00930644803899845,107.452380952381,0.00928530873874378,1,"11328","ENSG00000122642","geneontology_Biological_Process_noRedundant"
+"GO:0006457","protein folding",178,1,0.0394416131176601,25.3539325842697,0.0390548449447055,1,"11328","ENSG00000122642","geneontology_Biological_Process_noRedundant"
+"GO:0007018","microtubule-based movement",201,1,0.0445380013294926,22.452736318408,0.0440445054698859,1,"90990","ENSG00000167702","geneontology_Biological_Process_noRedundant"

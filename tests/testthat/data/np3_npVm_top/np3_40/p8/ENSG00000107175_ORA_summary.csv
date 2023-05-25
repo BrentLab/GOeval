@@ -1,0 +1,4 @@
+"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
+"GO:0060537","muscle tissue development",193,2,0.0427653445601595,46.7668393782383,0.000454900064019492,0.213328255154538,"59269;64208","ENSG00000132429;ENSG00000127124","geneontology_Biological_Process_noRedundant"
+"GO:0007517","muscle organ development",206,2,0.0456459118103257,43.8155339805825,0.000518416172915037,0.213328255154538,"59269;64208","ENSG00000132429;ENSG00000127124","geneontology_Biological_Process_noRedundant"
+"GO:0042391","regulation of membrane potential",196,1,0.0434300908486594,23.0255102040816,0.0429609015015409,1,"64208","ENSG00000132429","geneontology_Biological_Process_noRedundant"
