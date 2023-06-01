@@ -1,5 +1,7 @@
-#' get enrichment data for the top n terms from each tf summary file in a folder
-#' output by the webgestalt_network function
+#' get_terms
+#'
+#' Get enrichment data for the top n terms from each TF summary file in a folder
+#' output by the webgestalt_network function.
 #'
 #' @importFrom data.table fread
 #'

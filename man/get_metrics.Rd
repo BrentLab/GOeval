@@ -2,8 +2,7 @@
 % Please edit documentation in R/get_metrics.R
 \name{get_metrics}
 \alias{get_metrics}
-\title{get a data.frame that contains specified metrics for all networks that have a
-subdirectory in the provided path including both the real and permuted networks}
+\title{get_metrics}
 \usage{
 get_metrics(
   directory,
@@ -44,6 +43,7 @@ target genes are enriched}
 in parallel or sequentially}
 }
 \description{
-get a data.frame that contains specified metrics for all networks that have a
-subdirectory in the provided path including both the real and permuted networks
+Get a data.frame that contains specified metrics for all networks that have a
+subdirectory in the provided path including both the real and permuted networks.
+The path should contain only directories created by webgestalt_network.
 }

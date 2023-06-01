@@ -97,8 +97,11 @@ get_network_metrics <- function(full_terms, network_size, organism, get_sum, get
   )[c(get_sum, get_percent, get_mean, get_median, get_annotation_overlap)])
 }
 
-#' get a data.frame that contains specified metrics for all networks that have a
-#'  subdirectory in the provided path including both the real and permuted networks
+#' get_metrics
+#'
+#' Get a data.frame that contains specified metrics for all networks that have a
+#'  subdirectory in the provided path including both the real and permuted networks.
+#'  The path should contain only directories created by webgestalt_network.
 #'
 #' @import stringr
 #' @importFrom ontologyIndex get_ontology

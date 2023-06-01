@@ -1,8 +1,9 @@
-#' given a network or network subset, webgestalt_network will generate ORA results
-#' for this network and a given number of permutations
-#' NOTE: running with a previously used network_name will cause overwriting
-#' NOTE: if using the same output_directory for a different network than before,
-#'  you must first delete the contents of "/webgestalt_work/network_name/"
+#' webgestalt_network
+#'
+#' Given a network or network subset, webgestalt_network will generate ORA results
+#' for this network and a given number of permutations.
+#' NOTE: if using the same output_directory and network_name for a different network
+#'  than before, you must first delete the contents of "/webgestalt_work/network_name/"
 #'
 #' @importFrom WebGestaltR idMapping
 #' @importFrom WebGestaltR loadGeneSet
@@ -11,10 +12,13 @@
 #' @importFrom utils write.csv
 #' @importFrom stats xtabs
 #'
-#' @param network_path path to the network or network subset to evaluate
-#' @param reference_set path to the set of all genes possibly included in the network
+#' @param network_path path to the network or network subset to evaluate. Must be a tab-separated
+#'  file where the first column is the TFs and the second column is the regulated genes.
+#' @param reference_set path to the set of all genes possibly included in the network. Must be a
+#'  file containing exactly one column of the genes that could possibly appear in the network.
 #' @param output_directory path to the folder in which output from all networks subset from the same original network should be stored
-#' @param network_name the name of the folder to store the results within the output_directory
+#' @param network_name the name of the folder to store the results within the output_directory.
+#'  For now, it is best for this to be in the format "\{name\}_\{# of edges\}" like "example_8".
 #' @param organism human: "hsapiens"; yeast: "scerevisiae"
 #' @param database the gene set database to search for enrichment - see options with WebGestaltR::listGeneSet()
 #' @param permutations the number of randomly permuted networks to create and run ORA

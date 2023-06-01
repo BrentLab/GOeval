@@ -1,4 +1,6 @@
-#' plot the summary metrics from get_metrics across network subset size for one or more networks
+#' plot_metrics
+#'
+#' Plot the summary metrics from get_metrics across network subset size for one or more networks.
 #'
 #' @importFrom tidyr gather
 #' @importFrom tidyr separate
@@ -24,7 +26,6 @@
 #'
 #' @export
 plot_metrics <- function(metric_dfs_by_net, title_text, subtitle_text, sum = TRUE, percent = FALSE, mean = FALSE, median = FALSE, annotation_overlap = TRUE) {
-  #print("got here 0")
   to_plot <- c(sum, percent, mean, median, annotation_overlap)
   plot_with_boxes <- FALSE
   for (df_list in metric_dfs_by_net) {
@@ -32,7 +33,7 @@ plot_metrics <- function(metric_dfs_by_net, title_text, subtitle_text, sum = TRU
       plot_with_boxes <- TRUE
     }
   }
-  #print("got here 1")
+
   # merge data frames of like metrics across networks
   metric_dfs <- list()
   for (i in 1:length(metric_dfs_by_net[[1]])) {
@@ -49,93 +50,41 @@ plot_metrics <- function(metric_dfs_by_net, title_text, subtitle_text, sum = TRU
 
     real = gathered[!duplicated(gathered$network), ]
     real$size <- as.numeric(real$size)
+    real$ltype <- "Original network"
     permuted = gathered[duplicated(gathered$network), ]
     permuted$size <- as.numeric(permuted$size)
-    #print("got here 2")
+
+    plt <- ggplot2::ggplot(real, mapping=ggplot2::aes(x = size, y = metric, color = method, shape = method, linetype = ltype)) + ggplot2::geom_line(linewidth = 1) +
+      ggplot2::geom_point(size = 2.5) +
+      ggplot2::ggtitle(title_text, subtitle_text) +
+      ggplot2::guides(linetype = ggplot2::guide_legend(override.aes = list(size = 0.5)),
+             color = ggplot2::guide_legend(override.aes = list(size = 0.5))) +
+      ggplot2::theme(axis.line = ggplot2::element_line(colour = "black"),
+            panel.background = ggplot2::element_blank(),
+            plot.title=ggplot2::element_text(hjust=0.5),
+            plot.subtitle=ggplot2::element_text(hjust=0.5)) +
+      ggplot2::scale_x_continuous(n.breaks = 10, trans = "log2")
+
+     # Set lower limit of y axis to 0 if graphing a percent or # of TFs
+    if (m == 2 || m == 5 || m == 6) {
+      plt <- plt + ggplot2::scale_y_continuous(limits = c(0, NA))
+    }
+
     # if any of the networks whose metrics are being plotted has only one subset,
     # plotting with box plots for the permuted networks looks better
     if (plot_with_boxes) {
-      box_plot <- ggplot2::ggplot(real, mapping=ggplot2::aes(x = size, y = metric, color = method, group = method)) + ggplot2::geom_line(linewidth = 1) +
-        ggplot2::geom_point(real, mapping=ggplot2::aes(x = size, y = metric, color = method, shape = method), size = 2.5) +
-        ggplot2::ggtitle(title_text, subtitle_text) +
-        ggplot2::labs(x = "Edges per TF", y = label_text[m]) +
-        ggplot2::guides(shape = ggplot2::guide_legend(override.aes = list(size = 0.5)),
-               color = ggplot2::guide_legend(override.aes = list(size = 0.5))) +
-        ggplot2::theme(axis.line = ggplot2::element_line(colour = "black"),
-              panel.background = ggplot2::element_blank(),
-              plot.title=ggplot2::element_text(hjust=0.5),
-              plot.subtitle=ggplot2::element_text(hjust=0.5)) +
-        ggplot2::scale_x_continuous(n.breaks = 10, trans = "log2")
-      #print("got here 3")
-      box_plot <- box_plot + ggplot2::geom_boxplot(permuted, mapping=ggplot2::aes(x=size, y=metric, color = method, group = size))
-      plot(box_plot)
-      #print("got here 4")
+      plt <- plt + ggplot2::geom_boxplot(permuted, mapping=ggplot2::aes(x=size, y=metric, color = method, group = size))
     } else {
       medians = dplyr::summarise(group_by(permuted, network), median = median(metric))
       medians <- tidyr::separate(medians, network, into=c("method", "size"), remove = FALSE)
       medians$size <- as.numeric(medians$size)
-
-      line_plot <- ggplot2::ggplot(real, mapping=ggplot2::aes(x = size, y = metric, color = method, group = method)) + ggplot2::geom_line(linewidth = 1) +
-        ggplot2::geom_point(real, mapping=ggplot2::aes(x = size, y = metric, color = method, shape = method), size = 2.5) +
-        ggplot2::ggtitle(title_text, subtitle_text) +
-        ggplot2::labs(x = "Edges", y = label_text[m]) +
-        ggplot2::guides(shape = ggplot2::guide_legend(override.aes = list(size = 0.5)),
-               color = ggplot2::guide_legend(override.aes = list(size = 0.5))) +
-        ggplot2::theme(axis.line = ggplot2::element_line(colour = "black"),
-              panel.background = ggplot2::element_blank(),
-              plot.title=ggplot2::element_text(hjust=0.5),
-              plot.subtitle=ggplot2::element_text(hjust=0.5)) +
-        ggplot2::scale_x_continuous(n.breaks = 10, trans = "log2")
+      medians$ltype <- "Randomized network"
 
       for(net in unique(permuted$method)) {
-        line_plot <- line_plot + ggplot2::geom_line(medians[medians$method == net,], mapping = ggplot2::aes(x = size, y = median, color = method, group = method), linewidth = 1.5, linetype="dotted")
+        plt <- plt + ggplot2::geom_line(medians[medians$method == net,], mapping = ggplot2::aes(x = size, y = median, color = method, linetype = ltype), linewidth = 1.5)
       }
-      plot(line_plot)
+      plt <- plt + ggplot2::labs(x = "Edges per TF", y = label_text[m], color = "Network name", shape = "Network name", linetype = "Data")
     }
+    plot(plt)
   }
-
-
-  # if (plot_with_boxes) {
-  #   for (m in 1:length(metric_dfs)) {
-  #     if(to_plot[[m]]) {
-  #       gathered = tidyr::gather(metric_dfs[[m]], network, metric)
-  #       gathered <- tidyr::separate(gathered, network, into=c("method", "size"), remove = FALSE)
-  #       gathered$network = factor(gathered$network, levels=unique(gathered$network))
-  #
-  #       box_plot <- ggplot2::ggplot(gathered, ggplot2::aes(x = network, y = metric, color = method)) +
-  #         ggplot2::labs(x = "Edges per TF", y = label_text[m]) +
-  #         ggplot2::guides(shape = ggplot2::guide_legend(override.aes = list(size = 0.5)),
-  #                         color = ggplot2::guide_legend(override.aes = list(size = 0.5))) +
-  #         ggplot2::theme(panel.background = ggplot2::element_blank()) +
-  #         ggplot2::scale_x_discrete(labels = gathered$size[c(TRUE, diff(as.numeric(gathered$size)) != 0)])
-  #
-  #       plot(box_plot + ggplot2::geom_boxplot() +
-  #              ggplot2::stat_summary(ggplot2::aes(x = network, y = metric), fun=first, geom = "point", color = "red"))
-  #     }
-  #   }
-  # } else {
-  #   for (m in 1:length(metric_dfs)) {
-  #     if(to_plot[[m]]) {
-  #       gathered = tidyr::gather(metric_dfs[[m]], network, metric)
-  #       gathered <- tidyr::separate(gathered, network, into=c("method", "size"), remove = FALSE)
-  #       gathered$network = factor(gathered$network, levels=unique(gathered$network))
-  #
-  #       gathered$size = factor(gathered$size, levels=unique(gathered$size))
-  #       real = gathered[!duplicated(gathered$network), ]
-  #       permuted = gathered[duplicated(gathered$network), ]
-  #
-  #       line_plot <- ggplot2::ggplot() + ggplot2::geom_line(real, mapping=ggplot2::aes(x = size, y = metric, color = method, group = method), linewidth = 1) +
-  #         ggplot2::labs(x = "Edges per TF", y = label_text[m]) +
-  #         ggplot2::guides(shape = ggplot2::guide_legend(override.aes = list(size = 0.5)),
-  #                         color = ggplot2::guide_legend(override.aes = list(size = 0.5))) +
-  #         ggplot2::theme(panel.background = ggplot2::element_blank())
-  #
-  #       medians = dplyr::summarise(dplyr::group_by(permuted, network), median = median(metric))
-  #       medians <- tidyr::separate(medians, network, into=c("method", "size"), remove = FALSE)
-  #
-  #       plot(line_plot + ggplot2::geom_boxplot(permuted, mapping=ggplot2::aes(x=size, y=metric, color = method)) +
-  #              ggplot2::geom_point(real, mapping=ggplot2::aes(x = size, y = metric, color = method, shape = method), size = 2.5))
-  #     }
-  #   }
-  # }
 }
