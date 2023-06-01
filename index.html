@@ -66,8 +66,8 @@
   <main id="main" class="col-md-9">
 <p>Welcome to GOeval - a package for gene regulatory network evaluation using Gene Ontology and other gene set databases.</p>
 <p>This package provides functions to systematically run over-representation analysis (ORA) on multiple subsets of a gene regulatory network and its permutations using the ‘WebGestaltR’ package. It also provides functions to assess the quality of biological information captured by the network via metrics calculated from the ORA results.</p>
-<p>Here, you will find documentation on the purposes of the package’s functions and their arguments, as well as a “Get started” vignette showing example usage of the package’s functions.</p>
-<p>Input format: You will need a network in tab-separated format, where the first column is the transcription factors (TFs), and the second column is the regulated genes. The subset_network function requires the third column to be the scores of the regulatory relationships. For each network, the webgestalt_network function requires a “gene universe” file that has a single column containing all the genes that could possibly be present in the network.</p>
+<p>Here, you will find documentation on the purposes of the package’s functions and their arguments, as well as a “Get started” vignette showing example usage of the package’s functions. Link to vignette: <a href="https://westbrooktm.github.io/GOeval/articles/GOeval.html" class="uri">https://westbrooktm.github.io/GOeval/articles/GOeval.html</a>.</p>
+<p>Input format: You will need a network file in which each row represents a directed edge. The tab-separated entries in each row are the the source node (e.g. transcription factor), the target node (e.g. the regulated gene), and optionally an edge score. The subset_network function requires edge scores. The webgestalt_network function requires a “gene universe” file that has a single column containing all the genes that could possibly be present in the network.</p>
 
   </main><aside class="col-md-3"><div class="license">
 <h2 data-toc-skip>License</h2>

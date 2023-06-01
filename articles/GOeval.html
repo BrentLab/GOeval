@@ -67,9 +67,14 @@
 
     
     
-<p>First, install and load this package.</p>
+<p>First, install and load this package. It is easiest to use either the
+“devtools” or “remotes” package to do so. “remotes” is a smaller
+package, so it might be the better option if you do not want to install
+all of “devtools.”</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"westbrooktm/GOeval"</span>, ref <span class="op">=</span> <span class="st">"dev"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"westbrooktm/GOeval"</span>, ref <span class="op">=</span> <span class="st">"dev"</span><span class="op">)</span></span>
+<span><span class="co"># OR</span></span>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"westbrooktm/GOeval"</span>, ref <span class="op">=</span> <span class="st">"dev"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://westbrooktm.github.io/GOeval/">"GOeval"</a></span><span class="op">)</span></span></code></pre></div>
 <p>Steps to use this package from original network to graphing the
@@ -81,21 +86,31 @@ edges (not yet shown)</p></li>
 results</p></li>
 <li><p>get_metrics on the stored ORA results to calculate summary
 statistics for plotting</p></li>
-<li><p>plot_metrics using the output of get_metrics</p></li>
-<li><p>subset_network</p></li>
+<li><p>plot_metrics using the output of get_metrics<br><br><br></p></li>
+</ol>
+<p>First, we set a path to the directory that contains the test data, so
+we can use it for the following examples.</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">data_dir</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"GOeval"</span><span class="op">)</span>, <span class="st">"data"</span><span class="op">)</span></span></code></pre></div>
+<ol style="list-style-type: decimal">
+<li>subset_network</li>
 </ol>
 <p>“marbach_extract.tsv” contains 3 columns: the TFs, the regulated
 genes, and the scores.</p>
-<p>This function creates files in the output_folder with only the rows
-that have the highest scores.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span>  <span class="va">input_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"marbach_extract.tsv"</span><span class="op">)</span></span>
-<span>  <span class="va">output_folder</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"marbach_network_subsets"</span><span class="op">)</span></span>
+<p>This function sorts the input network in descending order by the
+values in the third column and creates files in the output_folder with
+only the rows that have the highest scores.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span>  <span class="va">input_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">data_dir</span>, <span class="st">"marbach_extract.tsv"</span><span class="op">)</span></span>
+<span>  <span class="co"># The output_directory is not put in data_dir.</span></span>
+<span>  <span class="co"># You do not want to save the output in the package itself.</span></span>
+<span>  <span class="co"># Ensure your output_directory exists.</span></span>
+<span>  <span class="va">output_directory</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"marbach_network_subsets"</span><span class="op">)</span></span>
 <span>  <span class="va">name</span> <span class="op">&lt;-</span> <span class="st">"marbach"</span></span>
 <span>  <span class="va">edges</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">64</span>, <span class="fl">128</span>, <span class="fl">256</span>, <span class="fl">512</span>, <span class="fl">1024</span>, <span class="fl">2048</span>, <span class="fl">4096</span>, <span class="fl">8192</span><span class="op">)</span></span>
 <span>  <span class="va">perTF</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
 <span>  </span>
-<span>  <span class="fu"><a href="../reference/subset_network.html">subset_network</a></span><span class="op">(</span><span class="va">input_file</span>, <span class="va">output_folder</span>, <span class="va">name</span>, <span class="va">edges</span>, <span class="va">perTF</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="../reference/subset_network.html">subset_network</a></span><span class="op">(</span><span class="va">input_file</span>, <span class="va">output_directory</span>, <span class="va">name</span>, <span class="va">edges</span>, <span class="va">perTF</span><span class="op">)</span></span></code></pre></div>
 <ol start="2" style="list-style-type: decimal">
 <li>webgestalt_network</li>
 </ol>
@@ -111,32 +126,35 @@ for ORA.</p>
 <p>You can see more options for organism and database with
 WebGestaltR::listOrganism() and WebGestaltR::listGeneSet()
 respectively.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/webgestalt_network.html">webgestalt_network</a></span><span class="op">(</span>network_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"small_net.tsv"</span><span class="op">)</span>, reference_set <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"small_net_gene_universe.txt"</span><span class="op">)</span>, output_directory <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"small_net_output"</span><span class="op">)</span>, network_name <span class="op">=</span> <span class="st">"small_net_194"</span>, permutations <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># Again, the output_directory is not put in data_dir.</span></span>
+<span><span class="co"># Ensure your output_directory exists.</span></span>
+<span><span class="fu"><a href="../reference/webgestalt_network.html">webgestalt_network</a></span><span class="op">(</span>network_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">data_dir</span>, <span class="st">"small_net.tsv"</span><span class="op">)</span>, reference_set <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">data_dir</span>, <span class="st">"small_net_gene_universe.txt"</span><span class="op">)</span>, output_directory <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"small_net_output"</span><span class="op">)</span>, network_name <span class="op">=</span> <span class="st">"small_net_194"</span>, permutations <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
 <ol start="3" style="list-style-type: decimal">
 <li>get_metrics</li>
 </ol>
 <p>Specify which metrics to calculate and use mapply to run get_metrics
-on each of the output_folders.</p>
+on each of the output_folders. The argument “get_sum” is set to TRUE by
+default.</p>
 <p>A wrapper function will be made in the near future so mapply will be
 unnecessary.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span>  <span class="co"># Specify which folders contain the data for each network.</span></span>
 <span>  <span class="co"># Each element will be a folder used as the output folder for a call to webgestalt_network.</span></span>
 <span>  <span class="co"># For the sake of run time, the data used in this example was premade.</span></span>
-<span>  <span class="va">output_folders</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"np3_example"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"marbach_example"</span><span class="op">)</span><span class="op">)</span></span>
-<span>  </span>
+<span>  <span class="va">output_folders</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">data_dir</span>, <span class="st">"np3_example"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">data_dir</span>, <span class="st">"marbach_example"</span><span class="op">)</span><span class="op">)</span></span>
+<span></span>
 <span>  <span class="va">metric_dfs_by_net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mapply.html" class="external-link">mapply</a></span><span class="op">(</span><span class="va">get_metrics</span>, <span class="va">output_folders</span>, MoreArgs<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>get_percent <span class="op">=</span> <span class="cn">TRUE</span>, get_mean <span class="op">=</span> <span class="cn">TRUE</span>, get_median <span class="op">=</span> <span class="cn">TRUE</span>, get_annotation_overlap <span class="op">=</span> <span class="cn">TRUE</span>, parallel <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>, SIMPLIFY <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <ol start="4" style="list-style-type: decimal">
 <li>plot_metrics</li>
 </ol>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span>  <span class="co"># Specify the main titles of the output graphs</span></span>
 <span>  <span class="va">title_text</span> <span class="op">=</span> <span class="st">"NP3 vs Marbach et al."</span></span>
 <span>  <span class="va">subtitle_text</span> <span class="op">=</span> <span class="st">"subset for overlapping TFs"</span></span>
 <span>  </span>
 <span>  <span class="fu"><a href="../reference/plot_metrics.html">plot_metrics</a></span><span class="op">(</span><span class="va">metric_dfs_by_net</span>, <span class="va">title_text</span>, <span class="va">subtitle_text</span><span class="op">)</span></span></code></pre></div>
-<p><img src="GOeval_files/figure-html/unnamed-chunk-6-1.png" width="700"><img src="GOeval_files/figure-html/unnamed-chunk-6-2.png" width="700"><img src="GOeval_files/figure-html/unnamed-chunk-6-3.png" width="700"><img src="GOeval_files/figure-html/unnamed-chunk-6-4.png" width="700"><img src="GOeval_files/figure-html/unnamed-chunk-6-5.png" width="700"></p>
+<p><img src="GOeval_files/figure-html/unnamed-chunk-8-1.png" width="700"><img src="GOeval_files/figure-html/unnamed-chunk-8-2.png" width="700"><img src="GOeval_files/figure-html/unnamed-chunk-8-3.png" width="700"><img src="GOeval_files/figure-html/unnamed-chunk-8-4.png" width="700"><img src="GOeval_files/figure-html/unnamed-chunk-8-5.png" width="700"></p>
   </main>
 </div>
 
