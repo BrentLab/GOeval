@@ -1,0 +1,7 @@
+"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
+"GO:0071241","cellular response to inorganic substance",111,1,0.0268505079825835,37.2432432432432,0.0266718726929936,1,"221184","ENSG00000140848","geneontology_Biological_Process_noRedundant"
+"GO:0072331","signal transduction by p53 class mediator",181,1,0.0437832607643928,22.8397790055249,0.0433066073872554,1,"7862","ENSG00000156983","geneontology_Biological_Process_noRedundant"
+"GO:0043543","protein acylation",192,1,0.04644412191582,21.53125,0.045907601576766,1,"7862","ENSG00000156983","geneontology_Biological_Process_noRedundant"
+"GO:0010038","response to metal ion",200,1,0.0483792936623125,20.67,0.0477970099173749,1,"221184","ENSG00000140848","geneontology_Biological_Process_noRedundant"
+"GO:0018205","peptidyl-lysine modification",282,1,0.0682148040638607,14.6595744680851,0.0670554742016413,1,"7862","ENSG00000156983","geneontology_Biological_Process_noRedundant"
+"GO:0016569","covalent chromatin modification",370,1,0.0895016932752782,11.172972972973,0.087504225946224,1,"7862","ENSG00000156983","geneontology_Biological_Process_noRedundant"

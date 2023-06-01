@@ -35,3 +35,4 @@ Imports:
     ggplot2,
     pkgdown
 VignetteBuilder: knitr
+LazyData: true

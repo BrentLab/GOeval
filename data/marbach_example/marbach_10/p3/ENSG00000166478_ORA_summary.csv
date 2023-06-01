@@ -1,0 +1,7 @@
+"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
+"GO:0006513","protein monoubiquitination",63,1,0.0152394775036284,65.6190476190476,0.0151823317672535,1,"84759","ENSG00000115289","geneontology_Biological_Process_noRedundant"
+"GO:0048736","appendage development",88,1,0.0212868892114175,46.9772727272727,0.0211748800568633,1,"221833","ENSG00000164651","geneontology_Biological_Process_noRedundant"
+"GO:0016458","gene silencing",146,1,0.0353168843734881,28.3150684931507,0.0350071620900628,1,"84759","ENSG00000115289","geneontology_Biological_Process_noRedundant"
+"GO:0007389","pattern specification process",195,1,0.0471698113207547,21.2,0.0466163491581667,1,"221833","ENSG00000164651","geneontology_Biological_Process_noRedundant"
+"GO:0040029","regulation of gene expression, epigenetic",201,1,0.0486211901306241,20.5671641791045,0.0480330542877471,1,"84759","ENSG00000115289","geneontology_Biological_Process_noRedundant"
+"GO:0016569","covalent chromatin modification",370,1,0.0895016932752782,11.172972972973,0.087504225946224,1,"84759","ENSG00000115289","geneontology_Biological_Process_noRedundant"

@@ -1,0 +1,8 @@
+"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
+"GO:0099072","regulation of postsynaptic membrane neurotransmitter receptor levels",36,1,0.00870827285921625,114.833333333333,0.00868983875070772,1,"1500","ENSG00000198561","geneontology_Biological_Process_noRedundant"
+"GO:0051701","interaction with host",136,1,0.0328979196903725,30.3970588235294,0.0326293083949691,1,"1500","ENSG00000198561","geneontology_Biological_Process_noRedundant"
+"GO:0034330","cell junction organization",168,1,0.0406386066763425,24.6071428571429,0.0402281405268963,1,"1500","ENSG00000198561","geneontology_Biological_Process_noRedundant"
+"GO:0050817","coagulation",169,1,0.0408805031446541,24.4615384615385,0.0404651212329391,1,"5051","ENSG00000158006","geneontology_Biological_Process_noRedundant"
+"GO:0016042","lipid catabolic process",179,1,0.0432994678277697,23.0949720670391,0.0428333189664327,1,"5051","ENSG00000158006","geneontology_Biological_Process_noRedundant"
+"GO:0050878","regulation of body fluid levels",240,1,0.058055152394775,17.225,0.0572159615503116,1,"5051","ENSG00000158006","geneontology_Biological_Process_noRedundant"
+"GO:0198738","cell-cell signaling by wnt",289,1,0.0699080793420416,14.3044982698962,0.0686903748028795,1,"1500","ENSG00000198561","geneontology_Biological_Process_noRedundant"
