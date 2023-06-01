@@ -59,6 +59,7 @@ This function sorts the input network in descending order by the values in the t
   input_file <- file.path(data_dir, "marbach_extract.tsv")
   # The output_directory is not put in data_dir.
   # You do not want to save the output in the package itself.
+  # Ensure your output_directory exists.
   output_directory <- file.path("data", "marbach_network_subsets")
   name <- "marbach"
   edges <- c(64, 128, 256, 512, 1024, 2048, 4096, 8192)
@@ -78,6 +79,7 @@ Note organism = "hsapiens" and database = "geneontology_Biological_Process_noRed
 You can see more options for organism and database with WebGestaltR::listOrganism() and WebGestaltR::listGeneSet() respectively.
 ```{r, eval = FALSE}
 # Again, the output_directory is not put in data_dir.
+# Ensure your output_directory exists.
 webgestalt_network(network_path = file.path(data_dir, "small_net.tsv"), reference_set = file.path(data_dir, "small_net_gene_universe.txt"), output_directory = file.path("data", "small_net_output"), network_name = "small_net_194", permutations = 2)
 ```
 
