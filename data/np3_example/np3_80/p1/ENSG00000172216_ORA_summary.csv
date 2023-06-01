@@ -1,0 +1,5 @@
+"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
+"GO:0007219","Notch signaling pathway",117,1,0.0259251052514957,38.5726495726496,0.0257584951568045,1,"23555","ENSG00000099282","geneontology_Biological_Process_noRedundant"
+"GO:0051604","protein maturation",203,1,0.0449811655218258,22.2315270935961,0.0444777751929943,1,"23555","ENSG00000099282","geneontology_Biological_Process_noRedundant"
+"GO:1990778","protein localization to cell periphery",222,1,0.0491912253489918,20.3288288288288,0.0485889394319765,1,"23555","ENSG00000099282","geneontology_Biological_Process_noRedundant"
+"GO:0043687","post-translational protein modification",268,1,0.0593840017726568,16.839552238806,0.0585055791425569,1,"79672","ENSG00000141560","geneontology_Biological_Process_noRedundant"

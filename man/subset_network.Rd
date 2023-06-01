@@ -20,7 +20,8 @@ by webgestalt_network}
 in the subsets and FALSE if they represent the total number of edges}
 }
 \description{
-From a network with edge scores, create subsets using the top given numbers of edges.
+From a network with edge scores, sorts the network in descending order of score, and
+creates subsets using the top given numbers of edges.
 The input file should be tab-separated with three columns: TFs, regulated genes, scores.
 The output files will be tab-separated with two columns: TFs, regulated genes.
 }

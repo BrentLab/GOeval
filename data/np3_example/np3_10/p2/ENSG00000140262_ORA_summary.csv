@@ -1,0 +1,8 @@
+"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
+"GO:0051647","nucleus localization",20,1,0.00443164192333259,225.65,0.00442697703709727,1,"199953","ENSG00000188807","geneontology_Biological_Process_noRedundant"
+"GO:1904029","regulation of cyclin-dependent protein kinase activity",77,1,0.0170618214048305,58.6103896103896,0.01698998215681,1,"29950","ENSG00000197019","geneontology_Biological_Process_noRedundant"
+"GO:0030705","cytoskeleton-dependent intracellular transport",153,1,0.0339020607134944,29.4967320261438,0.0336165696759068,1,"199953","ENSG00000188807","geneontology_Biological_Process_noRedundant"
+"GO:0007018","microtubule-based movement",201,1,0.0445380013294926,22.452736318408,0.0440445054698859,1,"199953","ENSG00000188807","geneontology_Biological_Process_noRedundant"
+"GO:0001667","ameboidal-type cell migration",236,1,0.0522933746953246,19.1228813559322,0.0516125468253301,1,"199953","ENSG00000188807","geneontology_Biological_Process_noRedundant"
+"GO:0071900","regulation of protein serine/threonine kinase activity",347,1,0.0768889873698205,13.0057636887608,0.0754151042878285,1,"29950","ENSG00000197019","geneontology_Biological_Process_noRedundant"
+"GO:0051656","establishment of organelle localization",376,1,0.0833148681586528,12.0026595744681,0.0815839498451074,1,"199953","ENSG00000188807","geneontology_Biological_Process_noRedundant"

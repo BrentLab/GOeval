@@ -1,0 +1,6 @@
+"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
+"GO:1901998","toxin transport",31,1,0.00749879051765844,133.354838709677,0.00748518438995038,1,"22818","ENSG00000111481","geneontology_Biological_Process_noRedundant"
+"GO:0043588","skin development",118,1,0.0285437832607644,35.0338983050847,0.0283417981003974,1,"26085","ENSG00000167759","geneontology_Biological_Process_noRedundant"
+"GO:0008544","epidermis development",140,1,0.0338655055636188,29.5285714285714,0.0335808009988831,1,"26085","ENSG00000167759","geneontology_Biological_Process_noRedundant"
+"GO:0051604","protein maturation",186,1,0.0449927431059507,22.2258064516129,0.0444893163807419,1,"26085","ENSG00000167759","geneontology_Biological_Process_noRedundant"
+"GO:0048193","Golgi vesicle transport",296,1,0.0716013546202225,13.9662162162162,0.070323841640123,1,"22818","ENSG00000111481","geneontology_Biological_Process_noRedundant"

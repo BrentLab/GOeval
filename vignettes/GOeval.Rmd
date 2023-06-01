@@ -33,14 +33,14 @@ Steps to use this package from original network to graphing the results:
 3. get_metrics on the stored ORA results to calculate summary statistics for plotting
 
 4. plot_metrics using the output of get_metrics
-
-
-
-1. subset_network
+\
+\
+\
+1\. subset_network
 
 "marbach_extract.tsv" contains 3 columns: the TFs, the regulated genes, and the scores.
 
-This function creates files in the output_folder with only the rows that have the highest scores.
+This function sorts the input network in descending order by the values in the third column and creates files in the output_folder with only the rows that have the highest scores.
 
 ```{r, eval = FALSE}
   input_file <- file.path("data", "marbach_extract.tsv")

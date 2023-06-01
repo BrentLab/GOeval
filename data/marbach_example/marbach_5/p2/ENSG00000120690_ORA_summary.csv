@@ -1,0 +1,6 @@
+"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
+"GO:0198738","cell-cell signaling by wnt",289,2,0.0699080793420416,28.6089965397924,0.00121770453916215,0.996082313034635,"7091;79412","ENSG00000131650;ENSG00000106829","geneontology_Biological_Process_noRedundant"
+"GO:1904837","beta-catenin-TCF complex assembly",25,1,0.00604741170778907,165.36,0.0060386335608803,1,"7091","ENSG00000106829","geneontology_Biological_Process_noRedundant"
+"GO:1990823","response to leukemia inhibitory factor",69,1,0.0166908563134978,59.9130434782609,0.0166222112046727,1,"7091","ENSG00000106829","geneontology_Biological_Process_noRedundant"
+"GO:0048736","appendage development",88,1,0.0212868892114175,46.9772727272727,0.0211748800568633,1,"79412","ENSG00000131650","geneontology_Biological_Process_noRedundant"
+"GO:0001503","ossification",190,1,0.0459603289791969,21.7578947368421,0.0454349568867169,1,"79412","ENSG00000131650","geneontology_Biological_Process_noRedundant"

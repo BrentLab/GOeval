@@ -1,0 +1,8 @@
+"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
+"GO:0006022","aminoglycan metabolic process",94,1,0.0208287170396632,48.0106382978723,0.0207214001042236,1,"2588","ENSG00000141012","geneontology_Biological_Process_noRedundant"
+"GO:1901136","carbohydrate derivative catabolic process",118,1,0.0261466873476623,38.2457627118644,0.0259772046651319,1,"2588","ENSG00000141012","geneontology_Biological_Process_noRedundant"
+"GO:0070085","glycosylation",184,1,0.0407711056946599,24.5271739130435,0.0403577476701658,1,"285203","ENSG00000163378","geneontology_Biological_Process_noRedundant"
+"GO:0006790","sulfur compound metabolic process",242,1,0.0536228672723244,18.6487603305785,0.05290690544337,1,"2588","ENSG00000141012","geneontology_Biological_Process_noRedundant"
+"GO:0009100","glycoprotein metabolic process",265,1,0.0587192554841569,17.0301886792453,0.0578604253762443,1,"285203","ENSG00000163378","geneontology_Biological_Process_noRedundant"
+"GO:0036230","granulocyte activation",333,1,0.0737868380234877,13.5525525525526,0.072429650753471,1,"2588","ENSG00000141012","geneontology_Biological_Process_noRedundant"
+"GO:0002446","neutrophil mediated immunity",335,1,0.074230002215821,13.4716417910448,0.0728564387399157,1,"2588","ENSG00000141012","geneontology_Biological_Process_noRedundant"
