@@ -4,13 +4,13 @@
 \alias{subset_network}
 \title{subset_network}
 \usage{
-subset_network(input_file, output_folder, name, edges, perTF)
+subset_network(input_file, output_directory, name, edges, perTF)
 }
 \arguments{
-\item{input_file}{a folder containing .csv files of the enrichment summaries output
-by webgestalt_network}
+\item{input_file}{a file containing the network to create subsets from. The file should
+be tab-separated with three columns: source node, target node, edge score}
 
-\item{output_folder}{name of the folder in which to place the created network subset files}
+\item{output_directory}{name of the folder in which to place the created network subset files}
 
 \item{name}{base name for the created network subset files}
 
@@ -22,6 +22,7 @@ in the subsets and FALSE if they represent the total number of edges}
 \description{
 From a network with edge scores, sorts the network in descending order of score, and
 creates subsets using the top given numbers of edges.
-The input file should be tab-separated with three columns: TFs, regulated genes, scores.
-The output files will be tab-separated with two columns: TFs, regulated genes.
+The input file should be tab-separated with three columns: source node (e.g. transcription factor),
+target node (e.g. the regulated gene), and edge score.
+The output files will be tab-separated with two columns: source node, target node.
 }

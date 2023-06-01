@@ -14,10 +14,12 @@ knitr::opts_chunk$set(
 )
 ```
 
-First, install and load this package.
+First, install and load this package. It is easiest to use either the "devtools" or "remotes" package to do so. "remotes" is a smaller package, so it might be the better option if you do not want to install all of "devtools."
 
 ```{r, eval = FALSE}
 devtools::install_github("westbrooktm/GOeval", ref = "dev")
+# OR
+remotes::install_github("westbrooktm/GOeval", ref = "dev")
 ```
 
 ```{r setup}
@@ -36,20 +38,29 @@ Steps to use this package from original network to graphing the results:
 \
 \
 \
-1\. subset_network
+
+First, we set a path to the directory that contains the test data, so we can use it for the following examples.
+
+```{r}
+data_dir <- file.path(system.file(package = "GOeval"), "data")
+```
+
+1. subset_network
 
 "marbach_extract.tsv" contains 3 columns: the TFs, the regulated genes, and the scores.
 
 This function sorts the input network in descending order by the values in the third column and creates files in the output_folder with only the rows that have the highest scores.
 
 ```{r, eval = FALSE}
-  input_file <- file.path("data", "marbach_extract.tsv")
-  output_folder <- file.path("data", "marbach_network_subsets")
+  input_file <- file.path(data_dir, "marbach_extract.tsv")
+  # The output_directory is not put in data_dir.
+  # You do not want to save the output in the package itself.
+  output_directory <- file.path("data", "marbach_network_subsets")
   name <- "marbach"
   edges <- c(64, 128, 256, 512, 1024, 2048, 4096, 8192)
   perTF <- FALSE
   
-  subset_network(input_file, output_folder, name, edges, perTF)
+  subset_network(input_file, output_directory, name, edges, perTF)
 ```
 
 2. webgestalt_network
@@ -62,19 +73,20 @@ Note organism = "hsapiens" and database = "geneontology_Biological_Process_noRed
 
 You can see more options for organism and database with WebGestaltR::listOrganism() and WebGestaltR::listGeneSet() respectively.
 ```{r, eval = FALSE}
-webgestalt_network(network_path = file.path("data", "small_net.tsv"), reference_set = file.path("data", "small_net_gene_universe.txt"), output_directory = file.path("data", "small_net_output"), network_name = "small_net_194", permutations = 2)
+# Again, the output_directory is not put in data_dir.
+webgestalt_network(network_path = file.path(data_dir, "small_net.tsv"), reference_set = file.path(data_dir, "small_net_gene_universe.txt"), output_directory = file.path("data", "small_net_output"), network_name = "small_net_194", permutations = 2)
 ```
 
 3. get_metrics
 
-Specify which metrics to calculate and use mapply to run get_metrics on each of the output_folders.
+Specify which metrics to calculate and use mapply to run get_metrics on each of the output_folders. The argument "get_sum" is set to TRUE by default.
 
 A wrapper function will be made in the near future so mapply will be unnecessary.
 ```{r}
   # Specify which folders contain the data for each network.
   # Each element will be a folder used as the output folder for a call to webgestalt_network.
   # For the sake of run time, the data used in this example was premade.
-  output_folders <- c(file.path("data", "np3_example"), file.path("data", "marbach_example"))
+  output_folders <- c(file.path(data_dir, "np3_example"), file.path("data", "marbach_example"))
   
   metric_dfs_by_net <- mapply(get_metrics, output_folders, MoreArgs=list(get_percent = TRUE, get_mean = TRUE, get_median = TRUE, get_annotation_overlap = TRUE, parallel = FALSE), SIMPLIFY = FALSE)
 ```

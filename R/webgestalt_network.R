@@ -13,7 +13,7 @@
 #' @importFrom stats xtabs
 #'
 #' @param network_path path to the network or network subset to evaluate. Must be a tab-separated
-#'  file where the first column is the TFs and the second column is the regulated genes.
+#'  file where the first column is the source nodes (TFs) and the second column is the target nodes (regulated genes).
 #' @param reference_set path to the set of all genes possibly included in the network. Must be a
 #'  file containing exactly one column of the genes that could possibly appear in the network.
 #' @param output_directory path to the folder in which output from all networks subset from the same original network should be stored

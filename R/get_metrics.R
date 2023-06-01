@@ -151,6 +151,11 @@ get_metrics <- function(directory, organism = "hsapiens", get_sum = TRUE, get_pe
   }
 
   networks_list <- list.dirs(directory, full.names = TRUE, recursive = FALSE)
+
+  if (length(networks_list) == 0) {
+    stop("Invalid input path: ", directory)
+  }
+
   networks_list <- gtools::mixedsort(networks_list)
 
   if (parallel) {
