@@ -67,78 +67,76 @@
 
     
     
-<p>Steps to use this package from original network to graphing the
-results: 1. subset_network to create network subsets with the
-top-weighted edges 2. webgestalt_network on each of the network subsets
-to generate ORA results 3. get_metrics on the stored ORA results to
-calculate summary statistics for plotting 4. plot_metrics using the
-output of get_metrics</p>
+<p>First, install and load this package.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">ontologyIndex</span><span class="op">)</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/bzhanglab/WebGestaltR" class="external-link">WebGestaltR</a></span><span class="op">)</span></span>
-<span><span class="co">#&gt; ******************************************</span></span>
-<span><span class="co">#&gt; *                                        *</span></span>
-<span><span class="co">#&gt; *          Welcome to WebGestaltR !      *</span></span>
-<span><span class="co">#&gt; *                                        *</span></span>
-<span><span class="co">#&gt; ******************************************</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://westbrooktm.github.io/GOeval/">GOeval</a></span><span class="op">)</span></span>
-<span><span class="co">#devtools::load_all()</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"westbrooktm/GOeval"</span>, ref <span class="op">=</span> <span class="st">"dev"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># 1. subset_network</span></span>
-<span><span class="co"># subset_network()</span></span>
-<span></span>
-<span><span class="co"># 2. webgestalt_network</span></span>
-<span><span class="fu"><a href="../reference/webgestalt_network.html">webgestalt_network</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"small_net.tsv"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"small_net_gene_universe.txt"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"small_net_output"</span><span class="op">)</span>, <span class="st">"small_net_194"</span>, permutations <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in dir.create(REPORTS_PATH, recursive = TRUE): 'data/small_net_output'</span></span>
-<span><span class="co">#&gt; already exists</span></span>
-<span><span class="co">#&gt; Warning in dir.create(file.path(output_directory, network_name, paste0("p", :</span></span>
-<span><span class="co">#&gt; 'data/small_net_output/small_net_194/p0' already exists</span></span>
-<span><span class="co">#&gt; Warning in dir.create(file.path(output_directory, network_name, paste0("p", :</span></span>
-<span><span class="co">#&gt; 'data/small_net_output/small_net_194/p1' already exists</span></span>
-<span><span class="co">#&gt; Warning in dir.create(file.path(output_directory, network_name, paste0("p", :</span></span>
-<span><span class="co">#&gt; 'data/small_net_output/small_net_194/p2' already exists</span></span>
-<span><span class="co">#&gt; Warning in dir.create(file.path(work_dir, paste0("p", i - 1)), recursive =</span></span>
-<span><span class="co">#&gt; TRUE): 'data/small_net_output/webgestalt_work/small_net_194/p0' already exists</span></span>
-<span><span class="co">#&gt; Warning in dir.create(file.path(work_dir, paste0("p", i - 1)), recursive =</span></span>
-<span><span class="co">#&gt; TRUE): 'data/small_net_output/webgestalt_work/small_net_194/p1' already exists</span></span>
-<span><span class="co">#&gt; Warning in dir.create(file.path(work_dir, paste0("p", i - 1)), recursive =</span></span>
-<span><span class="co">#&gt; TRUE): 'data/small_net_output/webgestalt_work/small_net_194/p2' already exists</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://westbrooktm.github.io/GOeval/">"GOeval"</a></span><span class="op">)</span></span></code></pre></div>
+<p>Steps to use this package from original network to graphing the
+results:</p>
+<ol style="list-style-type: decimal">
+<li><p>subset_network to create network subsets with the top-weighted
+edges (not yet shown)</p></li>
+<li><p>webgestalt_network on each of the network subsets to generate ORA
+results</p></li>
+<li><p>get_metrics on the stored ORA results to calculate summary
+statistics for plotting</p></li>
+<li><p>plot_metrics using the output of get_metrics</p></li>
+<li><p>subset_network</p></li>
+</ol>
+<p>“marbach_extract.tsv” contains 3 columns: the TFs, the regulated
+genes, and the scores.</p>
+<p>This function creates files in the output_folder with only the rows
+that have the highest scores.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span>  <span class="va">output_folders</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"np3_example"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"marbach_example"</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
+<code class="sourceCode R"><span>  <span class="va">input_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"marbach_extract.tsv"</span><span class="op">)</span></span>
+<span>  <span class="va">output_folder</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"marbach_network_subsets"</span><span class="op">)</span></span>
+<span>  <span class="va">name</span> <span class="op">&lt;-</span> <span class="st">"marbach"</span></span>
+<span>  <span class="va">edges</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">64</span>, <span class="fl">128</span>, <span class="fl">256</span>, <span class="fl">512</span>, <span class="fl">1024</span>, <span class="fl">2048</span>, <span class="fl">4096</span>, <span class="fl">8192</span><span class="op">)</span></span>
+<span>  <span class="va">perTF</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
+<span>  </span>
+<span>  <span class="fu"><a href="../reference/subset_network.html">subset_network</a></span><span class="op">(</span><span class="va">input_file</span>, <span class="va">output_folder</span>, <span class="va">name</span>, <span class="va">edges</span>, <span class="va">perTF</span><span class="op">)</span></span></code></pre></div>
+<ol start="2" style="list-style-type: decimal">
+<li>webgestalt_network</li>
+</ol>
+<p>Run ORA using the webgestalt_network function on “small_net_194”,
+which is a small example network with 5 TFs that have an average of 194
+target genes. “small_net.tsv” is tab-separated with the first column
+containing the TF names and the second column containing the regulated
+gene names. “small_net_gene_universe.txt” contains one column of the
+names of all genes that could appear in the network.</p>
+<p>Note organism = “hsapiens” and database =
+“geneontology_Biological_Process_noRedundant” is the default database
+for ORA.</p>
+<p>You can see more options for organism and database with
+WebGestaltR::listOrganism() and WebGestaltR::listGeneSet()
+respectively.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/webgestalt_network.html">webgestalt_network</a></span><span class="op">(</span>network_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"small_net.tsv"</span><span class="op">)</span>, reference_set <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"small_net_gene_universe.txt"</span><span class="op">)</span>, output_directory <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"small_net_output"</span><span class="op">)</span>, network_name <span class="op">=</span> <span class="st">"small_net_194"</span>, permutations <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span></code></pre></div>
+<ol start="3" style="list-style-type: decimal">
+<li>get_metrics</li>
+</ol>
+<p>Specify which metrics to calculate and use mapply to run get_metrics
+on each of the output_folders.</p>
+<p>A wrapper function will be made in the near future so mapply will be
+unnecessary.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span>  <span class="co"># Specify which folders contain the data for each network.</span></span>
+<span>  <span class="co"># Each element will be a folder used as the output folder for a call to webgestalt_network.</span></span>
+<span>  <span class="co"># For the sake of run time, the data used in this example was premade.</span></span>
+<span>  <span class="va">output_folders</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"np3_example"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"marbach_example"</span><span class="op">)</span><span class="op">)</span></span>
+<span>  </span>
+<span>  <span class="va">metric_dfs_by_net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mapply.html" class="external-link">mapply</a></span><span class="op">(</span><span class="va">get_metrics</span>, <span class="va">output_folders</span>, MoreArgs<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>get_percent <span class="op">=</span> <span class="cn">TRUE</span>, get_mean <span class="op">=</span> <span class="cn">TRUE</span>, get_median <span class="op">=</span> <span class="cn">TRUE</span>, get_annotation_overlap <span class="op">=</span> <span class="cn">TRUE</span>, parallel <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>, SIMPLIFY <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<ol start="4" style="list-style-type: decimal">
+<li>plot_metrics</li>
+</ol>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span>  <span class="co"># Specify the main titles of the output graphs</span></span>
 <span>  <span class="va">title_text</span> <span class="op">=</span> <span class="st">"NP3 vs Marbach et al."</span></span>
 <span>  <span class="va">subtitle_text</span> <span class="op">=</span> <span class="st">"subset for overlapping TFs"</span></span>
-<span></span>
-<span>  <span class="co"># load regulatory relationships between GO terms for the calculation of</span></span>
-<span>  <span class="co">#   overlap between TF GO annotations and their targets' enriched GO terms</span></span>
-<span>  <span class="va">go</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/pkg/ontologyIndex/man/get_ontology.html" class="external-link">get_ontology</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">"http://purl.obolibrary.org/obo/go/go-basic.obo"</span>, extract_tags <span class="op">=</span> <span class="st">"everything"</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="va">go</span> <span class="op">&lt;-</span> <span class="va">go</span><span class="op">[</span><span class="va">go</span><span class="op">$</span><span class="va">namespace</span> <span class="op">==</span> <span class="st">'biological_process'</span>,<span class="op">]</span></span>
-<span>  <span class="va">go_reg</span> <span class="op">&lt;-</span> <span class="va">go</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'id'</span>, <span class="st">'regulates'</span>, <span class="st">'negatively_regulates'</span>, <span class="st">'positively_regulates'</span><span class="op">)</span><span class="op">]</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/rm.html" class="external-link">rm</a></span><span class="op">(</span><span class="va">go</span><span class="op">)</span></span>
-<span></span>
-<span>  <span class="co"># load gene annotations with WebGestaltR::loadGeneSet</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/warning.html" class="external-link">suppressWarnings</a></span><span class="op">(</span><span class="va">go_ann</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/WebGestaltR/man/loadGeneSet.html" class="external-link">loadGeneSet</a></span><span class="op">(</span>organism <span class="op">=</span> <span class="st">"hsapiens"</span>, enrichDatabase <span class="op">=</span> <span class="st">"geneontology_Biological_Process_noRedundant"</span>, hostName <span class="op">=</span> <span class="st">"https://www.webgestalt.org/"</span><span class="op">)</span><span class="op">$</span><span class="va">geneSet</span><span class="op">)</span></span>
-<span></span>
-<span>  <span class="co"># 3. get_metrics</span></span>
-<span>  <span class="va">metric_dfs_by_net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mapply.html" class="external-link">mapply</a></span><span class="op">(</span><span class="va">get_metrics</span>, <span class="va">output_folders</span>, MoreArgs<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>get_percent <span class="op">=</span> <span class="cn">TRUE</span>, get_mean <span class="op">=</span> <span class="cn">TRUE</span>, get_median <span class="op">=</span> <span class="cn">TRUE</span>, get_annotation_overlap <span class="op">=</span> <span class="cn">TRUE</span>, go_ann <span class="op">=</span> <span class="va">go_ann</span>, go_reg <span class="op">=</span> <span class="va">go_reg</span>, parallel <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>, SIMPLIFY <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span></span>
-<span>  <span class="co">#pdf(file.path("data", "npVm_example.pdf"), 7, 5)</span></span>
-<span></span>
-<span>  <span class="co"># 4. plot_metrics</span></span>
-<span>  <span class="fu"><a href="../reference/plot_metrics.html">plot_metrics</a></span><span class="op">(</span><span class="va">metric_dfs_by_net</span>, <span class="va">title_text</span>, <span class="va">subtitle_text</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning: Duplicated `override.aes` is ignored.</span></span></code></pre></div>
-<p><img src="GOeval_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
-<pre><code><span><span class="co">#&gt; Warning: Duplicated `override.aes` is ignored.</span></span></code></pre>
-<p><img src="GOeval_files/figure-html/unnamed-chunk-3-2.png" width="700"></p>
-<pre><code><span><span class="co">#&gt; Warning: Duplicated `override.aes` is ignored.</span></span></code></pre>
-<p><img src="GOeval_files/figure-html/unnamed-chunk-3-3.png" width="700"></p>
-<pre><code><span><span class="co">#&gt; Warning: Duplicated `override.aes` is ignored.</span></span></code></pre>
-<p><img src="GOeval_files/figure-html/unnamed-chunk-3-4.png" width="700"></p>
-<pre><code><span><span class="co">#&gt; Warning: Duplicated `override.aes` is ignored.</span></span></code></pre>
-<p><img src="GOeval_files/figure-html/unnamed-chunk-3-5.png" width="700"></p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span></span>
-<span>  <span class="co">#dev.off()</span></span></code></pre></div>
+<span>  </span>
+<span>  <span class="fu"><a href="../reference/plot_metrics.html">plot_metrics</a></span><span class="op">(</span><span class="va">metric_dfs_by_net</span>, <span class="va">title_text</span>, <span class="va">subtitle_text</span><span class="op">)</span></span></code></pre></div>
+<p><img src="GOeval_files/figure-html/unnamed-chunk-6-1.png" width="700"><img src="GOeval_files/figure-html/unnamed-chunk-6-2.png" width="700"><img src="GOeval_files/figure-html/unnamed-chunk-6-3.png" width="700"><img src="GOeval_files/figure-html/unnamed-chunk-6-4.png" width="700"><img src="GOeval_files/figure-html/unnamed-chunk-6-5.png" width="700"></p>
   </main>
 </div>
 
