@@ -45,6 +45,10 @@ First, we set a path to the directory that contains the test data, so we can use
 data_dir <- file.path(system.file(package = "GOeval"), "data")
 ```
 
+```{r, echo = FALSE}
+data_dir <- "data"
+```
+
 1. subset_network
 
 "marbach_extract.tsv" contains 3 columns: the TFs, the regulated genes, and the scores.
@@ -86,8 +90,8 @@ A wrapper function will be made in the near future so mapply will be unnecessary
   # Specify which folders contain the data for each network.
   # Each element will be a folder used as the output folder for a call to webgestalt_network.
   # For the sake of run time, the data used in this example was premade.
-  output_folders <- c(file.path(data_dir, "np3_example"), file.path("data", "marbach_example"))
-  
+  output_folders <- c(file.path(data_dir, "np3_example"), file.path(data_dir, "marbach_example"))
+
   metric_dfs_by_net <- mapply(get_metrics, output_folders, MoreArgs=list(get_percent = TRUE, get_mean = TRUE, get_median = TRUE, get_annotation_overlap = TRUE, parallel = FALSE), SIMPLIFY = FALSE)
 ```
 
