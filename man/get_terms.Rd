@@ -2,8 +2,7 @@
 % Please edit documentation in R/get_terms.R
 \name{get_terms}
 \alias{get_terms}
-\title{get enrichment data for the top n terms from each tf summary file in a folder
-output by the webgestalt_network function}
+\title{get_terms}
 \usage{
 get_terms(path, n)
 }
@@ -14,6 +13,6 @@ by webgestalt_network}
 \item{n}{the number of terms from each summary to get data for}
 }
 \description{
-get enrichment data for the top n terms from each tf summary file in a folder
-output by the webgestalt_network function
+Get enrichment data for the top n terms from each TF summary file in a folder
+output by the webgestalt_network function.
 }

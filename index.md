@@ -7,4 +7,6 @@ Welcome to GOeval - a package for gene regulatory network evaluation using Gene 
 
 This package provides functions to systematically run over-representation analysis (ORA) on multiple subsets of a gene regulatory network and its permutations using the 'WebGestaltR' package. It also provides functions to assess the quality of biological information captured by the network via metrics calculated from the ORA results.
 
-Here, you will find documentation on the purposes of the package's functions and their arguments.
+Here, you will find documentation on the purposes of the package's functions and their arguments, as well as a "Get started" vignette showing example usage of the package's functions.
+
+Input format: You will need a network in tab-separated format, where the first column is the transcription factors (TFs), and the second column is the regulated genes. The subset_network function requires the third column to be the scores of the regulatory relationships. For each network, the webgestalt_network function requires a "gene universe" file that has a single column containing all the genes that could possibly be present in the network.

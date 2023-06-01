@@ -2,7 +2,7 @@
 % Please edit documentation in R/plot_metrics.R
 \name{plot_metrics}
 \alias{plot_metrics}
-\title{plot the summary metrics from get_metrics across network subset size for one or more networks}
+\title{plot_metrics}
 \usage{
 plot_metrics(
   metric_dfs_by_net,
@@ -40,5 +40,5 @@ which is the percent of TFs that are annotated to a GO term for which their
 target genes are enriched}
 }
 \description{
-plot the summary metrics from get_metrics across network subset size for one or more networks
+Plot the summary metrics from get_metrics across network subset size for one or more networks.
 }

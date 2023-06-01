@@ -97,10 +97,15 @@ get_network_metrics <- function(full_terms, network_size, organism, get_sum, get
   )[c(get_sum, get_percent, get_mean, get_median, get_annotation_overlap)])
 }
 
-#' get a data.frame that contains specified metrics for all networks that have a
-#'  subdirectory in the provided path including both the real and permuted networks
+#' get_metrics
+#'
+#' Get a data.frame that contains specified metrics for all networks that have a
+#'  subdirectory in the provided path including both the real and permuted networks.
+#'  The path should contain only directories created by webgestalt_network.
 #'
 #' @import stringr
+#' @importFrom ontologyIndex get_ontology
+#' @importFrom WebGestaltR loadGeneSet
 #' @importFrom gtools mixedsort
 #' @importFrom parallel mclapply
 #' @importFrom reader n.readLines
@@ -122,16 +127,28 @@ get_network_metrics <- function(full_terms, network_size, organism, get_sum, get
 #' @param get_annotation_overlap bool whether to get the 'annotation_overlap' metric,
 #'  which is the percent of TFs that are annotated to a GO term for which their
 #'  target genes are enriched
-#' @param go_ann a data.frame of annotations of genes to GO terms. Obtain with
-#'  WebGestaltR::loadGeneSet.
-#' @param go_reg a data.frame of the regulatory relationships between GO terms.
-#'  Obtain with ontologyIndex::get_ontology.
 #' @param parallel bool whether to get the metrics for each network in the directory
 #'  in parallel or sequentially
 #'
 #' @export
-get_metrics <- function(directory, organism = "hsapiens", get_sum = TRUE, get_percent = FALSE, get_mean = FALSE, get_median = FALSE, get_annotation_overlap = FALSE, go_ann = NULL, go_reg = NULL, parallel = TRUE) {
+get_metrics <- function(directory, organism = "hsapiens", get_sum = TRUE, get_percent = FALSE, get_mean = FALSE, get_median = FALSE, get_annotation_overlap = FALSE, parallel = TRUE) {
   # start = Sys.time()
+
+  # GO regulatory relationships only needed if get_annotation_overlap = TRUE
+  if (get_annotation_overlap) {
+    # Load regulatory relationships between GO terms for the calculation of overlap between TF GO
+    # annotations and their targets' enriched GO terms.
+    go <- as.data.frame(ontologyIndex::get_ontology(file = "http://purl.obolibrary.org/obo/go/go-basic.obo", extract_tags = "everything"))
+    go <- go[go$namespace == 'biological_process',]
+    go_reg <- go[c('id', 'regulates', 'negatively_regulates', 'positively_regulates')]
+    rm(go)
+
+    # Load gene annotations with WebGestaltR::loadGeneSet.
+    suppressWarnings(go_ann <- WebGestaltR::loadGeneSet(organism = "hsapiens", enrichDatabase = "geneontology_Biological_Process_noRedundant", hostName = "https://www.webgestalt.org/")$geneSet)
+  } else {
+    go_reg <- NULL
+    go_ann <- NULL
+  }
 
   networks_list <- list.dirs(directory, full.names = TRUE, recursive = FALSE)
   networks_list <- gtools::mixedsort(networks_list)

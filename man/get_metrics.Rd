@@ -2,8 +2,7 @@
 % Please edit documentation in R/get_metrics.R
 \name{get_metrics}
 \alias{get_metrics}
-\title{get a data.frame that contains specified metrics for all networks that have a
-subdirectory in the provided path including both the real and permuted networks}
+\title{get_metrics}
 \usage{
 get_metrics(
   directory,
@@ -13,8 +12,6 @@ get_metrics(
   get_mean = FALSE,
   get_median = FALSE,
   get_annotation_overlap = FALSE,
-  go_ann = NULL,
-  go_reg = NULL,
   parallel = TRUE
 )
 }
@@ -42,16 +39,11 @@ log base 10 of the p-value for the top term of each TF}
 which is the percent of TFs that are annotated to a GO term for which their
 target genes are enriched}
 
-\item{go_ann}{a data.frame of annotations of genes to GO terms. Obtain with
-WebGestaltR::loadGeneSet.}
-
-\item{go_reg}{a data.frame of the regulatory relationships between GO terms.
-Obtain with ontologyIndex::get_ontology.}
-
 \item{parallel}{bool whether to get the metrics for each network in the directory
 in parallel or sequentially}
 }
 \description{
-get a data.frame that contains specified metrics for all networks that have a
-subdirectory in the provided path including both the real and permuted networks
+Get a data.frame that contains specified metrics for all networks that have a
+subdirectory in the provided path including both the real and permuted networks.
+The path should contain only directories created by webgestalt_network.
 }

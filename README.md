@@ -18,3 +18,12 @@ You can install the development version of GOeval like so:
 devtools::install_github("westbrooktm/GOeval", ref = "dev")
 ```
 
+You can then load the package with:
+
+``` r
+library("GOeval")
+```
+
+## Documentation
+
+https://westbrooktm.github.io/GOeval/
