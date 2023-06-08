@@ -1,7 +1,0 @@
-"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
-"GO:0051668","localization within membrane",97,1,0.0214934633281631,46.5257731958763,0.0213791490633701,1,"196383","ENSG00000150977","geneontology_Biological_Process_noRedundant"
-"GO:0002064","epithelial cell development",125,1,0.0276977620208287,36.104,0.027507483766503,1,"196383","ENSG00000150977","geneontology_Biological_Process_noRedundant"
-"GO:1990778","protein localization to cell periphery",222,1,0.0491912253489918,20.3288288288288,0.0485889394319765,1,"196383","ENSG00000150977","geneontology_Biological_Process_noRedundant"
-"GO:0090150","establishment of protein localization to membrane",270,1,0.05982716596499,16.7148148148148,0.0589355588932678,1,"196383","ENSG00000150977","geneontology_Biological_Process_noRedundant"
-"GO:0044782","cilium organization",308,1,0.068247285619322,14.6525974025974,0.0670865146118355,1,"196383","ENSG00000150977","geneontology_Biological_Process_noRedundant"
-"GO:1901652","response to peptide",321,1,0.0711278528694881,14.0591900311526,0.069866860464046,1,"80318","ENSG00000165113","geneontology_Biological_Process_noRedundant"

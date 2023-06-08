@@ -1,3 +1,0 @@
-"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
-"GO:0007050","cell cycle arrest",194,1,0.0429869266563262,23.2628865979381,0.0425272880499735,1,"10669","ENSG00000138028","geneontology_Biological_Process_noRedundant"
-"GO:0007178","transmembrane receptor protein serine/threonine kinase signaling pathway",196,1,0.0434300908486594,23.0255102040816,0.0429609015015409,1,"3547","ENSG00000147255","geneontology_Biological_Process_noRedundant"

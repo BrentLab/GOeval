@@ -28,7 +28,7 @@ library("GOeval")
 
 Steps to use this package from original network to graphing the results:
 
-1. subset_network to create network subsets with the top-weighted edges (not yet shown)
+1. subset_network to create network subsets with the top-weighted edges
 
 2. webgestalt_network on each of the network subsets to generate ORA results
 
@@ -39,10 +39,15 @@ Steps to use this package from original network to graphing the results:
 \
 \
 
-First, we set a path to the directory that contains the test data, so we can use it for the following examples.
+To run the following examples, access the example data stored in "vignette_data.tar.gz" and extract it into a local folder.
 
-```{r}
-data_dir <- file.path(system.file(package = "GOeval"), "data")
+```{r, eval = FALSE}
+data_path <- system.file(package = "GOeval", file.path("data", "vignette_data.tar.gz"))
+
+# where you want to store the example data
+data_dir <- "data"
+
+untar(data_path, exdir = data_dir)
 ```
 
 ```{r, echo = FALSE}
@@ -51,58 +56,99 @@ data_dir <- "data"
 
 1. subset_network
 
-"marbach_extract.tsv" contains 3 columns: the TFs, the regulated genes, and the scores.
+"np3_dtoTFs.tsv" is tab-separated and contains 3 columns: the TFs, the regulated genes, and the scores.
 
-This function sorts the input network in descending order by the values in the third column and creates files in the output_folder with only the rows that have the highest scores.
+This function sorts the input network in descending order by the values in the third column and creates files in the output_folder with only the first two columns of the rows that have the highest scores.
 
-```{r, eval = FALSE}
-  input_file <- file.path(data_dir, "marbach_extract.tsv")
-  # The output_directory is not put in data_dir.
-  # You do not want to save the output in the package itself.
-  # Ensure your output_directory exists.
-  output_directory <- file.path("data", "marbach_network_subsets")
-  name <- "marbach"
-  edges <- c(64, 128, 256, 512, 1024, 2048, 4096, 8192)
-  perTF <- FALSE
+```{r}
+  input_file <- file.path(data_dir, "np3_dtoTFs.tsv")
   
-  subset_network(input_file, output_directory, name, edges, perTF)
+  # This does not have to be in the same directory as the input file.
+  # Ensure your output_directory exists.
+  output_directory <- file.path("data", "np3_dtoTFs_subsets")
+  
+  name <- "np3"
+  
+  # Since we are setting num_possible_TFs, this will be the average number of
+  #   edges from each TF in each subset.
+  edges <- c(8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096)
+  
+  # The "np3_dtoTFs.tsv" network was made to include only 56 TFs.
+  num_possible_TFs <- 56
+  
+  subset_network(input_file, output_directory, name, edges, num_possible_TFs)
 ```
+
+The result is that now the "data/np3_dtoTFs_subsets" folder contains 10 files: "np3_8.tsv" through "np3_4096.tsv".
 
 2. webgestalt_network
 
-Run ORA using the webgestalt_network function on "small_net_194", which is a small example network with 5 TFs that have an average of 194 target genes. 
-"small_net.tsv" is tab-separated with the first column containing the TF names and the second column containing the regulated gene names. 
-"small_net_gene_universe.txt" contains one column of the names of all genes that could appear in the network.
+Run ORA using the webgestalt_network function on each of the network subsets created in step 1.
+These files are tab-separated with the first column containing the TF names and the second column containing the regulated gene names. 
+"h1_k562_overlap_universe.txt" contains one column of the names of all genes that could appear in the network.
+The network_name should be different for each subset, so I choose to use the subset file names without the extension.
 
 Note organism = "hsapiens" and database = "geneontology_Biological_Process_noRedundant" is the default database for ORA.
 
 You can see more options for organism and database with WebGestaltR::listOrganism() and WebGestaltR::listGeneSet() respectively.
+
 ```{r, eval = FALSE}
-# Again, the output_directory is not put in data_dir.
-# Ensure your output_directory exists.
-webgestalt_network(network_path = file.path(data_dir, "small_net.tsv"), reference_set = file.path(data_dir, "small_net_gene_universe.txt"), output_directory = file.path("data", "small_net_output"), network_name = "small_net_194", permutations = 2)
+for (subset in list.files(file.path(data_dir, "np3_dtoTFs_subsets"), full.names = TRUE)) {
+  # Again, the output_directory does not have to be in data_dir.
+  webgestalt_network(network_path = subset,
+                     reference_set = file.path(data_dir, "h1_k562_overlap_universe.txt"),
+                     output_directory = file.path("data", "np3_dtoTFs_summaries"),
+                     network_name = strsplit(basename(subset), "[.]")[[1]][1],
+                     permutations = 3)
+}
+```
+
+Also note that the run time of the above code could take well over an hour, so this vignette does not actually evaluate the code. The run time is highly dependent on the number of subsets, the number of TFs in each of those subsets, and the number of permutations. The process can be sped up (in this case by 10x) by running webgestalt_network on each subset at the same time using a computing cluster or similar.
+
+To test the very basics on a personal computer, the following code should run in just a few minutes.
+
+```{r, eval = FALSE}
+webgestalt_network(network_path = file.path(data_dir, "np3_dtoTFs_subsets", "np3_8.tsv"),
+                   reference_set = file.path(data_dir, "h1_k562_overlap_universe.txt"),
+                   output_directory = file.path("data", "np3_dtoTFs_single_permutation"),
+                   network_name = "np3_8",
+                   permutations = 1)
 ```
 
 3. get_metrics
 
-Specify which metrics to calculate and use mapply to run get_metrics on each of the output_folders. The argument "get_sum" is set to TRUE by default.
+Run get_metrics to calculate the desired metrics based on the output from webgestalt_network. Note the arguments 'get_sum' and 'get_size' are TRUE by default.
 
-A wrapper function will be made in the near future so mapply will be unnecessary.
 ```{r}
+  output_folders <- file.path(data_dir, "np3_dtoTFs_summaries")
+
+  metric_dfs <- get_metrics(output_folders, get_percent = TRUE, get_mean = TRUE, get_median = TRUE, get_annotation_overlap = TRUE, parallel = FALSE)
+```
+
+If you want to compare multiple networks, you can run get_metrics on both at the same time as shown below with the addition of the "EDN" network. When comparing multiple networks, the sizes for all must be based either on total edges or on edges per TF, but the exact subset sizes do not need to be the same.
+
+```{r, eval = FALSE}
   # Specify which folders contain the data for each network.
   # Each element will be a folder used as the output folder for a call to webgestalt_network.
-  # For the sake of run time, the data used in this example was premade.
-  output_folders <- c(file.path(data_dir, "np3_example"), file.path(data_dir, "marbach_example"))
+  output_folders <- c(file.path(data_dir, "np3_dtoTFs_summaries"), file.path(data_dir, "EDN_summaries"))
 
   metric_dfs_by_net <- mapply(get_metrics, output_folders, MoreArgs=list(get_percent = TRUE, get_mean = TRUE, get_median = TRUE, get_annotation_overlap = TRUE, parallel = FALSE), SIMPLIFY = FALSE)
 ```
 
 4. plot_metrics
 
+Set a title and subtitle for the plots.\
+Specify whether the subset sizes are based on total edges or edges per TF.\
+Set the metric booleans to the same values as those used in get_metrics to ensure proper plot labels.\
+\
+plot_metrics also returns a list of the DataFrames used to plot. Each DataFrame contains values for one metric across all networks, subsets, and permutations
+
 ```{r}
   # Specify the main titles of the output graphs
-  title_text = "NP3 vs Marbach et al."
-  subtitle_text = "subset for overlapping TFs"
+  title_text <- "NP3"
+  subtitle_text <- "subset for TFs accepted by DTO"
   
-  plot_metrics(metric_dfs_by_net, title_text, subtitle_text)
+  perTF <- TRUE
+  
+  plot_data <- plot_metrics(metric_dfs, title_text, subtitle_text, perTF, percent = TRUE, mean = TRUE, median = TRUE, annotation_overlap = TRUE)
 ```

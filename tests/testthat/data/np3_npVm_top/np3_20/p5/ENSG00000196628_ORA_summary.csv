@@ -1,6 +1,0 @@
-"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
-"GO:0035264","multicellular organism growth",100,1,0.022158209616663,45.13,0.0220366770542224,1,"10743","ENSG00000108557","geneontology_Biological_Process_noRedundant"
-"GO:0045926","negative regulation of growth",142,1,0.0314646576556614,31.7816901408451,0.0312188672551382,1,"10743","ENSG00000108557","geneontology_Biological_Process_noRedundant"
-"GO:0048511","rhythmic process",173,1,0.0383337026368269,26.0867052023121,0.0379684174925866,1,"10743","ENSG00000108557","geneontology_Biological_Process_noRedundant"
-"GO:0048638","regulation of developmental growth",179,1,0.0396631952138267,25.2122905027933,0.039272056779031,1,"10743","ENSG00000108557","geneontology_Biological_Process_noRedundant"
-"GO:0007517","muscle organ development",206,1,0.0456459118103257,21.9077669902913,0.0451274956374108,1,"6876","ENSG00000149591","geneontology_Biological_Process_noRedundant"

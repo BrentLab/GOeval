@@ -1,8 +1,0 @@
-"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
-"GO:0010573","vascular endothelial growth factor production",16,1,0.00354531353866608,282.0625,0.00354236729472812,1,"9508","ENSG00000156140","geneontology_Biological_Process_noRedundant"
-"GO:0035924","cellular response to vascular endothelial growth factor stimulus",30,1,0.00664746288499889,150.433333333333,0.00663678275072344,1,"9508","ENSG00000156140","geneontology_Biological_Process_noRedundant"
-"GO:0032963","collagen metabolic process",49,1,0.0108575227121649,92.1020408163265,0.010828649521573,1,"9508","ENSG00000156140","geneontology_Biological_Process_noRedundant"
-"GO:0090287","regulation of cellular response to growth factor stimulus",155,1,0.0343452249058276,29.1161290322581,0.034052196394165,1,"9508","ENSG00000156140","geneontology_Biological_Process_noRedundant"
-"GO:0043062","extracellular structure organization",190,1,0.0421005982716596,23.7526315789474,0.041659766522444,1,"9508","ENSG00000156140","geneontology_Biological_Process_noRedundant"
-"GO:0051604","protein maturation",203,1,0.0449811655218258,22.2315270935961,0.0444777751929943,1,"9508","ENSG00000156140","geneontology_Biological_Process_noRedundant"
-"GO:0018209","peptidyl-serine modification",218,1,0.0483048969643253,20.7018348623853,0.0477241677321224,1,"375449","ENSG00000069020","geneontology_Biological_Process_noRedundant"

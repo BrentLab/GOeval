@@ -1,8 +1,0 @@
-"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
-"GO:0006643","membrane lipid metabolic process",147,1,0.0488588522047419,20.4671201814059,0.0480726820830664,1,"8612","ENSG00000141934","geneontology_Biological_Process_noRedundant"
-"GO:0050817","coagulation",177,1,0.0588300465322402,16.9981167608286,0.0576901953585662,1,"7975","ENSG00000198517","geneontology_Biological_Process_noRedundant"
-"GO:0016042","lipid catabolic process",185,1,0.0614890316862398,16.2630630630631,0.0602438790965963,1,"23646","ENSG00000105223","geneontology_Biological_Process_noRedundant"
-"GO:0030258","lipid modification",197,1,0.0654775094172391,15.2724196277496,0.0640657475001559,1,"8612","ENSG00000141934","geneontology_Biological_Process_noRedundant"
-"GO:0050878","regulation of body fluid levels",252,1,0.083758032350986,11.9391534391534,0.0814500961780181,1,"7975","ENSG00000198517","geneontology_Biological_Process_noRedundant"
-"GO:0006644","phospholipid metabolic process",321,1,0.106691779304232,9.37279335410176,0.102953378393018,1,"8612","ENSG00000141934","geneontology_Biological_Process_noRedundant"
-"GO:0016311","dephosphorylation",335,1,0.111345003323731,8.98109452736318,0.107274999580134,1,"8612","ENSG00000141934","geneontology_Biological_Process_noRedundant"

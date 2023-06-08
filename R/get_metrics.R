@@ -67,11 +67,13 @@ get_annotation_overlap <- function(terms, organism, go_ann, go_reg) {
 #' @param get_annotation_overlap bool whether to get the 'annotation_overlap' metric,
 #'  which is the percent of TFs that are annotated to a GO term for which their
 #'  target genes are enriched
+#' @param get_size bool whether to get the 'size' metric, which is the number of
+#'  TFs in the network subset that have more than one target gene with GO annotations
 #' @param go_ann a data.frame of annotations of genes to GO terms. Obtain with
 #'  WebGestaltR::loadGeneSet.
 #' @param go_reg a data.frame of the regulatory relationships between GO terms.
 #'  Obtain with ontologyIndex::get_ontology.
-get_network_metrics <- function(full_terms, network_size, organism, get_sum, get_percent, get_mean, get_median, get_annotation_overlap, go_ann = NULL, go_reg = NULL) {
+get_network_metrics <- function(full_terms, network_size, organism, get_sum, get_percent, get_mean, get_median, get_annotation_overlap, get_size, go_ann = NULL, go_reg = NULL) {
   # heuristically chosen
   penalty <- 3
   if (!any(is.na(full_terms))) {
@@ -93,8 +95,8 @@ get_network_metrics <- function(full_terms, network_size, organism, get_sum, get
   }
   return(c(
     sum(neglogp_zeros - penalty), percent, mean(neglogp_zeros),
-    median(neglogp_zeros), prior_ann
-  )[c(get_sum, get_percent, get_mean, get_median, get_annotation_overlap)])
+    median(neglogp_zeros), prior_ann, network_size
+  )[c(get_sum, get_percent, get_mean, get_median, get_annotation_overlap, get_size)])
 }
 
 #' get_metrics
@@ -108,7 +110,6 @@ get_network_metrics <- function(full_terms, network_size, organism, get_sum, get
 #' @importFrom WebGestaltR loadGeneSet
 #' @importFrom gtools mixedsort
 #' @importFrom parallel mclapply
-#' @importFrom reader n.readLines
 #' @importFrom parallelly availableCores
 #'
 #' @param directory a directory containing the webgestalt_network output directory
@@ -127,13 +128,13 @@ get_network_metrics <- function(full_terms, network_size, organism, get_sum, get
 #' @param get_annotation_overlap bool whether to get the 'annotation_overlap' metric,
 #'  which is the percent of TFs that are annotated to a GO term for which their
 #'  target genes are enriched
+#' @param get_size bool whether to get the 'size' metric, which is the number of
+#'  TFs in the network subset that have more than one target gene with GO annotations
 #' @param parallel bool whether to get the metrics for each network in the directory
 #'  in parallel or sequentially
 #'
 #' @export
-get_metrics <- function(directory, organism = "hsapiens", get_sum = TRUE, get_percent = FALSE, get_mean = FALSE, get_median = FALSE, get_annotation_overlap = FALSE, parallel = TRUE) {
-  # start = Sys.time()
-
+get_metrics <- function(directory, organism = "hsapiens", get_sum = TRUE, get_percent = FALSE, get_mean = FALSE, get_median = FALSE, get_annotation_overlap = FALSE, get_size = TRUE, parallel = FALSE) {
   # GO regulatory relationships only needed if get_annotation_overlap = TRUE
   if (get_annotation_overlap) {
     # Load regulatory relationships between GO terms for the calculation of overlap between TF GO
@@ -164,21 +165,27 @@ get_metrics <- function(directory, organism = "hsapiens", get_sum = TRUE, get_pe
     # gives "*** recursive gc invocation" when run via the "Test" button
     # but also sometimes it works...
     results <- parallel::mclapply(networks_list, function(net) {
-      readme <- reader::n.readLines(file.path(net, "p0", "README.txt"), n = 1)
-      network_size <- as.integer(stringr::word(readme, start = 3, end = 3, sep = stringr::fixed(" ")))
+      network_data_files <- list.files(net, recursive = TRUE, pattern = "network_data.txt", full.names = TRUE)
+      network_sizes <- lapply(network_data_files, function (f) {
+        size_line <- grep("valid", readLines(f), value = TRUE)
+        return(as.integer(unlist(strsplit(size_line, " "))[1]))
+      })
       paths <- list.dirs(net, full.names = TRUE, recursive = FALSE)
       p_terms <- mapply(get_terms, paths, 16, SIMPLIFY = FALSE)
-      result <- t(mapply(get_network_metrics, p_terms, network_size, organism, get_sum, get_percent, get_mean, get_median, get_annotation_overlap, MoreArgs = list(go_ann = go_ann, go_reg = go_reg)))
-      return(result)
+      return(t(mapply(get_network_metrics, p_terms, network_sizes, organism, get_sum, get_percent, get_mean, get_median, get_annotation_overlap, get_size, MoreArgs = list(go_ann = go_ann, go_reg = go_reg))))
     }, mc.cores = parallelly::availableCores())
   } else {
     # non-parallel version
     results <- lapply(networks_list, function(net) {
-      readme <- reader::n.readLines(file.path(net, "p0", "README.txt"), n = 1)
-      network_size <- as.integer(stringr::word(readme, start = 3, end = 3, sep = stringr::fixed(" ")))
+      network_data_files <- list.files(net, recursive = TRUE, pattern = "network_data.txt", full.names = TRUE)
+      network_sizes <- lapply(network_data_files, function (f) {
+        size_line <- grep("valid", readLines(f), value = TRUE)
+        return(as.integer(unlist(strsplit(size_line, " "))[1]))
+      })
+      #network_size <- as.integer(unlist(strsplit(readLines(file.path(net, "p0", "network_data.txt"))[2], " "))[1])
       paths <- list.dirs(net, full.names = TRUE, recursive = FALSE)
       p_terms <- mapply(get_terms, paths, 16, SIMPLIFY = FALSE)
-      return(t(mapply(get_network_metrics, p_terms, network_size, organism, get_sum, get_percent, get_mean, get_median, get_annotation_overlap, MoreArgs = list(go_ann = go_ann, go_reg = go_reg))))
+      return(t(mapply(get_network_metrics, p_terms, network_sizes, organism, get_sum, get_percent, get_mean, get_median, get_annotation_overlap, get_size, MoreArgs = list(go_ann = go_ann, go_reg = go_reg))))
     })
   }
 
@@ -189,7 +196,5 @@ get_metrics <- function(directory, organism = "hsapiens", get_sum = TRUE, get_pe
     colnames(df_list[[i]]) <- basename(networks_list)
   }
 
-  # end = Sys.time()
-  # print(end - start)
   return(df_list)
 }

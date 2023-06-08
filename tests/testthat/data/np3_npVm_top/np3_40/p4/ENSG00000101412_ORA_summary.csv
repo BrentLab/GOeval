@@ -1,7 +1,0 @@
-"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
-"GO:0006643","membrane lipid metabolic process",147,2,0.0325725681364946,61.4013605442177,0.000263467864151101,0.216834052196356,"123099;347735","ENSG00000168350;ENSG00000168528","geneontology_Biological_Process_noRedundant"
-"GO:0097164","ammonium ion metabolic process",119,1,0.0263682694438289,37.9243697478992,0.0261958896214265,1,"123099","ENSG00000168350","geneontology_Biological_Process_noRedundant"
-"GO:0006575","cellular modified amino acid metabolic process",122,1,0.0270330157323288,36.9918032786885,0.026851797178112,1,"347735","ENSG00000168528","geneontology_Biological_Process_noRedundant"
-"GO:0046486","glycerolipid metabolic process",296,1,0.0655883004653224,15.2466216216216,0.0645163587125652,1,"347735","ENSG00000168528","geneontology_Biological_Process_noRedundant"
-"GO:1901615","organic hydroxy compound metabolic process",296,1,0.0655883004653224,15.2466216216216,0.0645163587125652,1,"123099","ENSG00000168350","geneontology_Biological_Process_noRedundant"
-"GO:0006644","phospholipid metabolic process",321,1,0.0711278528694881,14.0591900311526,0.069866860464046,1,"347735","ENSG00000168528","geneontology_Biological_Process_noRedundant"

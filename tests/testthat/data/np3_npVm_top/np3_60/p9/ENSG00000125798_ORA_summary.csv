@@ -1,8 +1,0 @@
-"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
-"GO:0009615","response to virus",196,1,0.0434300908486594,23.0255102040816,0.0429609015015409,1,"63901","ENSG00000166801","geneontology_Biological_Process_noRedundant"
-"GO:0019058","viral life cycle",202,1,0.0447595834256592,22.3415841584158,0.0442611526074561,1,"63901","ENSG00000166801","geneontology_Biological_Process_noRedundant"
-"GO:0051258","protein polymerization",204,1,0.0452027476179925,22.1225490196078,0.0446943732264993,1,"9050","ENSG00000152229","geneontology_Biological_Process_noRedundant"
-"GO:0098542","defense response to other organism",210,1,0.0465322401949922,21.4904761904762,0.0459934458348401,1,"63901","ENSG00000166801","geneontology_Biological_Process_noRedundant"
-"GO:0043900","regulation of multi-organism process",232,1,0.0514070463106581,19.4525862068966,0.0507491500393141,1,"63901","ENSG00000166801","geneontology_Biological_Process_noRedundant"
-"GO:0006260","DNA replication",245,1,0.0542876135608243,18.4204081632653,0.0535537532999467,1,"63901","ENSG00000166801","geneontology_Biological_Process_noRedundant"
-"GO:0007015","actin filament organization",263,1,0.0582760912918236,17.1596958174905,0.0574302001052053,1,"9050","ENSG00000152229","geneontology_Biological_Process_noRedundant"

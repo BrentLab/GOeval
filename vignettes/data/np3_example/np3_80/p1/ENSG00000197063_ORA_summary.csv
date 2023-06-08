@@ -1,5 +1,0 @@
-"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
-"GO:0031099","regeneration",104,1,0.0230445380013295,43.3942307692308,0.0229130373135653,1,"59352","ENSG00000133067","geneontology_Biological_Process_noRedundant"
-"GO:0007015","actin filament organization",263,1,0.0582760912918236,17.1596958174905,0.0574302001052053,1,"134549","ENSG00000164403","geneontology_Biological_Process_noRedundant"
-"GO:2000147","positive regulation of cell motility",287,1,0.0635940615998227,15.7247386759582,0.0625864216210114,1,"59352","ENSG00000133067","geneontology_Biological_Process_noRedundant"
-"GO:0198738","cell-cell signaling by wnt",307,1,0.0680257035231553,14.700325732899,0.0668724699897436,1,"59352","ENSG00000133067","geneontology_Biological_Process_noRedundant"

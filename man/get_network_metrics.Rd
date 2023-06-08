@@ -14,6 +14,7 @@ get_network_metrics(
   get_mean,
   get_median,
   get_annotation_overlap,
+  get_size,
   go_ann = NULL,
   go_reg = NULL
 )
@@ -44,6 +45,9 @@ log base 10 of the p-value for the top term of each TF}
 \item{get_annotation_overlap}{bool whether to get the 'annotation_overlap' metric,
 which is the percent of TFs that are annotated to a GO term for which their
 target genes are enriched}
+
+\item{get_size}{bool whether to get the 'size' metric, which is the number of
+TFs in the network subset that have more than one target gene with GO annotations}
 
 \item{go_ann}{a data.frame of annotations of genes to GO terms. Obtain with
 WebGestaltR::loadGeneSet.}

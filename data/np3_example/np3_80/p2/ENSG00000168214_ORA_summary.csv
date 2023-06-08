@@ -1,7 +1,0 @@
-"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
-"GO:0043112","receptor metabolic process",122,1,0.0270330157323288,36.9918032786885,0.026851797178112,1,"144717","ENSG00000198324","geneontology_Biological_Process_noRedundant"
-"GO:0016482","cytosolic transport",138,1,0.0305783292709949,32.7028985507246,0.0303462389047826,1,"144717","ENSG00000198324","geneontology_Biological_Process_noRedundant"
-"GO:0006898","receptor-mediated endocytosis",159,1,0.0352315532904941,28.3836477987421,0.0349231552062895,1,"136853","ENSG00000146700","geneontology_Biological_Process_noRedundant"
-"GO:0016197","endosomal transport",180,1,0.0398847773099934,25.0722222222222,0.0394892440613237,1,"144717","ENSG00000198324","geneontology_Biological_Process_noRedundant"
-"GO:0016050","vesicle organization",257,1,0.0569465987148238,17.5603112840467,0.0561389350433006,1,"144717","ENSG00000198324","geneontology_Biological_Process_noRedundant"
-"GO:0010256","endomembrane system organization",322,1,0.0713494349656548,14.0155279503106,0.0700805613576788,1,"144717","ENSG00000198324","geneontology_Biological_Process_noRedundant"

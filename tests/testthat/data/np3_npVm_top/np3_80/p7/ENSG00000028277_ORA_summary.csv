@@ -1,6 +1,0 @@
-"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
-"GO:0007218","neuropeptide signaling pathway",19,1,0.00421005982716596,237.526315789474,0.00420586142955426,1,"11248","ENSG00000182575","geneontology_Biological_Process_noRedundant"
-"GO:0031929","TOR signaling",96,1,0.0212718812319965,47.0104166666667,0.0211599239623546,1,"197131","ENSG00000159459","geneontology_Biological_Process_noRedundant"
-"GO:0001101","response to acid chemical",195,1,0.0432085087524928,23.1435897435897,0.0427441070517732,1,"197131","ENSG00000159459","geneontology_Biological_Process_noRedundant"
-"GO:1902532","negative regulation of intracellular signal transduction",358,1,0.0793263904276535,12.6061452513966,0.0777574418745965,1,"197131","ENSG00000159459","geneontology_Biological_Process_noRedundant"
-"GO:0010498","proteasomal protein catabolic process",397,1,0.087968092178152,11.367758186398,0.0860381550865987,1,"197131","ENSG00000159459","geneontology_Biological_Process_noRedundant"

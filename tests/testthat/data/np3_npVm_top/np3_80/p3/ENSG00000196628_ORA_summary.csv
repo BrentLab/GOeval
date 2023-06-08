@@ -1,8 +1,0 @@
-"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
-"GO:1901568","fatty acid derivative metabolic process",82,1,0.0181697318856636,55.0365853658537,0.0180881945846808,1,"55711","ENSG00000064763","geneontology_Biological_Process_noRedundant"
-"GO:0033865","nucleoside bisphosphate metabolic process",97,1,0.0214934633281631,46.5257731958763,0.0213791490633701,1,"55711","ENSG00000064763","geneontology_Biological_Process_noRedundant"
-"GO:0097485","neuron projection guidance",141,1,0.0312430755594948,32.0070921985816,0.0310007469955988,1,"5623","ENSG00000125650","geneontology_Biological_Process_noRedundant"
-"GO:0006790","sulfur compound metabolic process",242,1,0.0536228672723244,18.6487603305785,0.05290690544337,1,"55711","ENSG00000064763","geneontology_Biological_Process_noRedundant"
-"GO:0006732","coenzyme metabolic process",265,1,0.0587192554841569,17.0301886792453,0.0578604253762443,1,"55711","ENSG00000064763","geneontology_Biological_Process_noRedundant"
-"GO:0061564","axon development",296,1,0.0655883004653224,15.2466216216216,0.0645163587125652,1,"5623","ENSG00000125650","geneontology_Biological_Process_noRedundant"
-"GO:0009259","ribonucleotide metabolic process",378,1,0.083758032350986,11.9391534391534,0.0820086263567302,1,"55711","ENSG00000064763","geneontology_Biological_Process_noRedundant"

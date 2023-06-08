@@ -1,6 +1,0 @@
-"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
-"GO:0008643","carbohydrate transport",87,2,0.0192776423664968,103.747126436782,9.18491547655664e-05,0.0755918543720612,"55032;144195","ENSG00000173262;ENSG00000138459","geneontology_Biological_Process_noRedundant"
-"GO:1901264","carbohydrate derivative transport",52,1,0.0115222690006647,86.7884615384615,0.01148971300515,1,"55032","ENSG00000138459","geneontology_Biological_Process_noRedundant"
-"GO:0015849","organic acid transport",152,1,0.0336804786173277,29.6907894736842,0.0333987194887284,1,"55032","ENSG00000138459","geneontology_Biological_Process_noRedundant"
-"GO:0015931","nucleobase-containing compound transport",209,1,0.0463106580988256,21.5933014354067,0.0457769951135319,1,"55032","ENSG00000138459","geneontology_Biological_Process_noRedundant"
-"GO:0015711","organic anion transport",236,1,0.0522933746953246,19.1228813559322,0.0516125468253301,1,"55032","ENSG00000138459","geneontology_Biological_Process_noRedundant"

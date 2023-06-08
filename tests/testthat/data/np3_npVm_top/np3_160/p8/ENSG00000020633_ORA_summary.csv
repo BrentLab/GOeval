@@ -1,5 +1,0 @@
-"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
-"GO:0042476","odontogenesis",53,1,0.0117438510968314,85.1509433962264,0.0117100183956109,1,"4782","ENSG00000141905","geneontology_Biological_Process_noRedundant"
-"GO:0071241","cellular response to inorganic substance",117,1,0.0259251052514957,38.5726495726496,0.0257584951568045,1,"221184","ENSG00000140848","geneontology_Biological_Process_noRedundant"
-"GO:0010038","response to metal ion",209,1,0.0463106580988256,21.5933014354067,0.0457769951135319,1,"221184","ENSG00000140848","geneontology_Biological_Process_noRedundant"
-"GO:0006260","DNA replication",245,1,0.0542876135608243,18.4204081632653,0.0535537532999467,1,"4782","ENSG00000141905","geneontology_Biological_Process_noRedundant"

@@ -1,8 +1,0 @@
-"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
-"GO:0006338","chromatin remodeling",129,1,0.0285840904054952,34.984496124031,0.0283813888225644,1,"93624","ENSG00000173011","geneontology_Biological_Process_noRedundant"
-"GO:0043543","protein acylation",201,1,0.0445380013294926,22.452736318408,0.0440445054698859,1,"93624","ENSG00000173011","geneontology_Biological_Process_noRedundant"
-"GO:0010038","response to metal ion",209,1,0.0463106580988256,21.5933014354067,0.0457769951135319,1,"140576","ENSG00000188643","geneontology_Biological_Process_noRedundant"
-"GO:0070646","protein modification by small protein removal",242,1,0.0536228672723244,18.6487603305785,0.05290690544337,1,"93624","ENSG00000173011","geneontology_Biological_Process_noRedundant"
-"GO:0033044","regulation of chromosome organization",290,1,0.0642588078883226,15.5620689655172,0.0632299549531576,1,"93624","ENSG00000173011","geneontology_Biological_Process_noRedundant"
-"GO:0018205","peptidyl-lysine modification",306,1,0.0678041214269887,14.7483660130719,0.0666584008156187,1,"93624","ENSG00000173011","geneontology_Biological_Process_noRedundant"
-"GO:0016569","covalent chromatin modification",395,1,0.0875249279858187,11.4253164556962,0.0856144115522227,1,"93624","ENSG00000173011","geneontology_Biological_Process_noRedundant"

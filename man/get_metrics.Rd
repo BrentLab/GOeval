@@ -12,7 +12,8 @@ get_metrics(
   get_mean = FALSE,
   get_median = FALSE,
   get_annotation_overlap = FALSE,
-  parallel = TRUE
+  get_size = TRUE,
+  parallel = FALSE
 )
 }
 \arguments{
@@ -38,6 +39,9 @@ log base 10 of the p-value for the top term of each TF}
 \item{get_annotation_overlap}{bool whether to get the 'annotation_overlap' metric,
 which is the percent of TFs that are annotated to a GO term for which their
 target genes are enriched}
+
+\item{get_size}{bool whether to get the 'size' metric, which is the number of
+TFs in the network subset that have more than one target gene with GO annotations}
 
 \item{parallel}{bool whether to get the metrics for each network in the directory
 in parallel or sequentially}
