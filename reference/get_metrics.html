@@ -59,7 +59,8 @@ The path should contain only directories created by webgestalt_network.</p>
 <span>  get_mean <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  get_median <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  get_annotation_overlap <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  parallel <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  get_size <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  parallel <span class="op">=</span> <span class="cn">FALSE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -100,6 +101,11 @@ log base 10 of the p-value for the top term of each TF</p></dd>
 <dd><p>bool whether to get the 'annotation_overlap' metric,
 which is the percent of TFs that are annotated to a GO term for which their
 target genes are enriched</p></dd>
+
+
+<dt>get_size</dt>
+<dd><p>bool whether to get the 'size' metric, which is the number of
+TFs in the network subset that have more than one target gene with GO annotations</p></dd>
 
 
 <dt>parallel</dt>

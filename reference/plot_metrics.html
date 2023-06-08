@@ -49,11 +49,13 @@
 <span>  <span class="va">metric_dfs_by_net</span>,</span>
 <span>  <span class="va">title_text</span>,</span>
 <span>  <span class="va">subtitle_text</span>,</span>
+<span>  <span class="va">perTF</span>,</span>
 <span>  sum <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  percent <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  mean <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  median <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  annotation_overlap <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span>  annotation_overlap <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  size <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -69,6 +71,11 @@
 
 <dt>subtitle_text</dt>
 <dd><p>text for the subtitle of each plot</p></dd>
+
+
+<dt>perTF</dt>
+<dd><p>bool whether the network subset sizes were specified as average target
+genes per TF; changes the x-axis label</p></dd>
 
 
 <dt>sum</dt>

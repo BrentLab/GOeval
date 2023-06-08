@@ -60,6 +60,7 @@ terms for each TF in a single network</p>
 <span>  <span class="va">get_mean</span>,</span>
 <span>  <span class="va">get_median</span>,</span>
 <span>  <span class="va">get_annotation_overlap</span>,</span>
+<span>  <span class="va">get_size</span>,</span>
 <span>  go_ann <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  go_reg <span class="op">=</span> <span class="cn">NULL</span></span>
 <span><span class="op">)</span></span></code></pre></div>
@@ -107,6 +108,11 @@ log base 10 of the p-value for the top term of each TF</p></dd>
 <dd><p>bool whether to get the 'annotation_overlap' metric,
 which is the percent of TFs that are annotated to a GO term for which their
 target genes are enriched</p></dd>
+
+
+<dt>get_size</dt>
+<dd><p>bool whether to get the 'size' metric, which is the number of
+TFs in the network subset that have more than one target gene with GO annotations</p></dd>
 
 
 <dt>go_ann</dt>
