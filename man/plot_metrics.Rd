@@ -13,7 +13,7 @@ plot_metrics(
   percent = FALSE,
   mean = FALSE,
   median = FALSE,
-  annotation_overlap = TRUE,
+  annotation_overlap = FALSE,
   size = TRUE
 )
 }

@@ -1,5 +1,0 @@
-"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
-"GO:0030323","respiratory tube development",94,1,0.0208287170396632,48.0106382978723,0.0207214001042236,1,"51696","ENSG00000112406","geneontology_Biological_Process_noRedundant"
-"GO:0010959","regulation of metal ion transport",174,1,0.0385552847329936,25.9367816091954,0.0381857520870766,1,"283229","ENSG00000177685","geneontology_Biological_Process_noRedundant"
-"GO:0045930","negative regulation of mitotic cell cycle",215,1,0.0476401506758254,20.9906976744186,0.0470753311608872,1,"51696","ENSG00000112406","geneontology_Biological_Process_noRedundant"
-"GO:0072511","divalent inorganic cation transport",224,1,0.0496343895413251,20.1473214285714,0.0490211779697068,1,"283229","ENSG00000177685","geneontology_Biological_Process_noRedundant"

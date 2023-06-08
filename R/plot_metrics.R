@@ -27,13 +27,21 @@
 #'  target genes are enriched
 #'
 #' @export
-plot_metrics <- function(metric_dfs_by_net, title_text, subtitle_text, perTF, sum = TRUE, percent = FALSE, mean = FALSE, median = FALSE, annotation_overlap = TRUE, size = TRUE) {
-  to_plot <- c(sum, percent, mean, median, annotation_overlap, size)
+plot_metrics <- function(metric_dfs_by_net, title_text, subtitle_text, perTF, sum = TRUE, percent = FALSE, mean = FALSE, median = FALSE, annotation_overlap = FALSE, size = TRUE) {
+  # determine if any of the input networks have only one size
+  # if yes, metrics for permuted networks will be shown with box plots instead of line plots
   plot_with_boxes <- FALSE
-  for (df_list in metric_dfs_by_net) {
-    if (length(df_list[[1]][1,]) == 1) {
-      plot_with_boxes <- TRUE
+  if (class(metric_dfs_by_net[[1]]) == "list") {
+    for (df_list in metric_dfs_by_net) {
+      if (length(df_list[[1]][1,]) == 1) {
+        plot_with_boxes <- TRUE
+      }
     }
+  } else if (length(metric_dfs_by_net[[1]][1,]) == 1) {
+    plot_with_boxes <- TRUE
+    metric_dfs_by_net <- list(metric_dfs_by_net)
+  } else {
+    metric_dfs_by_net <- list(metric_dfs_by_net)
   }
 
   # merge data frames of like metrics across networks
@@ -42,15 +50,24 @@ plot_metrics <- function(metric_dfs_by_net, title_text, subtitle_text, perTF, su
     metric_dfs[[i]] <- do.call(cbind, lapply(unname(metric_dfs_by_net), "[[", i))
   }
 
+  # assemble y-axis labels
+  to_plot <- c(sum, percent, mean, median, annotation_overlap, size)
   label_text <- c("Sum of (top -log(p-value) - 3) across TFs", "Percent of TFs with a significant GO term (FDR < 0.05)",
                   "Mean of top -log(p-value)", "Median of top -log(p-value)", "Percent of TFs annotated to a significant GO term (FDR < 0.05)",
-                  "Number of TFs with > 1 annotated target gene")
+                  "Number of TFs with > 1 annotated target gene")[to_plot]
+
+  # this won't catch when correct amount but wrong selection of metrics
+  if (length(label_text) != length(metric_dfs)) {
+    stop("The selected metrics must be the same as those calculated by get_metrics")
+  }
 
   for (m in 1:length(metric_dfs)) {
+    # gather dfs into format usable by ggplot2
     gathered = tidyr::gather(metric_dfs[[m]], network, metric)
     gathered <- tidyr::separate_wider_regex(gathered, network, c(method = ".*", "_", size = ".*"), cols_remove = FALSE)
     gathered$network = factor(gathered$network, levels=unique(gathered$network))
 
+    # split metrics based on whether they came from real or permuted data
     real = gathered[!duplicated(gathered$network), ]
     real$size <- as.numeric(real$size)
     real$ltype <- "Original network"
@@ -75,11 +92,11 @@ plot_metrics <- function(metric_dfs_by_net, title_text, subtitle_text, perTF, su
       ggplot2::scale_x_continuous(n.breaks = 10, trans = "log2")
 
      # Set lower limit of y axis to 0 if graphing a percent or # of TFs
-    if (m == 2 || m >= 5) {
+    if (grepl("Percent|Number", label_text[m])) {
       plt <- plt + ggplot2::scale_y_continuous(limits = c(0, NA))
     }
 
-    # if any of the networks whose metrics are being plotted has only one subset,
+    # if any of the networks whose metrics are being plotted has only one size,
     # plotting with box plots for the permuted networks looks better
     if (plot_with_boxes) {
       plt <- plt + ggplot2::geom_boxplot(permuted, mapping=ggplot2::aes(x=size, y=metric, color = method, group = size)) +
@@ -97,5 +114,8 @@ plot_metrics <- function(metric_dfs_by_net, title_text, subtitle_text, perTF, su
     }
     plot(plt)
   }
+  # each element of metric_dfs is a DataFrame containing values of one metric
+  # the column names denote the network and subset
+  # the first row is from the real data; the rest are from the permuted data
   return(metric_dfs)
 }

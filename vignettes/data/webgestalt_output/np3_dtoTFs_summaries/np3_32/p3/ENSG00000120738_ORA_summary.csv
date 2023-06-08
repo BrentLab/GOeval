@@ -1,3 +1,0 @@
-"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
-"GO:0002576","platelet degranulation",74,1,0.0163970751163306,60.9864864864865,0.0163307600756937,1,"54863","ENSG00000198113","geneontology_Biological_Process_noRedundant"
-"GO:0043087","regulation of GTPase activity",334,1,0.0740084201196543,13.5119760479042,0.0726430570227098,1,"3268","ENSG00000106351","geneontology_Biological_Process_noRedundant"

@@ -1,8 +1,0 @@
-"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
-"GO:0002181","cytoplasmic translation",89,1,0.0295812098382451,33.8052434456929,0.0292936994939054,1,"100526842","ENSG00000215472","geneontology_Biological_Process_noRedundant"
-"GO:0060348","bone development",107,1,0.0355639264347441,28.1183800623053,0.0351478427836305,1,"389058","ENSG00000204335","geneontology_Biological_Process_noRedundant"
-"GO:0048705","skeletal system morphogenesis",111,1,0.0368934190117439,27.1051051051051,0.0364455590390784,1,"389058","ENSG00000204335","geneontology_Biological_Process_noRedundant"
-"GO:0034976","response to endoplasmic reticulum stress",237,1,0.0787724351872369,12.6947960618847,0.0767304495231692,1,"116496","ENSG00000135842","geneontology_Biological_Process_noRedundant"
-"GO:0042326","negative regulation of phosphorylation",307,1,0.102038555284733,9.80021715526601,0.0986178325466085,1,"116496","ENSG00000135842","geneontology_Biological_Process_noRedundant"
-"GO:0034248","regulation of cellular amide metabolic process",333,1,0.110680257035232,9.03503503503504,0.106658476806119,1,"116496","ENSG00000135842","geneontology_Biological_Process_noRedundant"
-"GO:0010608","posttranscriptional regulation of gene expression",418,1,0.138931974296477,7.19776714513557,0.132611266841666,1,"116496","ENSG00000135842","geneontology_Biological_Process_noRedundant"

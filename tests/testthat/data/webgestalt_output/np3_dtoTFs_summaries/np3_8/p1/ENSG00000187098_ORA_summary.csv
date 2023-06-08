@@ -1,8 +1,0 @@
-"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
-"GO:0031214","biomineral tissue development",64,1,0.0141812541546643,70.515625,0.0141317572565066,1,"6574","ENSG00000144136","geneontology_Biological_Process_noRedundant"
-"GO:0007272","ensheathment of neurons",74,1,0.0163970751163306,60.9864864864865,0.0163307600756937,1,"57716","ENSG00000105227","geneontology_Biological_Process_noRedundant"
-"GO:0015698","inorganic anion transport",87,1,0.0192776423664968,51.8735632183908,0.0191857932117315,1,"6574","ENSG00000144136","geneontology_Biological_Process_noRedundant"
-"GO:0006814","sodium ion transport",104,1,0.0230445380013295,43.3942307692308,0.0229130373135653,1,"6574","ENSG00000144136","geneontology_Biological_Process_noRedundant"
-"GO:0098656","anion transmembrane transport",143,1,0.031686239751828,31.5594405594406,0.0314369629626449,1,"6574","ENSG00000144136","geneontology_Biological_Process_noRedundant"
-"GO:0007249","I-kappaB kinase/NF-kappaB signaling",181,1,0.04010635940616,24.9337016574586,0.0397064067915835,1,"6574","ENSG00000144136","geneontology_Biological_Process_noRedundant"
-"GO:0008380","RNA splicing",386,1,0.0855306891203191,11.6917098445596,0.0837063503219081,1,"57716","ENSG00000105227","geneontology_Biological_Process_noRedundant"

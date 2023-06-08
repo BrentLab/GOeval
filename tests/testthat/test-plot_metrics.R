@@ -1,5 +1,5 @@
 test_that("get_metrics and plot_metrics run", {
-  folders <- c(file.path("data", "webgestalt_output", "np3_dtoTFs_summaries"))
+  folders <- c(file.path("data", "np3_dtoTFs_summaries"))
 
   title_text = "NP3"
   subtitle_text = "subset for overlapping TFs with EDN"
@@ -11,7 +11,7 @@ test_that("get_metrics and plot_metrics run", {
 
   pdf(file.path("data", "line-test-plot_metrics.pdf"), 7, 5)
   # call plot_metrics
-  plot_metrics(metric_dfs_by_net, title_text, subtitle_text, perTF = TRUE)
+  plot_metrics(metric_dfs_by_net, title_text, subtitle_text, perTF = TRUE, percent = TRUE, mean = TRUE, median = TRUE, annotation_overlap = TRUE)
   dev.off()
 
   expect_equal(2 * 2, 4)
@@ -20,7 +20,7 @@ test_that("get_metrics and plot_metrics run", {
 })
 
 test_that("get_metrics and plot_metrics run with single subset network", {
-  folders <- c(file.path("data", "webgestalt_output", "np3_dtoTFs_summaries"), file.path("data", "webgestalt_output", "EDN_summaries"))
+  folders <- c(file.path("data", "np3_dtoTFs_summaries"), file.path("data", "EDN_summaries"))
 
   title_text = "NP3 vs EDN"
   subtitle_text = "subset for overlapping TFs"
@@ -32,7 +32,7 @@ test_that("get_metrics and plot_metrics run with single subset network", {
 
   pdf(file.path("data", "box-test-plot_metrics.pdf"), 7, 5)
   # call plot_metrics
-  plot_metrics(metric_dfs_by_net, title_text, subtitle_text, perTF = TRUE)
+  plot_metrics(metric_dfs_by_net, title_text, subtitle_text, perTF = TRUE, percent = TRUE, mean = TRUE, median = TRUE, annotation_overlap = TRUE)
   dev.off()
 
   expect_equal(2 * 2, 4)

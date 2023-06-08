@@ -1,5 +1,0 @@
-"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
-"GO:0015698","inorganic anion transport",87,1,0.0192776423664968,51.8735632183908,0.0191857932117315,1,"94015","ENSG00000141540","geneontology_Biological_Process_noRedundant"
-"GO:0098656","anion transmembrane transport",143,1,0.031686239751828,31.5594405594406,0.0314369629626449,1,"94015","ENSG00000141540","geneontology_Biological_Process_noRedundant"
-"GO:0003012","muscle system process",199,1,0.0440948371371593,22.678391959799,0.0436111375386469,1,"6525","ENSG00000183963","geneontology_Biological_Process_noRedundant"
-"GO:0007517","muscle organ development",206,1,0.0456459118103257,21.9077669902913,0.0451274956374108,1,"6525","ENSG00000183963","geneontology_Biological_Process_noRedundant"

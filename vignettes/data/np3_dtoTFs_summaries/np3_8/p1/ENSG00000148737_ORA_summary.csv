@@ -1,0 +1,6 @@
+"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
+"GO:0097035","regulation of membrane lipid distribution",22,1,0.00487480611566585,205.136363636364,0.00486913459608518,1,"50636","ENSG00000146205","geneontology_Biological_Process_noRedundant"
+"GO:0000041","transition metal ion transport",75,1,0.0166186572124972,60.1733333333333,0.0165505253214323,1,"93380","ENSG00000169446","geneontology_Biological_Process_noRedundant"
+"GO:0015698","inorganic anion transport",87,1,0.0192776423664968,51.8735632183908,0.0191857932117315,1,"50636","ENSG00000146205","geneontology_Biological_Process_noRedundant"
+"GO:0072511","divalent inorganic cation transport",224,1,0.0496343895413251,20.1473214285714,0.0490211779697068,1,"93380","ENSG00000169446","geneontology_Biological_Process_noRedundant"
+"GO:0010256","endomembrane system organization",322,1,0.0713494349656548,14.0155279503106,0.0700805613576788,1,"50636","ENSG00000146205","geneontology_Biological_Process_noRedundant"

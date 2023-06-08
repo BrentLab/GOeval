@@ -1,6 +1,0 @@
-"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
-"GO:1990845","adaptive thermogenesis",88,1,0.0194992244626634,51.2840909090909,0.0194052392810429,1,"283455","ENSG00000171435","geneontology_Biological_Process_noRedundant"
-"GO:0019932","second-messenger-mediated signaling",167,1,0.0370042100598272,27.0239520958084,0.0366638943329616,1,"283455","ENSG00000171435","geneontology_Biological_Process_noRedundant"
-"GO:0048871","multicellular organismal homeostasis",245,1,0.0542876135608243,18.4204081632653,0.0535537532999467,1,"283455","ENSG00000171435","geneontology_Biological_Process_noRedundant"
-"GO:0001701","in utero embryonic development",246,1,0.0545091956569909,18.3455284552846,0.0537693201480728,1,"80864","ENSG00000241404","geneontology_Biological_Process_noRedundant"
-"GO:0007265","Ras protein signal transduction",307,1,0.0680257035231553,14.700325732899,0.0668724699897436,1,"283455","ENSG00000171435","geneontology_Biological_Process_noRedundant"
