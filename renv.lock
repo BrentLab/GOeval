@@ -73,7 +73,7 @@
     },
     "WebGestaltR": {
       "Package": "WebGestaltR",
-      "Version": "0.4.5",
+      "Version": "0.4.6",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
@@ -94,7 +94,7 @@
         "svglite",
         "whisker"
       ],
-      "Hash": "1d0ead7137f136f9aeedec7339c93668"
+      "Hash": "decaad9b459a5bbef655127a1f02848b"
     },
     "apcluster": {
       "Package": "apcluster",
@@ -469,6 +469,18 @@
       "Source": "Repository",
       "Repository": "CRAN",
       "Hash": "77bd60a6157420d4ffa93b27cf6a58b8"
+    },
+    "fontawesome": {
+      "Package": "fontawesome",
+      "Version": "0.5.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "htmltools",
+        "rlang"
+      ],
+      "Hash": "e80750aec5717dedc019ad7ee40e4a7c"
     },
     "foreach": {
       "Package": "foreach",
@@ -1087,13 +1099,14 @@
     },
     "rmarkdown": {
       "Package": "rmarkdown",
-      "Version": "2.14",
+      "Version": "2.22",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "R",
         "bslib",
         "evaluate",
+        "fontawesome",
         "htmltools",
         "jquerylib",
         "jsonlite",
@@ -1106,7 +1119,7 @@
         "xfun",
         "yaml"
       ],
-      "Hash": "31b60a882fabfabf6785b8599ffeb8ba"
+      "Hash": "75a01be060d800ceb14e32c666cacac9"
     },
     "rngtools": {
       "Package": "rngtools",

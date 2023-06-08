@@ -2,23 +2,28 @@
 #'
 #' Given a network or network subset, webgestalt_network will generate ORA results
 #' for this network and a given number of permutations.
+#' The input network file should be a tab-separated .tsv where the first column is the
+#' source nodes (TFs) and the second column is the target nodes (regulated genes).
+#' All genes must be written as their Ensembl gene ID.
 #' NOTE: if using the same output_directory and network_name for a different network
 #'  than before, you must first delete the contents of "/webgestalt_work/network_name/"
 #'
 #' @importFrom WebGestaltR idMapping
 #' @importFrom WebGestaltR loadGeneSet
+#' @importFrom WebGestaltR WebGestaltRBatch
 #' @importFrom utils read.table
 #' @importFrom utils write.table
 #' @importFrom utils write.csv
 #' @importFrom stats xtabs
+#' @importFrom parallelly availableCores
 #'
 #' @param network_path path to the network or network subset to evaluate. Must be a tab-separated
 #'  file where the first column is the source nodes (TFs) and the second column is the target nodes (regulated genes).
-#' @param reference_set path to the set of all genes possibly included in the network. Must be a
+#' @param reference_set path to the set of all genes possibly included in the network. Must be a .txt
 #'  file containing exactly one column of the genes that could possibly appear in the network.
 #' @param output_directory path to the folder in which output from all networks subset from the same original network should be stored
 #' @param network_name the name of the folder to store the results within the output_directory.
-#'  For now, it is best for this to be in the format "\{name\}_\{# of edges\}" like "example_8".
+#'  It should be in the same format as the files output by subset_network: "\{name\}_\{# of edges\}" i.e. "example_8".
 #' @param organism human: "hsapiens"; yeast: "scerevisiae"
 #' @param database the gene set database to search for enrichment - see options with WebGestaltR::listGeneSet()
 #' @param permutations the number of randomly permuted networks to create and run ORA
@@ -32,17 +37,17 @@ webgestalt_network <- function(network_path, reference_set, output_directory, ne
   GENERATE_REPORT=FALSE
 
   # path must exist even if GENERATE_REPORT=FALSE
-  dir.create(REPORTS_PATH, recursive=TRUE)
+  dir.create(REPORTS_PATH, showWarnings = FALSE, recursive=TRUE)
 
   for (i in 1:(permutations+1)) {
-    dir.create(file.path(output_directory, network_name, paste0("p",i-1)), recursive=TRUE)
+    dir.create(file.path(output_directory, network_name, paste0("p",i-1)), showWarnings = FALSE, recursive=TRUE)
   }
 
   if (file.exists(network_path)) {
     # create paths for the intermediary gene set files
     work_dir = file.path(output_directory, "webgestalt_work", network_name)
     for (i in 1:(permutations+1)) {
-      dir.create(file.path(work_dir, paste0("p",i-1)), recursive=TRUE)
+      dir.create(file.path(work_dir, paste0("p",i-1)), showWarnings = FALSE, recursive=TRUE)
     }
 
     # finds the subset of genes in the reference set that are annotated to valid GO terms
@@ -88,7 +93,7 @@ webgestalt_network <- function(network_path, reference_set, output_directory, ne
         }
       }
 
-      # perform enrichment analysis
+      # perform ORA
       enrich_df <- WebGestaltR::WebGestaltRBatch(
         enrichMethod = METHOD,
         organism = organism,
@@ -106,6 +111,7 @@ webgestalt_network <- function(network_path, reference_set, output_directory, ne
         sigMethod = "top",
         topThr = 16, # top 0.1%
         isParallel = TRUE,
+        nThreads = ifelse(nzchar(Sys.getenv("_R_CHECK_LIMIT_CORES_", "")) && Sys.getenv("_R_CHECK_LIMIT_CORES_", "") == "TRUE", 2, parallelly::availableCores()),
         hostName = "https://www.webgestalt.org/"
       )
 
@@ -129,8 +135,6 @@ webgestalt_network <- function(network_path, reference_set, output_directory, ne
           }
         }
       }
-      #write(paste(sig_counter,"of",length(unique_TFs),"valid gene sets have at least one significant GO term.\n",length(unique(network$V1)),"gene sets in network."),
-      #      file = file.path(output_directory,network_name,paste0("p",i-1),"README.txt"))
       write(paste0(sig_counter," significant\n",valid_sets_counter," valid\n",length(unique(network$V1))," total\n",length(network$V2)," edges"),
             file = file.path(output_directory,network_name,paste0("p",i-1),"network_data.txt"))
     }

@@ -18,13 +18,13 @@ webgestalt_network(
 \item{network_path}{path to the network or network subset to evaluate. Must be a tab-separated
 file where the first column is the source nodes (TFs) and the second column is the target nodes (regulated genes).}
 
-\item{reference_set}{path to the set of all genes possibly included in the network. Must be a
+\item{reference_set}{path to the set of all genes possibly included in the network. Must be a .txt
 file containing exactly one column of the genes that could possibly appear in the network.}
 
 \item{output_directory}{path to the folder in which output from all networks subset from the same original network should be stored}
 
 \item{network_name}{the name of the folder to store the results within the output_directory.
-For now, it is best for this to be in the format "\{name\}_\{# of edges\}" like "example_8".}
+It should be in the same format as the files output by subset_network: "\{name\}_\{# of edges\}" i.e. "example_8".}
 
 \item{organism}{human: "hsapiens"; yeast: "scerevisiae"}
 
@@ -35,6 +35,9 @@ For now, it is best for this to be in the format "\{name\}_\{# of edges\}" like 
 \description{
 Given a network or network subset, webgestalt_network will generate ORA results
 for this network and a given number of permutations.
+The input network file should be a tab-separated .tsv where the first column is the
+source nodes (TFs) and the second column is the target nodes (regulated genes).
+All genes must be written as their Ensembl gene ID.
 NOTE: if using the same output_directory and network_name for a different network
 than before, you must first delete the contents of "/webgestalt_work/network_name/"
 }
