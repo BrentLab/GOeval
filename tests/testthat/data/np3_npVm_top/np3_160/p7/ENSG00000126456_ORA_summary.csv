@@ -1,6 +1,0 @@
-"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
-"GO:0006766","vitamin metabolic process",82,1,0.0181697318856636,55.0365853658537,0.0180881945846808,1,"873","ENSG00000159228","geneontology_Biological_Process_noRedundant"
-"GO:1901568","fatty acid derivative metabolic process",82,1,0.0181697318856636,55.0365853658537,0.0180881945846808,1,"873","ENSG00000159228","geneontology_Biological_Process_noRedundant"
-"GO:0006631","fatty acid metabolic process",231,1,0.0511854642144915,19.5367965367965,0.0505332394627279,1,"873","ENSG00000159228","geneontology_Biological_Process_noRedundant"
-"GO:0001701","in utero embryonic development",246,1,0.0545091956569909,18.3455284552846,0.0537693201480728,1,"26115","ENSG00000170921","geneontology_Biological_Process_noRedundant"
-"GO:0016053","organic acid biosynthetic process",249,1,0.0551739419454908,18.1244979919679,0.0544158733802562,1,"873","ENSG00000159228","geneontology_Biological_Process_noRedundant"

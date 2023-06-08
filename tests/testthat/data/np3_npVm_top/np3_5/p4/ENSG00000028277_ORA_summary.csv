@@ -1,5 +1,0 @@
-"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
-"GO:0009266","response to temperature stimulus",135,1,0.0448703744737425,22.2864197530864,0.0442074280826883,1,"51278","ENSG00000162783","geneontology_Biological_Process_noRedundant"
-"GO:0051260","protein homooligomerization",201,1,0.0668070019942389,14.9684908789386,0.0653373971366136,1,"115207","ENSG00000178695","geneontology_Biological_Process_noRedundant"
-"GO:0031098","stress-activated protein kinase signaling cascade",209,1,0.0694659871482384,14.3955342902711,0.0678772397967403,1,"10044","ENSG00000095370","geneontology_Biological_Process_noRedundant"
-"GO:0018209","peptidyl-serine modification",218,1,0.0724573454464879,13.8012232415902,0.0707290581836296,1,"10044","ENSG00000095370","geneontology_Biological_Process_noRedundant"

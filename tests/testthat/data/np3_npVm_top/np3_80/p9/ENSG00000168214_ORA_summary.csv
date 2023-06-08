@@ -1,3 +1,0 @@
-"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
-"GO:0045930","negative regulation of mitotic cell cycle",215,1,0.0476401506758254,20.9906976744186,0.0470753311608872,1,"10950","ENSG00000154640","geneontology_Biological_Process_noRedundant"
-"GO:0000209","protein polyubiquitination",222,1,0.0491912253489918,20.3288288288288,0.0485889394319765,1,"22888","ENSG00000185019","geneontology_Biological_Process_noRedundant"

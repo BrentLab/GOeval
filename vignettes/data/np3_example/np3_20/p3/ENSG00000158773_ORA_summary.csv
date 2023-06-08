@@ -1,4 +1,0 @@
-"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
-"GO:0006304","DNA modification",76,1,0.0168402393086639,59.3815789473684,0.0167702660151371,1,"10973","ENSG00000112249","geneontology_Biological_Process_noRedundant"
-"GO:0098742","cell-cell adhesion via plasma-membrane adhesion molecules",82,1,0.0181697318856636,55.0365853658537,0.0180881945846808,1,"56102","ENSG00000262209","geneontology_Biological_Process_noRedundant"
-"GO:0071103","DNA conformation change",193,1,0.0427653445601595,23.3834196891192,0.0423104444961403,1,"10973","ENSG00000112249","geneontology_Biological_Process_noRedundant"

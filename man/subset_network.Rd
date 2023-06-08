@@ -4,7 +4,7 @@
 \alias{subset_network}
 \title{subset_network}
 \usage{
-subset_network(input_file, output_directory, name, edges, perTF)
+subset_network(input_file, output_directory, name, edges, num_possible_TFs = 0)
 }
 \arguments{
 \item{input_file}{a file containing the network to create subsets from. The file should
@@ -16,8 +16,8 @@ be tab-separated with three columns: source node, target node, edge score}
 
 \item{edges}{list of numbers of edges or average edges per TF to include in each subset}
 
-\item{perTF}{boolean TRUE if the elements of "edges" represent average edges per TF
-in the subsets and FALSE if they represent the total number of edges}
+\item{num_possible_TFs}{if set to a number > 0, the elements of 'edges' will first be
+multiplied by this number to get the number of edges for each subset}
 }
 \description{
 From a network with edge scores, sorts the network in descending order of score, and
@@ -25,4 +25,8 @@ creates subsets using the top given numbers of edges.
 The input file should be tab-separated with three columns: source node (e.g. transcription factor),
 target node (e.g. the regulated gene), and edge score.
 The output files will be tab-separated with two columns: source node, target node.
+The size of the subsets can either be determined by the total number of edges (if 'num_possible_TFs' is not specified)
+or by the desired average number of target nodes from each possible source node (if 'num_possible_TFs' is set to a number > 0).
+The latter option multiplies each element of 'edges' by 'num_possible_TFs' to get the number of
+edges in each subset.
 }

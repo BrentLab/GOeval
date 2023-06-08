@@ -1,0 +1,8 @@
+"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
+"GO:0006814","sodium ion transport",104,1,0.0230445380013295,43.3942307692308,0.0229130373135653,1,"81539","ENSG00000111371","geneontology_Biological_Process_noRedundant"
+"GO:0006836","neurotransmitter transport",130,1,0.0288056725016619,34.7153846153846,0.028599803706498,1,"81539","ENSG00000111371","geneontology_Biological_Process_noRedundant"
+"GO:0098656","anion transmembrane transport",143,1,0.031686239751828,31.5594405594406,0.0314369629626449,1,"81539","ENSG00000111371","geneontology_Biological_Process_noRedundant"
+"GO:0015849","organic acid transport",152,1,0.0336804786173277,29.6907894736842,0.0333987194887284,1,"81539","ENSG00000111371","geneontology_Biological_Process_noRedundant"
+"GO:0001505","regulation of neurotransmitter levels",177,1,0.0392200310214935,25.4971751412429,0.0388376085583473,1,"81539","ENSG00000111371","geneontology_Biological_Process_noRedundant"
+"GO:0006631","fatty acid metabolic process",231,1,0.0511854642144915,19.5367965367965,0.0505332394627279,1,"22880","ENSG00000133422","geneontology_Biological_Process_noRedundant"
+"GO:0015711","organic anion transport",236,1,0.0522933746953246,19.1228813559322,0.0516125468253301,1,"81539","ENSG00000111371","geneontology_Biological_Process_noRedundant"

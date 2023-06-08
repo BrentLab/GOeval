@@ -1,8 +1,0 @@
-"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
-"GO:0007187","G protein-coupled receptor signaling pathway, coupled to cyclic nucleotide second messenger",71,1,0.0157323288278307,63.5633802816901,0.0156713170262819,1,"976","ENSG00000123146","geneontology_Biological_Process_noRedundant"
-"GO:0019932","second-messenger-mediated signaling",167,1,0.0370042100598272,27.0239520958084,0.0366638943329616,1,"976","ENSG00000123146","geneontology_Biological_Process_noRedundant"
-"GO:0043543","protein acylation",201,1,0.0445380013294926,22.452736318408,0.0440445054698859,1,"151050","ENSG00000144445","geneontology_Biological_Process_noRedundant"
-"GO:0018205","peptidyl-lysine modification",306,1,0.0678041214269887,14.7483660130719,0.0666584008156187,1,"151050","ENSG00000144445","geneontology_Biological_Process_noRedundant"
-"GO:0036230","granulocyte activation",333,1,0.0737868380234877,13.5525525525526,0.072429650753471,1,"976","ENSG00000123146","geneontology_Biological_Process_noRedundant"
-"GO:0002446","neutrophil mediated immunity",335,1,0.074230002215821,13.4716417910448,0.0728564387399157,1,"976","ENSG00000123146","geneontology_Biological_Process_noRedundant"
-"GO:0016569","covalent chromatin modification",395,1,0.0875249279858187,11.4253164556962,0.0856144115522227,1,"151050","ENSG00000144445","geneontology_Biological_Process_noRedundant"

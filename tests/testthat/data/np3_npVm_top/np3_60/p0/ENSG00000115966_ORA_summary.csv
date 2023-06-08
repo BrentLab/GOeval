@@ -1,7 +1,0 @@
-"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
-"GO:0002181","cytoplasmic translation",89,1,0.01972080655883,50.7078651685393,0.0196246607983216,1,"728689","ENSG00000205609","geneontology_Biological_Process_noRedundant"
-"GO:0006413","translational initiation",180,1,0.0398847773099934,25.0722222222222,0.0394892440613237,1,"728689","ENSG00000205609","geneontology_Biological_Process_noRedundant"
-"GO:0051056","regulation of small GTPase mediated signal transduction",221,1,0.0489696432528252,20.420814479638,0.0483727833350623,1,"51306","ENSG00000031003","geneontology_Biological_Process_noRedundant"
-"GO:0071826","ribonucleoprotein complex subunit organization",232,1,0.0514070463106581,19.4525862068966,0.0507491500393141,1,"728689","ENSG00000205609","geneontology_Biological_Process_noRedundant"
-"GO:0043087","regulation of GTPase activity",334,1,0.0740084201196543,13.5119760479042,0.0726430570227098,1,"51306","ENSG00000031003","geneontology_Biological_Process_noRedundant"
-"GO:0022613","ribonucleoprotein complex biogenesis",428,1,0.0948371371593175,10.5443925233645,0.0925936215046343,1,"728689","ENSG00000205609","geneontology_Biological_Process_noRedundant"

@@ -40,22 +40,6 @@
       ],
       "Hash": "4006dffe49958d2dd591c17e61e60591"
     },
-    "NCmisc": {
-      "Package": "NCmisc",
-      "Version": "1.2.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "grDevices",
-        "graphics",
-        "methods",
-        "stats",
-        "tools",
-        "utils"
-      ],
-      "Hash": "57805bff69b9ca137e70fb83bf0e35f9"
-    },
     "R6": {
       "Package": "R6",
       "Version": "2.5.1",
@@ -1036,22 +1020,6 @@
         "R"
       ],
       "Hash": "5e3c5dc0b071b21fa128676560dbe94d"
-    },
-    "reader": {
-      "Package": "reader",
-      "Version": "1.0.6",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "NCmisc",
-        "R",
-        "grDevices",
-        "graphics",
-        "methods",
-        "stats",
-        "utils"
-      ],
-      "Hash": "ebf0939ae7cf7eb8776481430c279429"
     },
     "readr": {
       "Package": "readr",

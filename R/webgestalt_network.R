@@ -39,12 +39,13 @@ webgestalt_network <- function(network_path, reference_set, output_directory, ne
   }
 
   if (file.exists(network_path)) {
-    # separate network into files of gene sets
+    # create paths for the intermediary gene set files
     work_dir = file.path(output_directory, "webgestalt_work", network_name)
     for (i in 1:(permutations+1)) {
       dir.create(file.path(work_dir, paste0("p",i-1)), recursive=TRUE)
     }
 
+    # finds the subset of genes in the reference set that are annotated to valid GO terms
     ref_genes = WebGestaltR::idMapping(organism = organism, inputGene = read.table(reference_set)$V1, sourceIdType = GENE_ID, targetIdType = "entrezgene", host = "https://www.webgestalt.org/")
     annotations = suppressWarnings(WebGestaltR::loadGeneSet(organism = organism, enrichDatabase = database))
     genes_per_term = table(annotations$geneSet$geneSet)
@@ -68,7 +69,7 @@ webgestalt_network <- function(network_path, reference_set, output_directory, ne
     unique_TFs <- unique(annotated_network$V1)
     ann_network_matrix = xtabs(~ V1 + V2, annotated_network)
 
-    # makes a folder of gene sets for one network subest, calls the WebGestaltRBatch
+    # separates each network subset into gene set files, calls the WebGestaltRBatch
     # function on that folder, and saves the results
     for (i in 1:(permutations+1)) {
       if (i == 1) {
@@ -76,12 +77,14 @@ webgestalt_network <- function(network_path, reference_set, output_directory, ne
       } else {
         net <- permute(ann_network_matrix)
       }
+      valid_sets_counter = 0
       for (tf in unique_TFs) {
         gene_set = net$V2[net$V1 == tf]
         entrez_gene_set = annotated_ref_genes$entrezgene[annotated_ref_genes$userId %in% gene_set]
         present_terms = annotations_proper_size$geneSet[annotations_proper_size$gene %in% entrez_gene_set]
         if (length(gene_set) > 1 & length(unique(present_terms)) > 1) {
           write.table(gene_set, file=file.path(work_dir,paste0("p",i-1),paste0(tf,"_targets.txt")), row.names=FALSE, col.names=FALSE)
+          valid_sets_counter = valid_sets_counter + 1
         }
       }
 
@@ -118,14 +121,18 @@ webgestalt_network <- function(network_path, reference_set, output_directory, ne
           df <- data.frame(set[[2]])
           sig_df <- subset(df, select = -c(link))
           if (nrow(sig_df) > 0) {
-            sig_counter = sig_counter + 1
+            if (sig_df$FDR[1] < 0.05) {
+              sig_counter = sig_counter + 1
+            }
             sig_df['database'] <- rep(database, nrow(sig_df))
             write.csv(sig_df,file.path(output_directory,network_name,paste0("p",i-1),paste0(tf_method, "_summary.csv")),row.names = FALSE)
           }
         }
       }
-      write(paste(sig_counter,"of",length(unique_TFs),"valid gene sets have at least one significant GO term.\n",length(unique(network$V1)),"gene sets in network."),
-            file = file.path(output_directory,network_name,paste0("p",i-1),"README.txt"))
+      #write(paste(sig_counter,"of",length(unique_TFs),"valid gene sets have at least one significant GO term.\n",length(unique(network$V1)),"gene sets in network."),
+      #      file = file.path(output_directory,network_name,paste0("p",i-1),"README.txt"))
+      write(paste0(sig_counter," significant\n",valid_sets_counter," valid\n",length(unique(network$V1))," total\n",length(network$V2)," edges"),
+            file = file.path(output_directory,network_name,paste0("p",i-1),"network_data.txt"))
     }
   } else {
     print(paste(network_path,"must be an existing file."))

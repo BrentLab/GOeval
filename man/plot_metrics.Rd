@@ -8,11 +8,13 @@ plot_metrics(
   metric_dfs_by_net,
   title_text,
   subtitle_text,
+  perTF,
   sum = TRUE,
   percent = FALSE,
   mean = FALSE,
   median = FALSE,
-  annotation_overlap = TRUE
+  annotation_overlap = TRUE,
+  size = TRUE
 )
 }
 \arguments{
@@ -21,6 +23,9 @@ plot_metrics(
 \item{title_text}{text for the title of each plot; generally the names of the networks}
 
 \item{subtitle_text}{text for the subtitle of each plot}
+
+\item{perTF}{bool whether the network subset sizes were specified as average target
+genes per TF; changes the x-axis label}
 
 \item{sum}{bool whether to plot the 'sum' metric, which is the sum of the negative
 log base 10 of the p-value for the top term of each TF minus 3 times the total

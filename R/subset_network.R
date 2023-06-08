@@ -5,9 +5,12 @@
 #'  The input file should be tab-separated with three columns: source node (e.g. transcription factor),
 #'    target node (e.g. the regulated gene), and edge score.
 #'  The output files will be tab-separated with two columns: source node, target node.
+#'  The size of the subsets can either be determined by the total number of edges (if 'num_possible_TFs' is not specified)
+#'  or by the desired average number of target nodes from each possible source node (if 'num_possible_TFs' is set to a number > 0).
+#'  The latter option multiplies each element of 'edges' by 'num_possible_TFs' to get the number of
+#'    edges in each subset.
 #'
 #' @importFrom dplyr arrange
-#' @importFrom dplyr n_distinct
 #' @importFrom dplyr select
 #'
 #' @param input_file a file containing the network to create subsets from. The file should
@@ -15,11 +18,11 @@
 #' @param output_directory name of the folder in which to place the created network subset files
 #' @param name base name for the created network subset files
 #' @param edges list of numbers of edges or average edges per TF to include in each subset
-#' @param perTF boolean TRUE if the elements of "edges" represent average edges per TF
-#'  in the subsets and FALSE if they represent the total number of edges
+#' @param num_possible_TFs if set to a number > 0, the elements of 'edges' will first be
+#'  multiplied by this number to get the number of edges for each subset
 #'
 #' @export
-subset_network <- function(input_file, output_directory, name, edges, perTF) {
+subset_network <- function(input_file, output_directory, name, edges, num_possible_TFs = 0) {
   network = read.table(file=input_file, sep='\t', header=FALSE)
 
   colnames(network) <- c("Column1", "Column2", "Column3")
@@ -29,7 +32,7 @@ subset_network <- function(input_file, output_directory, name, edges, perTF) {
 
   for (i in edges) {
     # Get the top rows for each file
-    top_rows <- head(sorted_net, ifelse(perTF, dplyr::n_distinct(sorted_net$Column1)*i, i))
+    top_rows <- head(sorted_net, ifelse(num_possible_TFs > 0, num_possible_TFs*i, i))
 
     # Remove the third column
     top_rows <- dplyr::select(top_rows, Column1, Column2)

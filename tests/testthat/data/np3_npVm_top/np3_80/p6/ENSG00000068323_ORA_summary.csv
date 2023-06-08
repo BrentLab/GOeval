@@ -1,6 +1,0 @@
-"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
-"GO:0097485","neuron projection guidance",141,1,0.0312430755594948,32.0070921985816,0.0310007469955988,1,"5623","ENSG00000125650","geneontology_Biological_Process_noRedundant"
-"GO:0010959","regulation of metal ion transport",174,1,0.0385552847329936,25.9367816091954,0.0381857520870766,1,"27075","ENSG00000106537","geneontology_Biological_Process_noRedundant"
-"GO:0034765","regulation of ion transmembrane transport",201,1,0.0445380013294926,22.452736318408,0.0440445054698859,1,"27075","ENSG00000106537","geneontology_Biological_Process_noRedundant"
-"GO:0072511","divalent inorganic cation transport",224,1,0.0496343895413251,20.1473214285714,0.0490211779697068,1,"27075","ENSG00000106537","geneontology_Biological_Process_noRedundant"
-"GO:0061564","axon development",296,1,0.0655883004653224,15.2466216216216,0.0645163587125652,1,"5623","ENSG00000125650","geneontology_Biological_Process_noRedundant"

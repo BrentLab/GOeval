@@ -1,0 +1,4 @@
+"geneSet","description","size","overlap","expect","enrichmentRatio","pValue","FDR","overlapId","userId","database"
+"GO:1990823","response to leukemia inhibitory factor",70,1,0.0155107467316641,64.4714285714286,0.0154514535724128,1,"54836","ENSG00000119411","geneontology_Biological_Process_noRedundant"
+"GO:1990778","protein localization to cell periphery",222,1,0.0491912253489918,20.3288288288288,0.0485889394319765,1,"57512","ENSG00000151025","geneontology_Biological_Process_noRedundant"
+"GO:0072511","divalent inorganic cation transport",224,1,0.0496343895413251,20.1473214285714,0.0490211779697068,1,"54836","ENSG00000119411","geneontology_Biological_Process_noRedundant"
