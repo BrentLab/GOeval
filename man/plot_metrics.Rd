@@ -43,6 +43,9 @@ log base 10 of the p-value for the top term of each TF}
 \item{annotation_overlap}{bool whether to plot the 'annotation_overlap' metric,
 which is the percent of TFs that are annotated to a GO term for which their
 target genes are enriched}
+
+\item{size}{bool whether to plot the 'size' metric,
+which is the number of TFs with at least one annotated target gene}
 }
 \description{
 Plot the summary metrics from get_metrics across network subset size for one or more networks.

@@ -1,11 +1,11 @@
 #' get_terms
 #'
-#' Get enrichment data for the top n terms from each TF summary file in a folder
+#' Get ORA data for the top n terms from each TF summary file in a folder
 #' output by the webgestalt_network function.
 #'
 #' @importFrom data.table fread
 #'
-#' @param path a folder containing .csv files of the enrichment summaries output
+#' @param path a folder containing .csv files of the ORA summaries output
 #'    by webgestalt_network
 #' @param n the number of terms from each summary to get data for
 #'

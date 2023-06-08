@@ -113,7 +113,7 @@ get_network_metrics <- function(full_terms, network_size, organism, get_sum, get
 #' @importFrom parallelly availableCores
 #'
 #' @param directory a directory containing the webgestalt_network output directory
-#'  for each network of interest
+#'  for all networks of interest
 #' @param organism a string specifying the organism that the data is from, e.g.
 #'    "hsapiens" or "scerevisiae". Only specify if get_annotation_overlap = TRUE.
 #' @param get_sum bool whether to get the 'sum' metric, which is the sum of the negative
@@ -131,7 +131,7 @@ get_network_metrics <- function(full_terms, network_size, organism, get_sum, get
 #' @param get_size bool whether to get the 'size' metric, which is the number of
 #'  TFs in the network subset that have more than one target gene with GO annotations
 #' @param parallel bool whether to get the metrics for each network in the directory
-#'  in parallel or sequentially
+#'  in parallel or sequentially - use with caution, as this has not been adequately tested
 #'
 #' @export
 get_metrics <- function(directory, organism = "hsapiens", get_sum = TRUE, get_percent = FALSE, get_mean = FALSE, get_median = FALSE, get_annotation_overlap = FALSE, get_size = TRUE, parallel = FALSE) {
@@ -163,7 +163,7 @@ get_metrics <- function(directory, organism = "hsapiens", get_sum = TRUE, get_pe
     # parallel version
     # works fine when run in debug mode
     # gives "*** recursive gc invocation" when run via the "Test" button
-    # but also sometimes it works...
+    # but also sometimes it works, so possible race condition although I'm not sure how
     results <- parallel::mclapply(networks_list, function(net) {
       network_data_files <- list.files(net, recursive = TRUE, pattern = "network_data.txt", full.names = TRUE)
       network_sizes <- lapply(network_data_files, function (f) {
@@ -182,7 +182,6 @@ get_metrics <- function(directory, organism = "hsapiens", get_sum = TRUE, get_pe
         size_line <- grep("valid", readLines(f), value = TRUE)
         return(as.integer(unlist(strsplit(size_line, " "))[1]))
       })
-      #network_size <- as.integer(unlist(strsplit(readLines(file.path(net, "p0", "network_data.txt"))[2], " "))[1])
       paths <- list.dirs(net, full.names = TRUE, recursive = FALSE)
       p_terms <- mapply(get_terms, paths, 16, SIMPLIFY = FALSE)
       return(t(mapply(get_network_metrics, p_terms, network_sizes, organism, get_sum, get_percent, get_mean, get_median, get_annotation_overlap, get_size, MoreArgs = list(go_ann = go_ann, go_reg = go_reg))))

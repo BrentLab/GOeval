@@ -25,13 +25,15 @@
 #' @param annotation_overlap bool whether to plot the 'annotation_overlap' metric,
 #'  which is the percent of TFs that are annotated to a GO term for which their
 #'  target genes are enriched
+#' @param size bool whether to plot the 'size' metric,
+#'  which is the number of TFs with at least one annotated target gene
 #'
 #' @export
 plot_metrics <- function(metric_dfs_by_net, title_text, subtitle_text, perTF, sum = TRUE, percent = FALSE, mean = FALSE, median = FALSE, annotation_overlap = FALSE, size = TRUE) {
   # determine if any of the input networks have only one size
   # if yes, metrics for permuted networks will be shown with box plots instead of line plots
   plot_with_boxes <- FALSE
-  if (class(metric_dfs_by_net[[1]]) == "list") {
+  if (inherits(metric_dfs_by_net[[1]], "list")) {
     for (df_list in metric_dfs_by_net) {
       if (length(df_list[[1]][1,]) == 1) {
         plot_with_boxes <- TRUE
@@ -91,7 +93,7 @@ plot_metrics <- function(metric_dfs_by_net, title_text, subtitle_text, perTF, su
             plot.subtitle=ggplot2::element_text(hjust=0.5)) +
       ggplot2::scale_x_continuous(n.breaks = 10, trans = "log2")
 
-     # Set lower limit of y axis to 0 if graphing a percent or # of TFs
+     # set lower limit of y axis to 0 if graphing a percent or # of TFs
     if (grepl("Percent|Number", label_text[m])) {
       plt <- plt + ggplot2::scale_y_continuous(limits = c(0, NA))
     }

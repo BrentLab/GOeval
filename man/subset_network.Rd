@@ -14,7 +14,7 @@ be tab-separated with three columns: source node, target node, edge score}
 
 \item{name}{base name for the created network subset files}
 
-\item{edges}{list of numbers of edges or average edges per TF to include in each subset}
+\item{edges}{list of total numbers of edges or average edges per TF to include in each subset}
 
 \item{num_possible_TFs}{if set to a number > 0, the elements of 'edges' will first be
 multiplied by this number to get the number of edges for each subset}

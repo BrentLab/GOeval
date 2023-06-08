@@ -17,9 +17,10 @@ knitr::opts_chunk$set(
 First, install and load this package. It is easiest to use either the "devtools" or "remotes" package to do so. "remotes" is a smaller package, so it might be the better option if you do not want to install all of "devtools."
 
 ```{r, eval = FALSE}
-devtools::install_github("westbrooktm/GOeval", ref = "dev")
+# Uncomment the command before using.
+#devtools::install_github("westbrooktm/GOeval", ref = "dev")
 # OR
-remotes::install_github("westbrooktm/GOeval", ref = "dev")
+#remotes::install_github("westbrooktm/GOeval", ref = "dev")
 ```
 
 ```{r setup}
@@ -27,6 +28,8 @@ library("GOeval")
 ```
 
 Steps to use this package from original network to graphing the results:
+
+Begin with a network as a tab-separated .tsv file where the first column is the source nodes, the second column is the target nodes, and (if using subset_network) the third column is the edge scores. All genes should be written as their Ensembl gene ID.
 
 1. subset_network to create network subsets with the top-weighted edges
 

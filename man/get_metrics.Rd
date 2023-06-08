@@ -18,7 +18,7 @@ get_metrics(
 }
 \arguments{
 \item{directory}{a directory containing the webgestalt_network output directory
-for each network of interest}
+for all networks of interest}
 
 \item{organism}{a string specifying the organism that the data is from, e.g.
 "hsapiens" or "scerevisiae". Only specify if get_annotation_overlap = TRUE.}
@@ -44,7 +44,7 @@ target genes are enriched}
 TFs in the network subset that have more than one target gene with GO annotations}
 
 \item{parallel}{bool whether to get the metrics for each network in the directory
-in parallel or sequentially}
+in parallel or sequentially - use with caution, as this has not been adequately tested}
 }
 \description{
 Get a data.frame that contains specified metrics for all networks that have a
