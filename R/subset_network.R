@@ -34,15 +34,23 @@ subset_network <- function(input_file, output_directory, name, edges, num_possib
   # sort the data frame by the third column in descending order
   sorted_net <- dplyr::arrange(network, dplyr::desc(Column3))
 
+  if (num_possible_TFs > 0) {
+    multiplier = num_possible_TFs
+  } else {
+    multiplier = 1
+  }
+
   for (i in edges) {
-    # get the top rows
-    top_rows <- utils::head(sorted_net, ifelse(num_possible_TFs > 0, num_possible_TFs*i, i))
+    if (multiplier * i <= length(sorted_net$Column1)) {
+      # get the top rows
+      top_rows <- utils::head(sorted_net, multiplier * i)
 
-    # remove the third column
-    top_rows <- dplyr::select(top_rows, Column1, Column2)
+      # remove the third column
+      top_rows <- dplyr::select(top_rows, Column1, Column2)
 
-    # save the top rows as a new .tsv file
-    output_file <- paste0(name, "_", i, ".tsv")
-    write.table(top_rows, file.path(output_directory, output_file), quote = FALSE, sep = "\t", row.names = FALSE, col.names = FALSE)
+      # save the top rows as a new .tsv file
+      output_file <- paste0(name, "_", i, ".tsv")
+      write.table(top_rows, file.path(output_directory, output_file), quote = FALSE, sep = "\t", row.names = FALSE, col.names = FALSE)
+    }
   }
 }

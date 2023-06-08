@@ -17,19 +17,73 @@ knitr::opts_chunk$set(
 First, install and load this package. It is easiest to use either the "devtools" or "remotes" package to do so. "remotes" is a smaller package, so it might be the better option if you do not want to install all of "devtools."
 
 ```{r, eval = FALSE}
-# Uncomment the command before using.
-#devtools::install_github("westbrooktm/GOeval", ref = "dev")
+devtools::install_github("westbrooktm/GOeval", ref = "dev")
 # OR
-#remotes::install_github("westbrooktm/GOeval", ref = "dev")
+remotes::install_github("westbrooktm/GOeval", ref = "dev")
 ```
 
 ```{r setup}
 library("GOeval")
 ```
 
-Steps to use this package from original network to graphing the results:
+Now that the package is loaded, we need a network as a tab-separated .tsv file where the first column is the source nodes, the second column is the target nodes, and (if using subset_network) the third column is the edge scores. All genes should be written as their Ensembl gene ID.
 
-Begin with a network as a tab-separated .tsv file where the first column is the source nodes, the second column is the target nodes, and (if using subset_network) the third column is the edge scores. All genes should be written as their Ensembl gene ID.
+To run the following examples, access the example data stored in "vignette_data.tar.gz" and extract it into a local folder.
+
+```{r, eval = FALSE}
+data_path <- system.file(package = "GOeval", file.path("data", "vignette_data.tar.gz"))
+
+# wherever you want to store the example data
+data_dir <- "GOeval_data"
+
+untar(data_path, exdir = data_dir)
+
+# wherever you want to store the generated output
+out_dir <- "GOeval_output"
+```
+
+```{r, echo = FALSE}
+data_dir <- "data"
+out_dir <- "data"
+```
+
+Basic evaluation:
+
+Here are the required arguments.
+
+```{r}
+# path to a network in proper format
+network_path <- file.path(data_dir, "marbach_extract.tsv")
+# path to a .txt file with one column that includes all the genes
+#   that may appear in the network
+reference_path <- file.path(data_dir, "marbach_gene_universe.txt")
+# path to the desired output directory
+output_path <- out_dir
+# a short name for the network without any spaces
+network_name <- "marbach"
+```
+
+Run the 'evaluate' function. Look at its arguments in the documentation for ways to customize the output.
+
+```{r}
+plot_data <- evaluate(network_path, reference_path, output_path, network_name,
+                      # additional arguments allow for output customization
+                      # for example, permutations = 1 allows a faster run time than the default 3
+                      # get_annotation_overlap = TRUE causes the computation of the annotation_overlap metric
+                      permutations = 1, get_annotation_overlap = TRUE)
+```
+
+After a couple minutes, the directory at out_dir should contain a folder of subsets of the original network, a folder that contains the ORA summaries, and a .pdf file with plots of metrics calculated from those summaries. The evaluate function returns the data used to make the plots as a list of DataFrames.
+
+Do not be worried if the graphs output by the above code have weird shapes. The "marbach_extract.tsv" network has very few TFs for the sake of quick computation.
+
+The run time changes with the size of the network and with larger networks may take up to several hours. It is thus recommended to use a computing cluster when working with large networks. It is possible to speed up the process by calling each step manually as shown in the "Advanced usage" section below and running the webgestalt_network function calls in parallel.
+\
+\
+\
+Advanced usage:
+
+All intermediary steps in the evaluation can be run separately with the following functions.
 
 1. subset_network to create network subsets with the top-weighted edges
 
@@ -41,21 +95,7 @@ Begin with a network as a tab-separated .tsv file where the first column is the 
 \
 \
 \
-
-To run the following examples, access the example data stored in "vignette_data.tar.gz" and extract it into a local folder.
-
-```{r, eval = FALSE}
-data_path <- system.file(package = "GOeval", file.path("data", "vignette_data.tar.gz"))
-
-# where you want to store the example data
-data_dir <- "data"
-
-untar(data_path, exdir = data_dir)
-```
-
-```{r, echo = FALSE}
-data_dir <- "data"
-```
+We will now walk through step-by-step evaluation of the network "np3_dtoTFs.tsv", which has 56 TFs and a total of 629,832 edges.
 
 1. subset_network
 
@@ -66,8 +106,7 @@ This function sorts the input network in descending order by the values in the t
 ```{r}
   input_file <- file.path(data_dir, "np3_dtoTFs.tsv")
   
-  # This does not have to be in the same directory as the input file.
-  output_directory <- file.path(data_dir, "np3_dtoTFs_subsets")
+  output_directory <- file.path(out_dir, "np3_dtoTFs_subsets")
   
   name <- "np3"
   
@@ -94,25 +133,25 @@ Note organism = "hsapiens" and database = "geneontology_Biological_Process_noRed
 
 You can see more options for organism and database with WebGestaltR::listOrganism() and WebGestaltR::listGeneSet() respectively.
 
+Also note that the run time of the below code could take well over an hour, so this vignette does not actually evaluate the code. The run time is highly dependent on the number of subsets, the number of TFs in each of those subsets, and the number of permutations. The process can be sped up (in this case by 10x) by running webgestalt_network on each subset at the same time using a computing cluster or similar.
+
 ```{r, eval = FALSE}
 for (subset in list.files(file.path(data_dir, "np3_dtoTFs_subsets"), full.names = TRUE)) {
-  # Again, the output_directory does not have to be in data_dir.
   webgestalt_network(network_path = subset,
                      reference_set = file.path(data_dir, "h1_k562_overlap_universe.txt"),
-                     output_directory = file.path(data_dir, "np3_dtoTFs_summaries"),
+                     output_directory = file.path(out_dir, "np3_dtoTFs_summaries"),
+                     # this just gets the name of each file minus the extension
                      network_name = strsplit(basename(subset), "[.]")[[1]][1],
                      permutations = 3)
 }
 ```
-
-Also note that the run time of the above code could take well over an hour, so this vignette does not actually evaluate the code. The run time is highly dependent on the number of subsets, the number of TFs in each of those subsets, and the number of permutations. The process can be sped up (in this case by 10x) by running webgestalt_network on each subset at the same time using a computing cluster or similar.
 
 To test the very basics on a personal computer, the following code should run in just a few minutes.
 
 ```{r, eval = FALSE}
 webgestalt_network(network_path = file.path(data_dir, "np3_dtoTFs_subsets", "np3_8.tsv"),
                    reference_set = file.path(data_dir, "h1_k562_overlap_universe.txt"),
-                   output_directory = file.path("data", "np3_dtoTFs_single_permutation"),
+                   output_directory = file.path(out_dir, "np3_dtoTFs_single_permutation"),
                    network_name = "np3_8",
                    permutations = 1)
 ```
@@ -122,6 +161,8 @@ webgestalt_network(network_path = file.path(data_dir, "np3_dtoTFs_subsets", "np3
 Run get_metrics to calculate the desired metrics based on the output from webgestalt_network. Note the arguments 'get_sum' and 'get_size' are TRUE by default.
 
 ```{r}
+  # This would normally be in the 'out_dir' directory, but since this data was
+  #   premade due to time constraints, it is available in 'data_dir'
   output_folders <- file.path(data_dir, "np3_dtoTFs_summaries")
 
   metric_dfs <- get_metrics(output_folders, get_percent = TRUE, get_mean = TRUE, get_median = TRUE, get_annotation_overlap = TRUE, parallel = FALSE)
@@ -132,6 +173,7 @@ If you want to compare multiple networks, you can run get_metrics on both at the
 ```{r, eval = FALSE}
   # Specify which folders contain the data for each network.
   # Each element will be a folder used as the output folder for a call to webgestalt_network.
+  # Again, these are normally in 'out_dir' but here they are in 'data_dir' for convenience
   output_folders <- c(file.path(data_dir, "np3_dtoTFs_summaries"), file.path(data_dir, "EDN_summaries"))
 
   metric_dfs_by_net <- mapply(get_metrics, output_folders, MoreArgs=list(get_percent = TRUE, get_mean = TRUE, get_median = TRUE, get_annotation_overlap = TRUE, parallel = FALSE), SIMPLIFY = FALSE)

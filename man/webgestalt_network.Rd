@@ -18,7 +18,7 @@ webgestalt_network(
 \item{network_path}{path to the network or network subset to evaluate. Must be a tab-separated
 file where the first column is the source nodes (TFs) and the second column is the target nodes (regulated genes).}
 
-\item{reference_set}{path to the set of all genes possibly included in the network. Must be a
+\item{reference_set}{path to the set of all genes possibly included in the network. Must be a .txt
 file containing exactly one column of the genes that could possibly appear in the network.}
 
 \item{output_directory}{path to the folder in which output from all networks subset from the same original network should be stored}

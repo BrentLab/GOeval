@@ -152,6 +152,8 @@ get_metrics <- function(directory, organism = "hsapiens", get_sum = TRUE, get_pe
   }
 
   networks_list <- list.dirs(directory, full.names = TRUE, recursive = FALSE)
+  # filter out the webgestalt_work folder
+  networks_list <- networks_list[!grepl("webgestalt_work", networks_list)]
 
   if (length(networks_list) == 0) {
     stop("Invalid input path: ", directory)
@@ -187,13 +189,11 @@ get_metrics <- function(directory, organism = "hsapiens", get_sum = TRUE, get_pe
       return(t(mapply(get_network_metrics, p_terms, network_sizes, organism, get_sum, get_percent, get_mean, get_median, get_annotation_overlap, get_size, MoreArgs = list(go_ann = go_ann, go_reg = go_reg))))
     })
   }
-
   df_list <- list()
   for (i in 1:ncol(results[[1]])) {
     column_list <- lapply(results, "[", , i)
     df_list[[i]] <- data.frame(column_list)
     colnames(df_list[[i]]) <- basename(networks_list)
   }
-
   return(df_list)
 }
