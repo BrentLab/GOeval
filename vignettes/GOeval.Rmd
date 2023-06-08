@@ -67,8 +67,7 @@ This function sorts the input network in descending order by the values in the t
   input_file <- file.path(data_dir, "np3_dtoTFs.tsv")
   
   # This does not have to be in the same directory as the input file.
-  # Ensure your output_directory exists.
-  output_directory <- file.path("data", "np3_dtoTFs_subsets")
+  output_directory <- file.path(data_dir, "np3_dtoTFs_subsets")
   
   name <- "np3"
   
@@ -100,7 +99,7 @@ for (subset in list.files(file.path(data_dir, "np3_dtoTFs_subsets"), full.names 
   # Again, the output_directory does not have to be in data_dir.
   webgestalt_network(network_path = subset,
                      reference_set = file.path(data_dir, "h1_k562_overlap_universe.txt"),
-                     output_directory = file.path("data", "np3_dtoTFs_summaries"),
+                     output_directory = file.path(data_dir, "np3_dtoTFs_summaries"),
                      network_name = strsplit(basename(subset), "[.]")[[1]][1],
                      permutations = 3)
 }
