@@ -97,7 +97,7 @@ All intermediary steps in the evaluation can be run separately with the followin
 \
 We will now walk through step-by-step evaluation of the network "np3_dtoTFs.tsv", which has 56 TFs and a total of 629,832 edges.
 
-1. subset_network
+1\. subset_network
 
 "np3_dtoTFs.tsv" is tab-separated and contains 3 columns: the TFs, the regulated genes, and the scores.
 
