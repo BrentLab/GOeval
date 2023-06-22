@@ -29,16 +29,23 @@ subset_network <- function(input_file, output_directory, name, edges, num_possib
 
   network = read.table(file=input_file, sep='\t', header=FALSE)
 
-  colnames(network) <- c("Column1", "Column2", "Column3")
-
-  # sort the data frame by the third column in descending order
-  sorted_net <- dplyr::arrange(network, dplyr::desc(Column3))
-
   if (num_possible_TFs > 0) {
     multiplier = num_possible_TFs
   } else {
     multiplier = 1
   }
+
+  # check that there is a third column
+  # if not, don't subset
+  if (length(colnames(network)) < 3) {
+    write.table(network, file.path(output_directory, paste0(name, "_", as.integer(length(network$V1)/multiplier), ".tsv")), quote = FALSE, sep = "\t", row.names = FALSE, col.names = FALSE)
+    return()
+  }
+
+  colnames(network) <- c("Column1", "Column2", "Column3")
+
+  # sort the data frame by the third column in descending order
+  sorted_net <- dplyr::arrange(network, dplyr::desc(Column3))
 
   for (i in edges) {
     if (multiplier * i <= length(sorted_net$Column1)) {

@@ -17,7 +17,8 @@ evaluate(
   get_mean = FALSE,
   get_median = FALSE,
   get_annotation_overlap = FALSE,
-  get_size = TRUE
+  get_size = TRUE,
+  plot = TRUE
 )
 }
 \arguments{
@@ -58,6 +59,8 @@ target genes are enriched}
 
 \item{get_size}{bool whether to get the 'size' metric, which is the number of
 TFs in the network subset that have more than one target gene with GO annotations}
+
+\item{plot}{bool whether to make a pdf containing plots of the calculated metrics}
 }
 \description{
 Perform the whole GOeval pipeline on one network. Given one network, this

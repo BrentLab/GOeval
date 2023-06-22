@@ -32,9 +32,12 @@
 #'  target genes are enriched
 #' @param get_size bool whether to get the 'size' metric, which is the number of
 #'  TFs in the network subset that have more than one target gene with GO annotations
+#' @param plot bool whether to make a pdf containing plots of the calculated metrics
 #'
 #' @export
-evaluate <- function(network, reference_set, output_directory, network_name, edges = c(512, 1024, 2048, 4096, 8192, 16384, 32768, 65536), num_possible_TFs = 0, permutations = 3, get_sum = TRUE, get_percent = FALSE, get_mean = FALSE, get_median = FALSE, get_annotation_overlap = FALSE, get_size = TRUE) {
+evaluate <- function(network, reference_set, output_directory, network_name, edges = c(512, 1024, 2048, 4096, 8192, 16384, 32768, 65536), num_possible_TFs = 0,
+                     permutations = 3, get_sum = TRUE, get_percent = FALSE, get_mean = FALSE, get_median = FALSE, get_annotation_overlap = FALSE, get_size = TRUE, plot = TRUE) {
+
   subset_network(network, file.path(output_directory, paste0(network_name, "_subsets")), network_name, edges, num_possible_TFs)
 
   for (subset in list.files(file.path(output_directory, paste0(network_name, "_subsets")), full.names = TRUE)) {
@@ -48,9 +51,11 @@ evaluate <- function(network, reference_set, output_directory, network_name, edg
 
   metric_dfs_by_net <- mapply(get_metrics, file.path(output_directory, paste0(network_name, "_summaries")), MoreArgs=list(get_sum = get_sum, get_percent = get_percent, get_mean = get_mean, get_median = get_median, get_annotation_overlap = get_annotation_overlap, get_size = get_size, parallel = FALSE), SIMPLIFY = FALSE)
 
-  pdf(file.path(output_directory, paste0(network_name, "_ORA_metrics_plots.pdf")), 7, 5)
-  plot_data <- plot_metrics(metric_dfs_by_net, network_name, "", perTF = (num_possible_TFs > 0), sum = get_sum, percent = get_percent, mean = get_mean, median = get_median, annotation_overlap = get_annotation_overlap, size = get_size)
-  dev.off()
+  if (plot) {
+    pdf(file.path(output_directory, paste0(network_name, "_ORA_metrics_plots.pdf")), 7, 5)
+    plot_data <- plot_metrics(metric_dfs_by_net, network_name, "", perTF = (num_possible_TFs > 0), sum = get_sum, percent = get_percent, mean = get_mean, median = get_median, annotation_overlap = get_annotation_overlap, size = get_size)
+    dev.off()
+  }
 
-  return(plot_data)
+  return(metric_dfs_by_net)
 }

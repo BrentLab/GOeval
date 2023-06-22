@@ -37,36 +37,38 @@ data_path <- system.file(package = "GOeval", file.path("data", "vignette_data.ta
 data_dir <- "GOeval_data"
 
 untar(data_path, exdir = data_dir)
-
-# wherever you want to store the generated output
-out_dir <- "GOeval_output"
 ```
 
 ```{r, echo = FALSE}
 data_dir <- "data"
-out_dir <- "data"
 ```
 
 Basic evaluation:
 
-Here are the required arguments.
+Here are the required arguments to run the evaluate function on the "small_np3.tsv" network, which includes 10 transcription factors.
 
 ```{r}
 # path to a network in proper format
-network_path <- file.path(data_dir, "marbach_extract.tsv")
+network_path <- file.path(data_dir, "small_np3.tsv")
 # path to a .txt file with one column that includes all the genes
 #   that may appear in the network
-reference_path <- file.path(data_dir, "marbach_gene_universe.txt")
-# path to the desired output directory
-output_path <- out_dir
+reference_path <- file.path(data_dir, "h1_k562_overlap_universe.txt")
+# wherever you want to store the generated output
+out_dir <- "GOeval_output"
 # a short name for the network without any spaces
-network_name <- "marbach"
+network_name <- "np3"
+```
+
+```{r, echo = FALSE}
+out_dir <- "data"
 ```
 
 Run the 'evaluate' function. Look at its arguments in the documentation for ways to customize the output.
 
+The possible arguments for all functions can be found at https://westbrooktm.github.io/GOeval/reference/index.html.
+
 ```{r}
-plot_data <- evaluate(network_path, reference_path, output_path, network_name,
+net_1_data <- evaluate(network_path, reference_path, out_dir, network_name,
                       # additional arguments allow for output customization
                       # for example, permutations = 1 allows a faster run time than the default 3
                       # get_annotation_overlap = TRUE causes the computation of the annotation_overlap metric
@@ -75,9 +77,35 @@ plot_data <- evaluate(network_path, reference_path, output_path, network_name,
 
 After a couple minutes, the directory at out_dir should contain a folder of subsets of the original network, a folder that contains the ORA summaries, and a .pdf file with plots of metrics calculated from those summaries. The evaluate function returns the data used to make the plots as a list of DataFrames.
 
-Do not be worried if the graphs output by the above code have weird shapes. The "marbach_extract.tsv" network has very few TFs for the sake of quick computation.
+The run time of the evaluate function changes with the size of the network and the number of permutations. With larger networks, it may take up to several hours. It is thus recommended to use a computing cluster when working with large networks. It is possible to speed up the process by calling each step manually as shown in the "Advanced usage" section below and running the webgestalt_network function calls in parallel.
 
-The run time changes with the size of the network and with larger networks may take up to several hours. It is thus recommended to use a computing cluster when working with large networks. It is possible to speed up the process by calling each step manually as shown in the "Advanced usage" section below and running the webgestalt_network function calls in parallel.
+Now, let us compare with a second network. The "small_dto.tsv" network does not have edge scores, so no network subsets will be created. Generate the data for this network in a similar way as for the first one.
+
+```{r}
+net_2_data <- evaluate(file.path(data_dir, "small_dto.tsv"),
+                       file.path(data_dir, "h1_k562_overlap_universe.txt"),
+                       out_dir,
+                       "dto",
+                       permutations = 1, get_annotation_overlap = TRUE,
+                       # without multiple subsets, the plot would just be one dot
+                       # so we can tell it not to bother
+                       plot = FALSE)
+```
+
+```{r}
+# set main plot titles
+title_text <- "NP3 vs DTO"
+subtitle_text <- "subset for overlapping TFs"
+
+# perTF controls the x-axis label
+# true only if the network subset sizes were determined by
+ # average number of edges per TF instead of by total number of edges
+perTF <- FALSE
+
+plot_data <- plot_metrics(c(net_1_data, net_2_data), title_text, subtitle_text, perTF, annotation_overlap = TRUE)
+```
+
+
 \
 \
 \
