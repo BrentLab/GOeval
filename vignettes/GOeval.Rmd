@@ -65,7 +65,7 @@ out_dir <- "data"
 
 Run the 'evaluate' function. Look at its arguments in the documentation for ways to customize the output.
 
-The possible arguments for all functions can be found at https://westbrooktm.github.io/GOeval/reference/index.html.
+The possible arguments for all functions can be found at the "Reference" tab at the top of this page or https://westbrooktm.github.io/GOeval/reference/index.html.
 
 ```{r}
 net_1_data <- evaluate(network_path, reference_path, out_dir, network_name,
@@ -75,9 +75,11 @@ net_1_data <- evaluate(network_path, reference_path, out_dir, network_name,
                       permutations = 1, get_annotation_overlap = TRUE)
 ```
 
-After a couple minutes, the directory at out_dir should contain a folder of subsets of the original network, a folder that contains the ORA summaries, and a .pdf file with plots of metrics calculated from those summaries. The evaluate function returns the data used to make the plots as a list of DataFrames.
+After a couple minutes, the directory at out_dir should contain a folder of subsets of the original network, a folder that contains the ORA summaries and sets of target genes, and a .pdf file with plots of metrics calculated from those summaries. The evaluate function returns the data used to make the plots as a list of DataFrames.
 
 The run time of the evaluate function changes with the size of the network and the number of permutations. With larger networks, it may take up to several hours. It is thus recommended to use a computing cluster when working with large networks. It is possible to speed up the process by calling each step manually as shown in the "Advanced usage" section below and running the webgestalt_network function calls in parallel.
+
+NOTE: If you try to run the evaluate function again with the same out_dir and network_name, you must first delete the contents of "out_dir/<network_name>_summaries/webgestalt_work/". To avoid having to do this, simply use a different network_name (or out_dir) for each run unless you delete/rename the previous output.
 
 Now, let us compare with a second network. The "small_dto.tsv" network does not have edge scores, so no network subsets will be created. Generate the data for this network in a similar way as for the first one.
 
