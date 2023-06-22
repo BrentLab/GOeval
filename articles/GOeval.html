@@ -113,39 +113,7 @@ documentation for ways to customize the output.</p>
 <span>                      <span class="co"># additional arguments allow for output customization</span></span>
 <span>                      <span class="co"># for example, permutations = 1 allows a faster run time than the default 3</span></span>
 <span>                      <span class="co"># get_annotation_overlap = TRUE causes the computation of the annotation_overlap metric</span></span>
-<span>                      permutations <span class="op">=</span> <span class="fl">1</span>, get_annotation_overlap <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "network_size = 8"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 8"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 8"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 8"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 9"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 9"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 9"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 9"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 10"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 10"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 10"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 10"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 10"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 10"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 10"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 10"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 10"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 10"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 10"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 10"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 10"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 10"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 10"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 10"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 10"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 10"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 10"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 10"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 10"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 10"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 10"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 10"</span></span></code></pre></div>
+<span>                      permutations <span class="op">=</span> <span class="fl">1</span>, get_annotation_overlap <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p>After a couple minutes, the directory at out_dir should contain a
 folder of subsets of the original network, a folder that contains the
 ORA summaries and sets of target genes, and a .pdf file with plots of
@@ -175,11 +143,7 @@ first one.</p>
 <span>                       permutations <span class="op">=</span> <span class="fl">1</span>, get_annotation_overlap <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>                       <span class="co"># without multiple subsets, the plot would just be one dot</span></span>
 <span>                       <span class="co"># so we can tell it not to bother</span></span>
-<span>                       plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "network_size = 10"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 10"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 10"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 10"</span></span></code></pre></div>
+<span>                       plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># set main plot titles</span></span>
 <span><span class="va">title_text</span> <span class="op">&lt;-</span> <span class="st">"NP3 vs DTO"</span></span>
@@ -281,87 +245,7 @@ TRUE by default.</p>
 <span>  <span class="co">#   premade due to time constraints, it is available in 'data_dir'</span></span>
 <span>  <span class="va">output_folders</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">data_dir</span>, <span class="st">"np3_dtoTFs_summaries"</span><span class="op">)</span></span>
 <span></span>
-<span>  <span class="va">metric_dfs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_metrics.html">get_metrics</a></span><span class="op">(</span><span class="va">output_folders</span>, get_percent <span class="op">=</span> <span class="cn">TRUE</span>, get_mean <span class="op">=</span> <span class="cn">TRUE</span>, get_median <span class="op">=</span> <span class="cn">TRUE</span>, get_annotation_overlap <span class="op">=</span> <span class="cn">TRUE</span>, parallel <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] "network_size = 16"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 16"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 16"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 16"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 16"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 16"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 16"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 16"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 21"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 21"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 21"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 21"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 21"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 21"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 21"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 21"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 29"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 29"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 29"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 29"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 29"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 29"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 29"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 29"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 40"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 40"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 40"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 40"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 40"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 40"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 40"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 40"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 43"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 43"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 43"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 43"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 43"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 43"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 43"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 43"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 49"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 49"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 49"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 49"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 49"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 49"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 49"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 49"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 52"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 52"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 52"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 52"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 52"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 52"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 52"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 52"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 54"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 54"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 54"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 54"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 54"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 54"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 54"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 54"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 54"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 54"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 54"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 54"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 54"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 54"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 54"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 54"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 54"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 54"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 54"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 54"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 54"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 54"</span></span>
-<span><span class="co">#&gt; [1] "network_size = 54"</span></span>
-<span><span class="co">#&gt; [1] "length(terms$geneSet) = 54"</span></span></code></pre></div>
+<span>  <span class="va">metric_dfs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_metrics.html">get_metrics</a></span><span class="op">(</span><span class="va">output_folders</span>, get_percent <span class="op">=</span> <span class="cn">TRUE</span>, get_mean <span class="op">=</span> <span class="cn">TRUE</span>, get_median <span class="op">=</span> <span class="cn">TRUE</span>, get_annotation_overlap <span class="op">=</span> <span class="cn">TRUE</span>, parallel <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p>If you want to compare multiple networks, you can run get_metrics on
 both at the same time as shown below with the addition of the “EDN”
 network. When comparing multiple networks, the sizes for all must be
