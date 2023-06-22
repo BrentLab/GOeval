@@ -12,3 +12,5 @@
 ^Dockerfile$
 ^.dockerignore$
 ^index.md$
+^doc$
+^Meta$
