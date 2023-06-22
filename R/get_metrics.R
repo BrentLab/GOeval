@@ -82,9 +82,7 @@ get_network_metrics <- function(full_terms, network_size, organism, get_sum, get
     neglogp <- -log10(terms$pValue)
     # cap -logp values due to rounding to 0 for pval < 1E-16
     neglogp <- ifelse(is.finite(neglogp), neglogp, 16)
-    print(paste("network_size =", network_size))
-    print(paste("length(terms$geneSet) =", length(terms$geneSet)))
-    neglogp_zeros <- append(rep(0, network_size - length(terms$geneSet)), neglogp)
+    #neglogp_zeros <- append(rep(0, network_size - length(terms$geneSet)), neglogp)
     if (get_annotation_overlap) {
       prior_ann <- 100 * length(get_annotation_overlap(full_terms, organism, go_ann = go_ann, go_reg = go_reg)) / network_size
     } else {
@@ -92,12 +90,12 @@ get_network_metrics <- function(full_terms, network_size, organism, get_sum, get
     }
   } else {
     percent <- 0
-    neglogp_zeros <- rep(0, network_size)
+    neglogp <- rep(0, network_size)
     prior_ann <- 0
   }
   return(c(
-    sum(neglogp_zeros - penalty), percent, mean(neglogp_zeros),
-    median(neglogp_zeros), prior_ann, network_size
+    sum(neglogp - penalty), percent, mean(neglogp),
+    median(neglogp), prior_ann, network_size
   )[c(get_sum, get_percent, get_mean, get_median, get_annotation_overlap, get_size)])
 }
 
