@@ -5,8 +5,6 @@
 #' The input network file should be a tab-separated .tsv where the first column is the
 #' source nodes (TFs) and the second column is the target nodes (regulated genes).
 #' All genes must be written as their Ensembl gene ID.
-#' NOTE: if using the same output_directory and network_name for a multiple runs,
-#' you must first delete the contents of "webgestalt_work/"
 #'
 #' @importFrom WebGestaltR idMapping
 #' @importFrom WebGestaltR loadGeneSet

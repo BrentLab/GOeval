@@ -79,8 +79,6 @@ After a couple minutes, the directory at out_dir should contain a folder of subs
 
 The run time of the evaluate function changes with the size of the network and the number of permutations. With larger networks, it may take up to several hours. It is thus recommended to use a computing cluster when working with large networks. It is possible to speed up the process by calling each step manually as shown in the "Advanced usage" section below and running the webgestalt_network function calls in parallel.
 
-NOTE: If you try to run the evaluate function again with the same out_dir and network_name, you must first delete the contents of "out_dir/<network_name>_summaries/webgestalt_work/". To avoid having to do this, simply use a different network_name (or out_dir) for each run unless you delete/rename the previous output.
-
 Now, let us compare with a second network. The "small_dto.tsv" network does not have edge scores, so no network subsets will be created. Generate the data for this network in a similar way as for the first one.
 
 ```{r}
