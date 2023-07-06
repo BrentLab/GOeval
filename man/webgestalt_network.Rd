@@ -2,7 +2,7 @@
 % Please edit documentation in R/webgestalt_network.R
 \name{webgestalt_network}
 \alias{webgestalt_network}
-\title{webgestalt_network}
+\title{Generate ORA results for a network and a given number of permutations}
 \usage{
 webgestalt_network(
   network_path,
@@ -21,21 +21,29 @@ file where the first column is the source nodes (TFs) and the second column is t
 \item{reference_set}{path to the set of all genes possibly included in the network. Must be a .txt
 file containing exactly one column of the genes that could possibly appear in the network.}
 
-\item{output_directory}{path to the folder in which output from all networks subset from the same original network should be stored}
+\item{output_directory}{path to the directory in which output should be stored. It is recommended to make a dedicated
+directory for the output from all network subsets of a single original network.}
 
-\item{network_name}{the name of the folder to store the results within the output_directory.
-It should be in the same format as the files output by subset_network: "\{name\}_\{# of edges\}" i.e. "example_8".}
+\item{network_name}{the name of the directory to store the results within the output_directory.
+It should be in the same format as the files output by \code{subset_network}: "\{name\}_\{# of edges\}" i.e. "example_8".}
 
 \item{organism}{human: "hsapiens"; yeast: "scerevisiae"}
 
 \item{database}{the gene set database to search for enrichment - see options with WebGestaltR::listGeneSet()}
 
-\item{permutations}{the number of randomly permuted networks to create and run ORA}
+\item{permutations}{the number of randomly permuted networks to create and run ORA on}
 }
 \description{
-Given a network or network subset, webgestalt_network will generate ORA results
-for this network and a given number of permutations.
+Given a network or network subset, \code{webgestalt_network} will generate Over-Representation Analysis (ORA)
+results for this network and a given number of permutations. These are stored in a directory named "network_name"
+within the specified output_directory, which contains a folder "p0" for the input network and folders "p1", "p2",
+and so on for the different permutations of the network. Within these folders are .csv files for each source node.
+These files contain information on the gene set terms that are the most over-represented in the source node's targets.
+This function also creates a "webgestalt_work" directory in the output_directory, which has the same structure as
+the "network_name" directory, but the files are .txt files containing the list of targets for each source node.
+}
+\details{
 The input network file should be a tab-separated .tsv where the first column is the
 source nodes (TFs) and the second column is the target nodes (regulated genes).
-All genes must be written as their Ensembl gene ID.
+All genes must be written as Ensembl gene IDs.
 }

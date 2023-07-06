@@ -1,13 +1,16 @@
-#' get_terms
-#'
-#' Get ORA data for the top n terms from each TF summary file in a folder
-#' output by the webgestalt_network function.
+#' Gather ORA results from one folder of ORA summaries
 #'
 #' @importFrom data.table fread
 #'
+#' @description
+#' Get Over-Representation Analysis (ORA) data for the top n terms from each source node summary file
+#'  in a folder output by the `webgestalt_network` function.
+#'
 #' @param path a folder containing .csv files of the ORA summaries output
-#'    by webgestalt_network
-#' @param n the number of terms from each summary to get data for
+#'    by `webgestalt_network`
+#' @param n the number of terms from each summary for which to get data
+#'
+#' @return a data.frame
 #'
 #' @export
 get_terms <- function(path, n) {
@@ -20,6 +23,7 @@ get_terms <- function(path, n) {
     }
     combined_df <- do.call(rbind, first_rows)
     # extract TF ID from file name and add to row of corresponding GO term
+    # this is now done in `webgestalt_network`
     # combined_df$tfId <- rep(unlist(lapply(csv_files, function(f) {unlist(strsplit(basename(f), '_'))[1]})), each = n)
     return(combined_df)
   } else {

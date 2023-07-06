@@ -1,20 +1,27 @@
-#' calculate the percent of TFs that are annotated to a GO term for which their
-#'  target genes are enriched
+#' Helper function for `get_metrics`
 #'
 #' @importFrom WebGestaltR idMapping
 #'
-#' @param terms a data.frame obtained from calling get_terms on a folder of the
-#'    summaries output by webgestalt_network
+#' @description
+#' This function calculates the percent of source nodes that are annotated to a GO term
+#'  that either regulates or is the same as a GO term for which their target genes are enriched
+#'
+#' @param terms a data.frame obtained from calling `get_terms` on a folder of the
+#'    summaries output by `webgestalt_network`
 #' @param organism a string specifying the organism that the data is from, e.g.
 #'    "hsapiens" or "scerevisiae"
 #' @param go_ann a data.frame of annotations of genes to GO terms. Obtain with
 #'  WebGestaltR::loadGeneSet.
 #' @param go_reg a data.frame of the regulatory relationships between GO terms.
 #'  Obtain with ontologyIndex::get_ontology.
+#'
+#' @return a list of source nodes
+#'
+#' @keywords internal
 get_annotation_overlap <- function(terms, organism, go_ann, go_reg) {
   tf_ids <- unique(terms$tfId)
 
-  # assumption of "ensembl_gene_id" is a placeholder
+  # assumption of "ensembl_gene_id"
   tf_map <- WebGestaltR::idMapping(organism = organism, inputGene = tf_ids, sourceIdType = "ensembl_gene_id", targetIdType = "entrezgene", host = "https://www.webgestalt.org/")
 
   overlap_list <- list()
@@ -44,41 +51,49 @@ get_annotation_overlap <- function(terms, organism, go_ann, go_reg) {
   return(overlap_list)
 }
 
-#' helper function to compute the desired metrics from a dataframe of the top
-#'  terms for each TF in a single network
+#' Helper function for `get_metrics`
 #'
 #' @importFrom stats median
 #'
+#' @description
+#' This is a helper function that computes the desired metrics from a data.frame
+#'  of the top terms for each source node in a network.
+#'
 #' @param full_terms a data.frame containing all the summary results for a network.
-#'  Use get_terms to obtain.
-#' @param network_size the number of TFs in the network. May be different from
-#'  the number of TFs that have summary files.
+#'  Use `get_terms` to obtain.
+#' @param network_size the number of source nodes in the network
 #' @param organism a string specifying the organism that the data is from, e.g.
-#'  "hsapiens" or "scerevisiae". Only specify if get_annotation_overlap = TRUE.
-#' @param get_sum bool whether to get the 'sum' metric, which is the sum of the negative
-#'  log base 10 of the p-value for the top term of each TF minus 3 times the total
-#'  number of TFs.
-#' @param get_percent bool whether to get the 'percent' metric, which is the
-#'  percent of TFs with at least one GO term with a FDR < 0.05
-#' @param get_mean bool whether to get the 'mean' metric, which is the mean negative
-#'  log base 10 of the p-value for the top term of each TF
-#' @param get_median bool whether to get the 'median' metric, which is the median negative
-#'  log base 10 of the p-value for the top term of each TF
-#' @param get_annotation_overlap bool whether to get the 'annotation_overlap' metric,
-#'  which is the percent of TFs that are annotated to a GO term for which their
-#'  target genes are enriched
-#' @param get_size bool whether to get the 'size' metric, which is the number of
-#'  TFs in the network subset that have more than one target gene with GO annotations
+#'  "hsapiens" or "scerevisiae". Only required if get_annotation_overlap = TRUE.
+#' @param get_sum boolean whether to get the 'sum' metric, which is the sum of the negative
+#'  log base 10 of the p-value for the top term of each source node minus 'penalty' times the total
+#'  number of source nodes.
+#' @param get_percent boolean whether to get the 'percent' metric, which is the
+#'  percent of source nodes with at least one term with a FDR below the 'fdr_threshold'
+#' @param get_mean boolean whether to get the 'mean' metric, which is the mean negative
+#'  log base 10 of the p-value for the top term of each source node regardless of significance
+#' @param get_median boolean whether to get the 'median' metric, which is the median negative
+#'  log base 10 of the p-value for the top term of each source node regardless of significance
+#' @param get_annotation_overlap boolean whether to get the 'annotation_overlap' metric,
+#'  which is the percent of source nodes that are annotated to at least one of the 16 GO terms for
+#'  which their target genes are most enriched
+#' @param get_size boolean whether to get the 'size' metric, which is the number of
+#'  source nodes in the network subset that have more than one target gene with annotations. This number is
+#'  used in the calculation of all other metrics.
+#' @param penalty the penalty applied to the 'sum' metric for each source node in the network
+#' @param fdr_threshold the FDR threshold for a gene set term to be considered significantly
+#'  over-represented for the purposes of calculating the 'percent' metric
 #' @param go_ann a data.frame of annotations of genes to GO terms. Obtain with
 #'  WebGestaltR::loadGeneSet.
 #' @param go_reg a data.frame of the regulatory relationships between GO terms.
 #'  Obtain with ontologyIndex::get_ontology.
-get_network_metrics <- function(full_terms, network_size, organism, get_sum, get_percent, get_mean, get_median, get_annotation_overlap, get_size, go_ann = NULL, go_reg = NULL) {
-  # heuristically chosen
-  penalty <- 3
+#'
+#' @return a list of metric values
+#'
+#' @keywords internal
+get_network_metrics <- function(full_terms, network_size, organism, get_sum, get_percent, get_mean, get_median, get_annotation_overlap, get_size, penalty, fdr_threshold, go_ann = NULL, go_reg = NULL) {
   if (!any(is.na(full_terms))) {
     terms <- full_terms[match(unique(full_terms$tfId), full_terms$tfId), ]
-    percent <- 100 * sum(terms$FDR < 0.05) / network_size
+    percent <- 100 * sum(terms$FDR < fdr_threshold) / network_size
     neglogp <- -log10(terms$pValue)
     # cap -logp values due to rounding to 0 for pval < 1E-16
     neglogp <- ifelse(is.finite(neglogp), neglogp, 16)
@@ -99,11 +114,7 @@ get_network_metrics <- function(full_terms, network_size, organism, get_sum, get
   )[c(get_sum, get_percent, get_mean, get_median, get_annotation_overlap, get_size)])
 }
 
-#' get_metrics
-#'
-#' Get a data.frame that contains specified metrics for all networks that have a
-#'  subdirectory in the provided path including both the real and permuted networks.
-#'  The path should contain only directories created by webgestalt_network.
+#' Get summary metrics of a network's ORA results
 #'
 #' @import stringr
 #' @importFrom ontologyIndex get_ontology
@@ -112,29 +123,43 @@ get_network_metrics <- function(full_terms, network_size, organism, get_sum, get
 #' @importFrom parallel mclapply
 #' @importFrom parallelly availableCores
 #'
-#' @param directory a directory containing the webgestalt_network output directory
-#'  for all networks of interest
+#' @description
+#' `get_metrics` creates a data.frame that contains specified metrics for all network subsets and their permutations
+#'  that have a subdirectory in the provided path. It is designed to be run on the output of the `webgestalt_network`
+#'  function to prepare summary metrics for plotting with the `plot_metrics` function.
+#'  The 'directory' path should contain only directories created by `webgestalt_network`.
+#'
+#' @param directory a directory containing only the directories of ORA summaries created by
+#'  `webgestalt_network` for all networks of interest
 #' @param organism a string specifying the organism that the data is from, e.g.
-#'    "hsapiens" or "scerevisiae". Only specify if get_annotation_overlap = TRUE.
-#' @param get_sum bool whether to get the 'sum' metric, which is the sum of the negative
-#'  log base 10 of the p-value for the top term of each TF minus 3 times the total
-#'  number of TFs.
-#' @param get_percent bool whether to get the 'percent' metric, which is the
-#'  percent of TFs with at least one GO term with a FDR < 0.05
-#' @param get_mean bool whether to get the 'mean' metric, which is the mean negative
-#'  log base 10 of the p-value for the top term of each TF
-#' @param get_median bool whether to get the 'median' metric, which is the median negative
-#'  log base 10 of the p-value for the top term of each TF
-#' @param get_annotation_overlap bool whether to get the 'annotation_overlap' metric,
-#'  which is the percent of TFs that are annotated to a GO term for which their
-#'  target genes are enriched
-#' @param get_size bool whether to get the 'size' metric, which is the number of
-#'  TFs in the network subset that have more than one target gene with GO annotations
-#' @param parallel bool whether to get the metrics for each network in the directory
-#'  in parallel or sequentially - use with caution, as this has not been adequately tested
+#'    "hsapiens" or "scerevisiae". Only required if get_annotation_overlap = TRUE.
+#' @param get_sum boolean whether to get the 'sum' metric, which is the sum of the negative
+#'  log base 10 of the p-value for the top term of each source node minus 'penalty' times the total
+#'  number of source nodes.
+#' @param get_percent boolean whether to get the 'percent' metric, which is the
+#'  percent of source nodes with at least one term with a FDR below the 'fdr_threshold'
+#' @param get_mean boolean whether to get the 'mean' metric, which is the mean negative
+#'  log base 10 of the p-value for the top term of each source node regardless of significance
+#' @param get_median boolean whether to get the 'median' metric, which is the median negative
+#'  log base 10 of the p-value for the top term of each source node regardless of significance
+#' @param get_annotation_overlap boolean whether to get the 'annotation_overlap' metric,
+#'  which is the percent of source nodes that are annotated to at least one of the 16 GO terms for
+#'  which their target genes are most enriched
+#' @param get_size boolean whether to get the 'size' metric, which is the number of
+#'  source nodes in the network subset that have more than one target gene with annotations. This number is
+#'  used in the calculation of all other metrics.
+#' @param penalty the penalty applied to the 'sum' metric for each TF in the network
+#' @param fdr_threshold the FDR threshold for a gene set term to be considered significantly
+#'  over-represented for the purposes of calculating the 'percent' metric
+#' @param parallel boolean whether to get the metrics for each network in the directory
+#'  in parallel - use with caution, as this has not been adequately tested
+#'
+#' @return a list of data.frames, each containing the values of one metric.
+#'  The columns of a data.frame represent the different subset sizes, and the rows
+#'  represent the different network permutations. The first row is from the unpermuted networks.
 #'
 #' @export
-get_metrics <- function(directory, organism = "hsapiens", get_sum = TRUE, get_percent = FALSE, get_mean = FALSE, get_median = FALSE, get_annotation_overlap = FALSE, get_size = TRUE, parallel = FALSE) {
+get_metrics <- function(directory, organism = "hsapiens", get_sum = TRUE, get_percent = FALSE, get_mean = FALSE, get_median = FALSE, get_annotation_overlap = FALSE, get_size = TRUE, penalty = 3, fdr_threshold = 0.05, parallel = FALSE) {
   # GO regulatory relationships only needed if get_annotation_overlap = TRUE
   if (get_annotation_overlap) {
     # Load regulatory relationships between GO terms for the calculation of overlap between TF GO
@@ -174,7 +199,7 @@ get_metrics <- function(directory, organism = "hsapiens", get_sum = TRUE, get_pe
       })
       paths <- list.dirs(net, full.names = TRUE, recursive = FALSE)
       p_terms <- mapply(get_terms, paths, 16, SIMPLIFY = FALSE)
-      return(t(mapply(get_network_metrics, p_terms, network_sizes, organism, get_sum, get_percent, get_mean, get_median, get_annotation_overlap, get_size, MoreArgs = list(go_ann = go_ann, go_reg = go_reg))))
+      return(t(mapply(get_network_metrics, p_terms, network_sizes, organism, get_sum, get_percent, get_mean, get_median, get_annotation_overlap, get_size, penalty, fdr_threshold, MoreArgs = list(go_ann = go_ann, go_reg = go_reg))))
     }, mc.cores = parallelly::availableCores())
   } else {
     # non-parallel version
@@ -186,7 +211,7 @@ get_metrics <- function(directory, organism = "hsapiens", get_sum = TRUE, get_pe
       })
       paths <- list.dirs(net, full.names = TRUE, recursive = FALSE)
       p_terms <- mapply(get_terms, paths, 16, SIMPLIFY = FALSE)
-      return(t(mapply(get_network_metrics, p_terms, network_sizes, organism, get_sum, get_percent, get_mean, get_median, get_annotation_overlap, get_size, MoreArgs = list(go_ann = go_ann, go_reg = go_reg))))
+      return(t(mapply(get_network_metrics, p_terms, network_sizes, organism, get_sum, get_percent, get_mean, get_median, get_annotation_overlap, get_size, penalty, fdr_threshold, MoreArgs = list(go_ann = go_ann, go_reg = go_reg))))
     })
   }
   df_list <- list()

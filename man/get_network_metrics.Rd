@@ -2,8 +2,7 @@
 % Please edit documentation in R/get_metrics.R
 \name{get_network_metrics}
 \alias{get_network_metrics}
-\title{helper function to compute the desired metrics from a dataframe of the top
-terms for each TF in a single network}
+\title{Helper function for \code{get_metrics}}
 \usage{
 get_network_metrics(
   full_terms,
@@ -15,39 +14,46 @@ get_network_metrics(
   get_median,
   get_annotation_overlap,
   get_size,
+  penalty,
+  fdr_threshold,
   go_ann = NULL,
   go_reg = NULL
 )
 }
 \arguments{
 \item{full_terms}{a data.frame containing all the summary results for a network.
-Use get_terms to obtain.}
+Use \code{get_terms} to obtain.}
 
-\item{network_size}{the number of TFs in the network. May be different from
-the number of TFs that have summary files.}
+\item{network_size}{the number of source nodes in the network}
 
 \item{organism}{a string specifying the organism that the data is from, e.g.
-"hsapiens" or "scerevisiae". Only specify if get_annotation_overlap = TRUE.}
+"hsapiens" or "scerevisiae". Only required if get_annotation_overlap = TRUE.}
 
-\item{get_sum}{bool whether to get the 'sum' metric, which is the sum of the negative
-log base 10 of the p-value for the top term of each TF minus 3 times the total
-number of TFs.}
+\item{get_sum}{boolean whether to get the 'sum' metric, which is the sum of the negative
+log base 10 of the p-value for the top term of each source node minus 'penalty' times the total
+number of source nodes.}
 
-\item{get_percent}{bool whether to get the 'percent' metric, which is the
-percent of TFs with at least one GO term with a FDR < 0.05}
+\item{get_percent}{boolean whether to get the 'percent' metric, which is the
+percent of source nodes with at least one term with a FDR below the 'fdr_threshold'}
 
-\item{get_mean}{bool whether to get the 'mean' metric, which is the mean negative
-log base 10 of the p-value for the top term of each TF}
+\item{get_mean}{boolean whether to get the 'mean' metric, which is the mean negative
+log base 10 of the p-value for the top term of each source node regardless of significance}
 
-\item{get_median}{bool whether to get the 'median' metric, which is the median negative
-log base 10 of the p-value for the top term of each TF}
+\item{get_median}{boolean whether to get the 'median' metric, which is the median negative
+log base 10 of the p-value for the top term of each source node regardless of significance}
 
-\item{get_annotation_overlap}{bool whether to get the 'annotation_overlap' metric,
-which is the percent of TFs that are annotated to a GO term for which their
-target genes are enriched}
+\item{get_annotation_overlap}{boolean whether to get the 'annotation_overlap' metric,
+which is the percent of source nodes that are annotated to at least one of the 16 GO terms for
+which their target genes are most enriched}
 
-\item{get_size}{bool whether to get the 'size' metric, which is the number of
-TFs in the network subset that have more than one target gene with GO annotations}
+\item{get_size}{boolean whether to get the 'size' metric, which is the number of
+source nodes in the network subset that have more than one target gene with annotations. This number is
+used in the calculation of all other metrics.}
+
+\item{penalty}{the penalty applied to the 'sum' metric for each source node in the network}
+
+\item{fdr_threshold}{the FDR threshold for a gene set term to be considered significantly
+over-represented for the purposes of calculating the 'percent' metric}
 
 \item{go_ann}{a data.frame of annotations of genes to GO terms. Obtain with
 WebGestaltR::loadGeneSet.}
@@ -55,7 +61,11 @@ WebGestaltR::loadGeneSet.}
 \item{go_reg}{a data.frame of the regulatory relationships between GO terms.
 Obtain with ontologyIndex::get_ontology.}
 }
-\description{
-helper function to compute the desired metrics from a dataframe of the top
-terms for each TF in a single network
+\value{
+a list of metric values
 }
+\description{
+This is a helper function that computes the desired metrics from a data.frame
+of the top terms for each source node in a network.
+}
+\keyword{internal}

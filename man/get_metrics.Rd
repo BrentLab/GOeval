@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_metrics.R
 \name{get_metrics}
 \alias{get_metrics}
-\title{get_metrics}
+\title{Get summary metrics of a network's ORA results}
 \usage{
 get_metrics(
   directory,
@@ -13,41 +13,55 @@ get_metrics(
   get_median = FALSE,
   get_annotation_overlap = FALSE,
   get_size = TRUE,
+  penalty = 3,
+  fdr_threshold = 0.05,
   parallel = FALSE
 )
 }
 \arguments{
-\item{directory}{a directory containing the webgestalt_network output directory
-for all networks of interest}
+\item{directory}{a directory containing only the directories of ORA summaries created by
+\code{webgestalt_network} for all networks of interest}
 
 \item{organism}{a string specifying the organism that the data is from, e.g.
-"hsapiens" or "scerevisiae". Only specify if get_annotation_overlap = TRUE.}
+"hsapiens" or "scerevisiae". Only required if get_annotation_overlap = TRUE.}
 
-\item{get_sum}{bool whether to get the 'sum' metric, which is the sum of the negative
-log base 10 of the p-value for the top term of each TF minus 3 times the total
-number of TFs.}
+\item{get_sum}{boolean whether to get the 'sum' metric, which is the sum of the negative
+log base 10 of the p-value for the top term of each source node minus 'penalty' times the total
+number of source nodes.}
 
-\item{get_percent}{bool whether to get the 'percent' metric, which is the
-percent of TFs with at least one GO term with a FDR < 0.05}
+\item{get_percent}{boolean whether to get the 'percent' metric, which is the
+percent of source nodes with at least one term with a FDR below the 'fdr_threshold'}
 
-\item{get_mean}{bool whether to get the 'mean' metric, which is the mean negative
-log base 10 of the p-value for the top term of each TF}
+\item{get_mean}{boolean whether to get the 'mean' metric, which is the mean negative
+log base 10 of the p-value for the top term of each source node regardless of significance}
 
-\item{get_median}{bool whether to get the 'median' metric, which is the median negative
-log base 10 of the p-value for the top term of each TF}
+\item{get_median}{boolean whether to get the 'median' metric, which is the median negative
+log base 10 of the p-value for the top term of each source node regardless of significance}
 
-\item{get_annotation_overlap}{bool whether to get the 'annotation_overlap' metric,
-which is the percent of TFs that are annotated to a GO term for which their
-target genes are enriched}
+\item{get_annotation_overlap}{boolean whether to get the 'annotation_overlap' metric,
+which is the percent of source nodes that are annotated to at least one of the 16 GO terms for
+which their target genes are most enriched}
 
-\item{get_size}{bool whether to get the 'size' metric, which is the number of
-TFs in the network subset that have more than one target gene with GO annotations}
+\item{get_size}{boolean whether to get the 'size' metric, which is the number of
+source nodes in the network subset that have more than one target gene with annotations. This number is
+used in the calculation of all other metrics.}
 
-\item{parallel}{bool whether to get the metrics for each network in the directory
-in parallel or sequentially - use with caution, as this has not been adequately tested}
+\item{penalty}{the penalty applied to the 'sum' metric for each TF in the network}
+
+\item{fdr_threshold}{the FDR threshold for a gene set term to be considered significantly
+over-represented for the purposes of calculating the 'percent' metric}
+
+\item{parallel}{boolean whether to get the metrics for each network in the directory
+in parallel - use with caution, as this has not been adequately tested}
+}
+\value{
+a list of data.frames, each containing the values of one metric.
+The columns of a data.frame represent the different subset sizes, and the rows
+represent the different network permutations. The first row is from the unpermuted networks.
 }
 \description{
-Get a data.frame that contains specified metrics for all networks that have a
-subdirectory in the provided path including both the real and permuted networks.
-The path should contain only directories created by webgestalt_network.
+\code{get_metrics} creates a data.frame that contains specified metrics for all network subsets and their permutations
+that have a subdirectory in the provided path. It is designed to be run on the output of the \code{webgestalt_network}
+function to prepare summary metrics for plotting with the \code{plot_metrics} function.
+The 'directory' path should contain only directories created by \code{webgestalt_network}.
 }

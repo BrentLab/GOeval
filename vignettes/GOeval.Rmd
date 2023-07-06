@@ -16,6 +16,8 @@ knitr::opts_chunk$set(
 
 First, install and load this package. It is easiest to use either the "devtools" or "remotes" package to do so. "remotes" is a smaller package, so it might be the better option if you do not want to install all of "devtools."
 
+Point to webgestalt website, explain possible organisms and gene ids, describe defaults. How to use different gene id.
+
 ```{r, eval = FALSE}
 devtools::install_github("westbrooktm/GOeval", ref = "dev")
 # OR

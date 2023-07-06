@@ -2,12 +2,12 @@
 % Please edit documentation in R/plot_metrics.R
 \name{plot_metrics}
 \alias{plot_metrics}
-\title{plot_metrics}
+\title{Plot the summary metrics from \code{get_metrics}}
 \usage{
 plot_metrics(
   metric_dfs_by_net,
   title_text,
-  subtitle_text,
+  subtitle_text = "",
   perTF,
   sum = TRUE,
   percent = FALSE,
@@ -18,35 +18,43 @@ plot_metrics(
 )
 }
 \arguments{
-\item{metric_dfs_by_net}{a list of outputs of get_metrics for each network to be plotted}
+\item{metric_dfs_by_net}{a list of outputs from \code{get_metrics}}
 
-\item{title_text}{text for the title of each plot; generally the names of the networks}
+\item{title_text}{text for the title of every plot; generally the names of the networks}
 
-\item{subtitle_text}{text for the subtitle of each plot}
+\item{subtitle_text}{text for the subtitle of every plot}
 
-\item{perTF}{bool whether the network subset sizes were specified as average target
+\item{perTF}{boolean whether the network subset sizes were specified as average target
 genes per TF; changes the x-axis label}
 
-\item{sum}{bool whether to plot the 'sum' metric, which is the sum of the negative
-log base 10 of the p-value for the top term of each TF minus 3 times the total
-number of TFs.}
+\item{sum}{boolean whether to plot the 'sum' metric, which is the sum of the negative
+log base 10 of the p-value for the top term of each source node minus the penalty times the total
+number of source nodes.}
 
-\item{percent}{bool whether to plot the 'percent' metric, which is the
-percent of TFs with at least one GO term with a FDR < 0.05}
+\item{percent}{boolean whether to plot the 'percent' metric, which is the
+percent of source nodes with at least one term with a FDR below a threshold}
 
-\item{mean}{bool whether to plot the 'mean' metric, which is the mean negative
-log base 10 of the p-value for the top term of each TF}
+\item{mean}{boolean whether to plot the 'mean' metric, which is the mean negative
+log base 10 of the p-value for the top term of each source node regardless of significance}
 
-\item{median}{bool whether to plot the 'median' metric, which is the median negative
-log base 10 of the p-value for the top term of each TF}
+\item{median}{boolean whether to plot the 'median' metric, which is the median negative
+log base 10 of the p-value for the top term of each source node regardless of significance}
 
-\item{annotation_overlap}{bool whether to plot the 'annotation_overlap' metric,
-which is the percent of TFs that are annotated to a GO term for which their
-target genes are enriched}
+\item{annotation_overlap}{boolean whether to plot the 'annotation_overlap' metric,
+which is the percent of source nodes that are annotated to at least one of the 16 GO terms for
+which their target genes are most enriched}
 
-\item{size}{bool whether to plot the 'size' metric,
-which is the number of TFs with at least one annotated target gene}
+\item{size}{boolean whether to plot the 'size' metric, which is the number of
+source nodes in the network subset that have more than one target gene with annotations}
+}
+\value{
+a list of data.frames each containing values of one metric.
+The column names denote the network and subset. The first row of each data.frame
+is from the real networks; the rest are from permuted networks.
 }
 \description{
-Plot the summary metrics from get_metrics across network subset size for one or more networks.
+\code{plot_metrics} creates plots of all the summary metrics calculated by \code{get_metrics}.
+By making the 'metric_dfs_by_net' argument a list of multiple outputs from \code{get_metrics},
+you can plot the metrics from multiple networks on the same graphs.
+The x-axis is based on the network subset sizes.
 }

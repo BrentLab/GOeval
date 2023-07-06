@@ -1,6 +1,4 @@
-#' plot_metrics
-#'
-#' Plot the summary metrics from get_metrics across network subset size for one or more networks.
+#' Plot the summary metrics from `get_metrics`
 #'
 #' @importFrom tidyr gather
 #' @importFrom tidyr separate_wider_regex
@@ -8,28 +6,38 @@
 #' @importFrom dplyr group_by
 #' @import ggplot2
 #'
-#' @param metric_dfs_by_net a list of outputs of get_metrics for each network to be plotted
-#' @param title_text text for the title of each plot; generally the names of the networks
-#' @param subtitle_text text for the subtitle of each plot
-#' @param perTF bool whether the network subset sizes were specified as average target
+#' @description
+#' `plot_metrics` creates plots of all the summary metrics calculated by `get_metrics`.
+#' By making the 'metric_dfs_by_net' argument a list of multiple outputs from `get_metrics`,
+#'  you can plot the metrics from multiple networks on the same graphs.
+#' The x-axis is based on the network subset sizes.
+#'
+#' @param metric_dfs_by_net a list of outputs from `get_metrics`
+#' @param title_text text for the title of every plot; generally the names of the networks
+#' @param subtitle_text text for the subtitle of every plot
+#' @param perTF boolean whether the network subset sizes were specified as average target
 #'  genes per TF; changes the x-axis label
-#' @param sum bool whether to plot the 'sum' metric, which is the sum of the negative
-#'  log base 10 of the p-value for the top term of each TF minus 3 times the total
-#'  number of TFs.
-#' @param percent bool whether to plot the 'percent' metric, which is the
-#'  percent of TFs with at least one GO term with a FDR < 0.05
-#' @param mean bool whether to plot the 'mean' metric, which is the mean negative
-#'  log base 10 of the p-value for the top term of each TF
-#' @param median bool whether to plot the 'median' metric, which is the median negative
-#'  log base 10 of the p-value for the top term of each TF
-#' @param annotation_overlap bool whether to plot the 'annotation_overlap' metric,
-#'  which is the percent of TFs that are annotated to a GO term for which their
-#'  target genes are enriched
-#' @param size bool whether to plot the 'size' metric,
-#'  which is the number of TFs with at least one annotated target gene
+#' @param sum boolean whether to plot the 'sum' metric, which is the sum of the negative
+#'  log base 10 of the p-value for the top term of each source node minus the penalty times the total
+#'  number of source nodes.
+#' @param percent boolean whether to plot the 'percent' metric, which is the
+#'  percent of source nodes with at least one term with a FDR below a threshold
+#' @param mean boolean whether to plot the 'mean' metric, which is the mean negative
+#'  log base 10 of the p-value for the top term of each source node regardless of significance
+#' @param median boolean whether to plot the 'median' metric, which is the median negative
+#'  log base 10 of the p-value for the top term of each source node regardless of significance
+#' @param annotation_overlap boolean whether to plot the 'annotation_overlap' metric,
+#'  which is the percent of source nodes that are annotated to at least one of the 16 GO terms for
+#'  which their target genes are most enriched
+#' @param size boolean whether to plot the 'size' metric, which is the number of
+#'  source nodes in the network subset that have more than one target gene with annotations
+#'
+#' @return a list of data.frames each containing values of one metric.
+#'  The column names denote the network and subset. The first row of each data.frame
+#'  is from the real networks; the rest are from permuted networks.
 #'
 #' @export
-plot_metrics <- function(metric_dfs_by_net, title_text, subtitle_text, perTF, sum = TRUE, percent = FALSE, mean = FALSE, median = FALSE, annotation_overlap = FALSE, size = TRUE) {
+plot_metrics <- function(metric_dfs_by_net, title_text, subtitle_text = "", perTF, sum = TRUE, percent = FALSE, mean = FALSE, median = FALSE, annotation_overlap = FALSE, size = TRUE) {
   # determine if any of the input networks have only one size
   # if yes, metrics for permuted networks will be shown with box plots instead of line plots
   plot_with_boxes <- FALSE
@@ -93,9 +101,15 @@ plot_metrics <- function(metric_dfs_by_net, title_text, subtitle_text, perTF, su
             plot.subtitle=ggplot2::element_text(hjust=0.5)) +
       ggplot2::scale_x_continuous(n.breaks = 10, trans = "log2")
 
-     # set lower limit of y axis to 0 if graphing a percent or # of TFs
-    if (grepl("Percent|Number", label_text[m])) {
+     # set lower limit of y axis to 0 if graphing a percent
+    if (grepl("Percent", label_text[m])) {
       plt <- plt + ggplot2::scale_y_continuous(limits = c(0, NA))
+    }
+
+    # set lower limit of y axis to 0 and ensure integer values if graphing number of source nodes
+    # breaks function from https://stackoverflow.com/questions/15622001/how-to-display-only-integer-values-on-an-axis-using-ggplot2
+    if (grepl("Number", label_text[m])) {
+      plt <- plt + ggplot2::scale_y_continuous(breaks = function(x) unique(floor(pretty(seq(0, (max(x) + 1) * 1.1)))), limits = c(0, NA))
     }
 
     # if any of the networks whose metrics are being plotted has only one size,
