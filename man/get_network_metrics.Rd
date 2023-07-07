@@ -8,6 +8,7 @@ get_network_metrics(
   full_terms,
   network_size,
   organism,
+  gene_id,
   get_sum,
   get_percent,
   get_mean,
@@ -27,7 +28,10 @@ Use \code{get_terms} to obtain.}
 \item{network_size}{the number of source nodes in the network}
 
 \item{organism}{a string specifying the organism that the data is from, e.g.
-"hsapiens" or "scerevisiae". Only required if get_annotation_overlap = TRUE.}
+"hsapiens" or "scerevisiae"}
+
+\item{gene_id}{the naming system used for the input genes - see options with WebGestaltR::listIdType()
+and see webgestalt.org for examples of each type}
 
 \item{get_sum}{boolean whether to get the 'sum' metric, which is the sum of the negative
 log base 10 of the p-value for the top term of each source node minus 'penalty' times the total

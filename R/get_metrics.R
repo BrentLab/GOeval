@@ -10,6 +10,8 @@
 #'    summaries output by `webgestalt_network`
 #' @param organism a string specifying the organism that the data is from, e.g.
 #'    "hsapiens" or "scerevisiae"
+#' @param gene_id the naming system used for the input genes - see options with WebGestaltR::listIdType()
+#'  and see webgestalt.org for examples of each type
 #' @param go_ann a data.frame of annotations of genes to GO terms. Obtain with
 #'  WebGestaltR::loadGeneSet.
 #' @param go_reg a data.frame of the regulatory relationships between GO terms.
@@ -18,11 +20,10 @@
 #' @return a list of source nodes
 #'
 #' @keywords internal
-get_annotation_overlap <- function(terms, organism, go_ann, go_reg) {
+get_annotation_overlap <- function(terms, organism, gene_id, go_ann, go_reg) {
   tf_ids <- unique(terms$tfId)
 
-  # assumption of "ensembl_gene_id"
-  tf_map <- WebGestaltR::idMapping(organism = organism, inputGene = tf_ids, sourceIdType = "ensembl_gene_id", targetIdType = "entrezgene", host = "https://www.webgestalt.org/")
+  tf_map <- WebGestaltR::idMapping(organism = organism, inputGene = tf_ids, sourceIdType = gene_id, targetIdType = "entrezgene", host = "https://www.webgestalt.org/")
 
   overlap_list <- list()
   for (tf in tf_ids) {
@@ -63,7 +64,9 @@ get_annotation_overlap <- function(terms, organism, go_ann, go_reg) {
 #'  Use `get_terms` to obtain.
 #' @param network_size the number of source nodes in the network
 #' @param organism a string specifying the organism that the data is from, e.g.
-#'  "hsapiens" or "scerevisiae". Only required if get_annotation_overlap = TRUE.
+#'  "hsapiens" or "scerevisiae"
+#' @param gene_id the naming system used for the input genes - see options with WebGestaltR::listIdType()
+#'  and see webgestalt.org for examples of each type
 #' @param get_sum boolean whether to get the 'sum' metric, which is the sum of the negative
 #'  log base 10 of the p-value for the top term of each source node minus 'penalty' times the total
 #'  number of source nodes.
@@ -90,7 +93,7 @@ get_annotation_overlap <- function(terms, organism, go_ann, go_reg) {
 #' @return a list of metric values
 #'
 #' @keywords internal
-get_network_metrics <- function(full_terms, network_size, organism, get_sum, get_percent, get_mean, get_median, get_annotation_overlap, get_size, penalty, fdr_threshold, go_ann = NULL, go_reg = NULL) {
+get_network_metrics <- function(full_terms, network_size, organism, gene_id, get_sum, get_percent, get_mean, get_median, get_annotation_overlap, get_size, penalty, fdr_threshold, go_ann = NULL, go_reg = NULL) {
   if (!any(is.na(full_terms))) {
     terms <- full_terms[match(unique(full_terms$tfId), full_terms$tfId), ]
     percent <- 100 * sum(terms$FDR < fdr_threshold) / network_size
@@ -99,7 +102,7 @@ get_network_metrics <- function(full_terms, network_size, organism, get_sum, get
     neglogp <- ifelse(is.finite(neglogp), neglogp, 16)
     #neglogp_zeros <- append(rep(0, network_size - length(terms$geneSet)), neglogp)
     if (get_annotation_overlap) {
-      prior_ann <- 100 * length(get_annotation_overlap(full_terms, organism, go_ann = go_ann, go_reg = go_reg)) / network_size
+      prior_ann <- 100 * length(get_annotation_overlap(full_terms, organism, gene_id, go_ann = go_ann, go_reg = go_reg)) / network_size
     } else {
       prior_ann <- 0
     }
@@ -132,7 +135,11 @@ get_network_metrics <- function(full_terms, network_size, organism, get_sum, get
 #' @param directory a directory containing only the directories of ORA summaries created by
 #'  `webgestalt_network` for all networks of interest
 #' @param organism a string specifying the organism that the data is from, e.g.
-#'    "hsapiens" or "scerevisiae". Only required if get_annotation_overlap = TRUE.
+#'  "hsapiens" or "scerevisiae". Only required if get_annotation_overlap = TRUE.
+#' @param database the gene set database to search for enrichment - see options with WebGestaltR::listGeneSet().
+#'  Must be a Gene Ontology "biological process" database if get_annotation_overlap = TRUE.
+#' @param gene_id the naming system used for the input genes - see options with WebGestaltR::listIdType()
+#'  and see webgestalt.org for examples of each type. Only required if get_annotation_overlap = TRUE.
 #' @param get_sum boolean whether to get the 'sum' metric, which is the sum of the negative
 #'  log base 10 of the p-value for the top term of each source node minus 'penalty' times the total
 #'  number of source nodes.
@@ -159,7 +166,7 @@ get_network_metrics <- function(full_terms, network_size, organism, get_sum, get
 #'  represent the different network permutations. The first row is from the unpermuted networks.
 #'
 #' @export
-get_metrics <- function(directory, organism = "hsapiens", get_sum = TRUE, get_percent = FALSE, get_mean = FALSE, get_median = FALSE, get_annotation_overlap = FALSE, get_size = TRUE, penalty = 3, fdr_threshold = 0.05, parallel = FALSE) {
+get_metrics <- function(directory, organism = "hsapiens", database = "geneontology_Biological_Process_noRedundant", gene_id = "ensembl_gene_id", get_sum = TRUE, get_percent = FALSE, get_mean = FALSE, get_median = FALSE, get_annotation_overlap = FALSE, get_size = TRUE, penalty = 3, fdr_threshold = 0.05, parallel = FALSE) {
   # GO regulatory relationships only needed if get_annotation_overlap = TRUE
   if (get_annotation_overlap) {
     # Load regulatory relationships between GO terms for the calculation of overlap between TF GO
@@ -170,7 +177,7 @@ get_metrics <- function(directory, organism = "hsapiens", get_sum = TRUE, get_pe
     rm(go)
 
     # Load gene annotations with WebGestaltR::loadGeneSet.
-    suppressWarnings(go_ann <- WebGestaltR::loadGeneSet(organism = "hsapiens", enrichDatabase = "geneontology_Biological_Process_noRedundant", hostName = "https://www.webgestalt.org/")$geneSet)
+    suppressWarnings(go_ann <- WebGestaltR::loadGeneSet(organism = organism, enrichDatabase = database, hostName = "https://www.webgestalt.org/")$geneSet)
   } else {
     go_reg <- NULL
     go_ann <- NULL
@@ -199,7 +206,7 @@ get_metrics <- function(directory, organism = "hsapiens", get_sum = TRUE, get_pe
       })
       paths <- list.dirs(net, full.names = TRUE, recursive = FALSE)
       p_terms <- mapply(get_terms, paths, 16, SIMPLIFY = FALSE)
-      return(t(mapply(get_network_metrics, p_terms, network_sizes, organism, get_sum, get_percent, get_mean, get_median, get_annotation_overlap, get_size, penalty, fdr_threshold, MoreArgs = list(go_ann = go_ann, go_reg = go_reg))))
+      return(t(mapply(get_network_metrics, p_terms, network_sizes, organism, gene_id, get_sum, get_percent, get_mean, get_median, get_annotation_overlap, get_size, penalty, fdr_threshold, MoreArgs = list(go_ann = go_ann, go_reg = go_reg))))
     }, mc.cores = parallelly::availableCores())
   } else {
     # non-parallel version
@@ -211,7 +218,7 @@ get_metrics <- function(directory, organism = "hsapiens", get_sum = TRUE, get_pe
       })
       paths <- list.dirs(net, full.names = TRUE, recursive = FALSE)
       p_terms <- mapply(get_terms, paths, 16, SIMPLIFY = FALSE)
-      return(t(mapply(get_network_metrics, p_terms, network_sizes, organism, get_sum, get_percent, get_mean, get_median, get_annotation_overlap, get_size, penalty, fdr_threshold, MoreArgs = list(go_ann = go_ann, go_reg = go_reg))))
+      return(t(mapply(get_network_metrics, p_terms, network_sizes, organism, gene_id, get_sum, get_percent, get_mean, get_median, get_annotation_overlap, get_size, penalty, fdr_threshold, MoreArgs = list(go_ann = go_ann, go_reg = go_reg))))
     })
   }
   df_list <- list()

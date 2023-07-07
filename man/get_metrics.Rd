@@ -7,6 +7,8 @@
 get_metrics(
   directory,
   organism = "hsapiens",
+  database = "geneontology_Biological_Process_noRedundant",
+  gene_id = "ensembl_gene_id",
   get_sum = TRUE,
   get_percent = FALSE,
   get_mean = FALSE,
@@ -24,6 +26,12 @@ get_metrics(
 
 \item{organism}{a string specifying the organism that the data is from, e.g.
 "hsapiens" or "scerevisiae". Only required if get_annotation_overlap = TRUE.}
+
+\item{database}{the gene set database to search for enrichment - see options with WebGestaltR::listGeneSet().
+Must be a Gene Ontology "biological process" database if get_annotation_overlap = TRUE.}
+
+\item{gene_id}{the naming system used for the input genes - see options with WebGestaltR::listIdType()
+and see webgestalt.org for examples of each type. Only required if get_annotation_overlap = TRUE.}
 
 \item{get_sum}{boolean whether to get the 'sum' metric, which is the sum of the negative
 log base 10 of the p-value for the top term of each source node minus 'penalty' times the total

@@ -11,6 +11,7 @@ webgestalt_network(
   network_name,
   organism = "hsapiens",
   database = "geneontology_Biological_Process_noRedundant",
+  gene_id = "ensembl_gene_id",
   permutations = 10
 )
 }
@@ -27,9 +28,13 @@ directory for the output from all network subsets of a single original network.}
 \item{network_name}{the name of the directory to store the results within the output_directory.
 It should be in the same format as the files output by \code{subset_network}: "\{name\}_\{# of edges\}" i.e. "example_8".}
 
-\item{organism}{human: "hsapiens"; yeast: "scerevisiae"}
+\item{organism}{a string specifying the organism that the data is from, e.g.
+"hsapiens" or "scerevisiae" - see options with WebGestaltR::listOrganism()}
 
 \item{database}{the gene set database to search for enrichment - see options with WebGestaltR::listGeneSet()}
+
+\item{gene_id}{the naming system used for the input genes - see options with WebGestaltR::listIdType()
+and see webgestalt.org for examples of each type}
 
 \item{permutations}{the number of randomly permuted networks to create and run ORA on}
 }
@@ -45,5 +50,4 @@ the "network_name" directory, but the files are .txt files containing the list o
 \details{
 The input network file should be a tab-separated .tsv where the first column is the
 source nodes (TFs) and the second column is the target nodes (regulated genes).
-All genes must be written as Ensembl gene IDs.
 }

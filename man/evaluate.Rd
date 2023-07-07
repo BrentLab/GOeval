@@ -9,6 +9,9 @@ evaluate(
   reference_set,
   output_directory,
   network_name,
+  organism = "hsapiens",
+  database = "geneontology_Biological_Process_noRedundant",
+  gene_id = "ensembl_gene_id",
   edges = c(512, 1024, 2048, 4096, 8192, 16384, 32768, 65536),
   num_possible_TFs = 0,
   permutations = 3,
@@ -34,6 +37,15 @@ file containing exactly one column of the genes that could possibly appear in th
 ORA summaries, and plots}
 
 \item{network_name}{short name for the network - used in file naming so may not contain spaces}
+
+\item{organism}{a string specifying the organism that the data is from, e.g.
+"hsapiens" or "scerevisiae" - see options with WebGestaltR::listOrganism()}
+
+\item{database}{the gene set database to search for enrichment - see options with WebGestaltR::listGeneSet().
+Must be a Gene Ontology "biological process" database if get_annotation_overlap = TRUE.}
+
+\item{gene_id}{the naming system used for the input genes - see options with WebGestaltR::listIdType()
+and see webgestalt.org for examples of each type}
 
 \item{edges}{list of total numbers of edges or average edges per TF to include in each subset}
 
@@ -80,5 +92,5 @@ followed by \code{get_metrics} and \code{plot_metrics} to plot selected summary 
 }
 \details{
 The input file should be tab-separated with two or three columns: source node (e.g. transcription factor),
-target node (e.g. the regulated gene), and, optionally, edge score. All genes must be written as Ensembl gene IDs.
+target node (e.g. the regulated gene), and, optionally, edge score.
 }

@@ -4,7 +4,7 @@
 \alias{get_annotation_overlap}
 \title{Helper function for \code{get_metrics}}
 \usage{
-get_annotation_overlap(terms, organism, go_ann, go_reg)
+get_annotation_overlap(terms, organism, gene_id, go_ann, go_reg)
 }
 \arguments{
 \item{terms}{a data.frame obtained from calling \code{get_terms} on a folder of the
@@ -12,6 +12,9 @@ summaries output by \code{webgestalt_network}}
 
 \item{organism}{a string specifying the organism that the data is from, e.g.
 "hsapiens" or "scerevisiae"}
+
+\item{gene_id}{the naming system used for the input genes - see options with WebGestaltR::listIdType()
+and see webgestalt.org for examples of each type}
 
 \item{go_ann}{a data.frame of annotations of genes to GO terms. Obtain with
 WebGestaltR::loadGeneSet.}

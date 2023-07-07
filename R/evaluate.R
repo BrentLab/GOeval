@@ -13,6 +13,12 @@
 #' @param output_directory path to the directory in which to store the generated network subsets,
 #'  ORA summaries, and plots
 #' @param network_name short name for the network - used in file naming so may not contain spaces
+#' @param organism a string specifying the organism that the data is from, e.g.
+#'    "hsapiens" or "scerevisiae" - see options with WebGestaltR::listOrganism()
+#' @param database the gene set database to search for enrichment - see options with WebGestaltR::listGeneSet().
+#'  Must be a Gene Ontology "biological process" database if get_annotation_overlap = TRUE.
+#' @param gene_id the naming system used for the input genes - see options with WebGestaltR::listIdType()
+#'  and see webgestalt.org for examples of each type
 #' @param edges list of total numbers of edges or average edges per TF to include in each subset
 #' @param num_possible_TFs if set to a number > 0, the elements of 'edges' will first be
 #'  multiplied by this number to get the number of edges for each subset
@@ -39,13 +45,14 @@
 #'
 #' @details
 #' The input file should be tab-separated with two or three columns: source node (e.g. transcription factor),
-#'  target node (e.g. the regulated gene), and, optionally, edge score. All genes must be written as Ensembl gene IDs.
+#'  target node (e.g. the regulated gene), and, optionally, edge score.
 #'
 #' @return output of `get_metrics`. Can be used as input to `plot_metrics`.
 #'
 #' @export
-evaluate <- function(network, reference_set, output_directory, network_name, edges = c(512, 1024, 2048, 4096, 8192, 16384, 32768, 65536), num_possible_TFs = 0,
-                     permutations = 3, penalty = 3, fdr_threshold = 0.05, get_sum = TRUE, get_percent = FALSE, get_mean = FALSE, get_median = FALSE, get_annotation_overlap = FALSE, get_size = TRUE, plot = TRUE) {
+evaluate <- function(network, reference_set, output_directory, network_name, organism = "hsapiens", database = "geneontology_Biological_Process_noRedundant", gene_id = "ensembl_gene_id",
+                     edges = c(512, 1024, 2048, 4096, 8192, 16384, 32768, 65536), num_possible_TFs = 0, permutations = 3, penalty = 3, fdr_threshold = 0.05,
+                     get_sum = TRUE, get_percent = FALSE, get_mean = FALSE, get_median = FALSE, get_annotation_overlap = FALSE, get_size = TRUE, plot = TRUE) {
 
   # first package function
   subset_network(network, file.path(output_directory, paste0(network_name, "_subsets")), network_name, edges, num_possible_TFs)
@@ -62,12 +69,15 @@ evaluate <- function(network, reference_set, output_directory, network_name, edg
                        output_directory = file.path(output_directory, paste0(network_name, summaries_suffix)),
                        # this just gets the name of each file minus the extension
                        network_name = strsplit(basename(subset), "[.]")[[1]][1],
+                       organism = organism,
+                       database = database,
+                       gene_id = gene_id,
                        permutations = permutations)
   }
 
   # third package function
   # mapply returns a list of length 1 containing the output of get_metrics
-  metric_dfs_by_net <- mapply(get_metrics, file.path(output_directory, paste0(network_name, summaries_suffix)), MoreArgs=list(get_sum = get_sum, get_percent = get_percent, get_mean = get_mean, get_median = get_median, get_annotation_overlap = get_annotation_overlap, get_size = get_size, penalty = penalty, fdr_threshold = fdr_threshold, parallel = FALSE), SIMPLIFY = FALSE)
+  metric_dfs_by_net <- mapply(get_metrics, file.path(output_directory, paste0(network_name, summaries_suffix)), MoreArgs=list(organism = organism, database = database, gene_id = gene_id, get_sum = get_sum, get_percent = get_percent, get_mean = get_mean, get_median = get_median, get_annotation_overlap = get_annotation_overlap, get_size = get_size, penalty = penalty, fdr_threshold = fdr_threshold, parallel = FALSE), SIMPLIFY = FALSE)
 
   if (plot) {
     pdf(file.path(output_directory, paste0(network_name, "_ORA_metrics_plots_", formatted_time, ".pdf")), 7, 5)

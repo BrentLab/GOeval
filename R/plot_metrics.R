@@ -115,8 +115,8 @@ plot_metrics <- function(metric_dfs_by_net, title_text, subtitle_text = "", perT
     # if any of the networks whose metrics are being plotted has only one size,
     # plotting with box plots for the permuted networks looks better
     if (plot_with_boxes) {
-      plt <- plt + ggplot2::geom_boxplot(permuted, mapping=ggplot2::aes(x=size, y=metric, color = method, group = size)) +
-        ggplot2::labs(x = ifelse(perTF, "Edges per TF", "Edges"), y = label_text[m], color = "Network name", shape = "Network name")
+      plt <- plt + ggplot2::geom_boxplot(permuted, mapping=ggplot2::aes(x=size, y=metric, color = method, group = interaction(method, size))) +
+        ggplot2::labs(x = ifelse(perTF, "Edges per TF", "Edges"), y = label_text[m], color = "Network", shape = "Network")
     } else {
       medians = dplyr::summarise(group_by(permuted, network), median = median(metric))
       medians <- tidyr::separate_wider_regex(medians, network, c(method = ".*", "_", size = ".*"), cols_remove = FALSE)
@@ -126,7 +126,7 @@ plot_metrics <- function(metric_dfs_by_net, title_text, subtitle_text = "", perT
       for(net in unique(permuted$method)) {
         plt <- plt + ggplot2::geom_line(medians[medians$method == net,], mapping = ggplot2::aes(x = size, y = median, color = method, linetype = ltype), linewidth = 1.5)
       }
-      plt <- plt + ggplot2::labs(x = ifelse(perTF, "Edges per TF", "Edges"), y = label_text[m], color = "Network name", shape = "Network name", linetype = "Data")
+      plt <- plt + ggplot2::labs(x = ifelse(perTF, "Edges per TF", "Edges"), y = label_text[m], color = "Network", shape = "Network", linetype = "Data")
     }
     plot(plt)
   }
