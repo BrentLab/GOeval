@@ -79,9 +79,8 @@ all of “devtools.”</p>
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://westbrooktm.github.io/GOeval/">"GOeval"</a></span><span class="op">)</span></span></code></pre></div>
 <p>Now that the package is loaded, we need a network as a tab-separated
 .tsv file where the first column is the source nodes, the second column
-is the target nodes, and (if using subset_network) the third column is
-the edge scores. All genes should be written as their Ensembl gene
-ID.</p>
+is the target nodes, and the optional third column is the edge
+scores.</p>
 <p>To run the following examples, access the example data stored in
 “vignette_data.tar.gz” and extract it into a local folder.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
@@ -104,33 +103,36 @@ ID.</p>
 <span><span class="va">out_dir</span> <span class="op">&lt;-</span> <span class="st">"GOeval_output"</span></span>
 <span><span class="co"># a short name for the network without any spaces</span></span>
 <span><span class="va">network_name</span> <span class="op">&lt;-</span> <span class="st">"np3"</span></span></code></pre></div>
-<p>Run the ‘evaluate’ function. Look at its arguments in the
-documentation for ways to customize the output.</p>
-<p>The possible arguments for all functions can be found at the
-“Reference” tab at the top of this page or <a href="https://westbrooktm.github.io/GOeval/reference/index.html" class="uri">https://westbrooktm.github.io/GOeval/reference/index.html</a>.</p>
+<p>Run the <code>evaluate</code> function.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">net_1_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/evaluate.html">evaluate</a></span><span class="op">(</span><span class="va">network_path</span>, <span class="va">reference_path</span>, <span class="va">out_dir</span>, <span class="va">network_name</span>,</span>
-<span>                      <span class="co"># additional arguments allow for output customization</span></span>
-<span>                      <span class="co"># for example, permutations = 1 allows a faster run time than the default 3</span></span>
-<span>                      <span class="co"># get_annotation_overlap = TRUE causes the computation of the annotation_overlap metric</span></span>
-<span>                      permutations <span class="op">=</span> <span class="fl">1</span>, get_annotation_overlap <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p>After a couple minutes, the directory at out_dir should contain a
-folder of subsets of the original network, a folder that contains the
-ORA summaries and sets of target genes, and a .pdf file with plots of
-metrics calculated from those summaries. The evaluate function returns
-the data used to make the plots as a list of DataFrames.</p>
+<span>                      <span class="co"># some additional arguments</span></span>
+<span>                      edges <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">512</span>, <span class="fl">1024</span>, <span class="fl">2048</span>, <span class="fl">3174</span>, <span class="fl">4096</span>, <span class="fl">8192</span>, <span class="fl">16384</span>, <span class="fl">32768</span>, <span class="fl">65536</span><span class="op">)</span>,</span>
+<span>                      permutations <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>                      get_annotation_overlap <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<p>It is possible to customize the behavior of the <code>evaluate</code>
+function by using arguments in addition to the four required ones. In
+the above example, the ‘edges’ argument modifies the sizes of subsets to
+analyze from the input network. “permutations = 1” allows a faster run
+time than the default “permutations = 3” at the cost of running the
+analyses on fewer permuted versions of the input network.
+“get_annotation_overlap = TRUE” indicates that the “annotation_overlap”
+metric should be calculated.</p>
+<p>The available arguments for all functions can be found at the
+“Reference” tab at the top of this page or <a href="https://westbrooktm.github.io/GOeval/reference/index.html" class="uri">https://westbrooktm.github.io/GOeval/reference/index.html</a>.</p>
+<p>After <code>evaluate</code> runs for a couple minutes, the directory
+at out_dir should contain a folder of subsets of the original network, a
+folder that contains the ORA summaries and sets of target genes, and a
+.pdf file with plots of metrics calculated from those summaries. The
+evaluate function returns the data used to make the plots as a list of
+data.frames.</p>
 <p>The run time of the evaluate function changes with the size of the
 network and the number of permutations. With larger networks, it may
 take up to several hours. It is thus recommended to use a computing
 cluster when working with large networks. It is possible to speed up the
-process by calling each step manually as shown in the “Advanced usage”
-section below and running the webgestalt_network function calls in
-parallel.</p>
-<p>NOTE: If you try to run the evaluate function again with the same
-out_dir and network_name, you must first delete the contents of
-“out_dir/<network_name>_summaries/webgestalt_work/“. To avoid having to
-do this, simply use a different network_name (or out_dir) for each run
-unless you delete/rename the previous output.</network_name></p>
+process if performing each step manually as shown in the “Advanced
+usage” section below and running the <code>webgestalt_network</code>
+function calls in parallel.</p>
 <p>Now, let us compare with a second network. The “small_dto.tsv”
 network does not have edge scores, so no network subsets will be
 created. Generate the data for this network in a similar way as for the
@@ -144,6 +146,8 @@ first one.</p>
 <span>                       <span class="co"># without multiple subsets, the plot would just be one dot</span></span>
 <span>                       <span class="co"># so we can tell it not to bother</span></span>
 <span>                       plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<p>Use the output from both networks in the call to
+<code>plot_metrics</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># set main plot titles</span></span>
 <span><span class="va">title_text</span> <span class="op">&lt;-</span> <span class="st">"NP3 vs DTO"</span></span>
@@ -151,28 +155,63 @@ first one.</p>
 <span></span>
 <span><span class="co"># perTF controls the x-axis label</span></span>
 <span><span class="co"># true only if the network subset sizes were determined by</span></span>
-<span> <span class="co"># average number of edges per TF instead of by total number of edges</span></span>
+<span><span class="co">#  average number of edges per TF instead of by total number of edges</span></span>
 <span><span class="va">perTF</span> <span class="op">&lt;-</span> <span class="cn">FALSE</span></span>
 <span></span>
 <span><span class="va">plot_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_metrics.html">plot_metrics</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">net_1_data</span>, <span class="va">net_2_data</span><span class="op">)</span>, <span class="va">title_text</span>, <span class="va">subtitle_text</span>, <span class="va">perTF</span>, annotation_overlap <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="GOeval_files/figure-html/unnamed-chunk-9-1.png" width="700"><img src="GOeval_files/figure-html/unnamed-chunk-9-2.png" width="700"><img src="GOeval_files/figure-html/unnamed-chunk-9-3.png" width="700"></p>
+<p><img src="GOeval_files/figure-html/unnamed-chunk-10-1.png" width="700"><img src="GOeval_files/figure-html/unnamed-chunk-10-2.png" width="700"><img src="GOeval_files/figure-html/unnamed-chunk-10-3.png" width="700"></p>
+<p>Notice that the metrics for the “NP3” network are plotted as a line,
+and the metrics for the “DTO” metric are plotted as a dot at one value
+on the x-axis. This is because the input “NP3” network included a column
+of edge scores, so multiple subsets were created and analyzed.</p>
+<p>In the case that one of the input networks has only one size, the
+values for the permuted networks are shown as boxplots. They are visible
+in these example plots as horizontal lines, as only one permuted network
+was made for each network size. If every input network had multiple
+subsets, however, the medians of the values for the permuted networks
+would be plotted as a line for each input network.</p>
+<p><br><br><br>
+Notes on default behavior of <code>evaluate</code>:</p>
+<p>By default, only the “sum” and “size” metrics are calculated by
+<code>evaluate</code>. Other available metrics are “percent”, “mean”,
+“median”, and “annotation_overlap”. Descriptions of each are available
+in the function documentation.</p>
+<p>For this function to work properly, the correct ‘organism’ and
+‘gene_id’ must be specified in accordance with the genes in the input
+network and reference set. The default values of each are “hsapiens”
+(human) and “ensembl_gene_id” (for human, “ENSG” followed by 11
+numbers). You can see more options for ‘organism’ and ‘gene_id’ with
+WebGestaltR::listOrganism() and WebGestaltR::listIdType() respectively.
+The exact gene ID format specified by each option given by
+WebGestaltR::listIdType() may not be clear. To see examples, navigate to
+webgestalt.org, select an “Organism of Interest”, and click on the
+dropdown for “Gene ID Type”. Hovering the cursor over an option for a
+few seconds will display some example gene IDs of that type. While not
+ideal, this may be how you have to identify which option for ‘gene_id’
+corresponds with the format of the gene IDs in your input.</p>
+<p>The ‘database’ argument specifies which database contains the gene
+set terms in which to search for over-representation. The default is
+“geneontology_Biological_Process_noRedundant”. See more options with
+WebGestaltR::listGeneSet(). NOTE: the “annotation_overlap” metric is
+only designed to work with “geneontology_Biological_Process_noRedundant”
+or “geneontology_Biological_Process”.</p>
 <p><br><br><br>
 Advanced usage:</p>
 <p>All intermediary steps in the evaluation can be run separately with
 the following functions.</p>
 <ol style="list-style-type: decimal">
-<li><p>subset_network to create network subsets with the top-weighted
-edges</p></li>
-<li><p>webgestalt_network on each of the network subsets to generate ORA
-results</p></li>
-<li><p>get_metrics on the stored ORA results to calculate summary
-statistics for plotting</p></li>
-<li><p>plot_metrics using the output of get_metrics<br><br><br>
+<li><p><code>subset_network</code> to create network subsets with the
+top-weighted edges</p></li>
+<li><p><code>webgestalt_network</code> on each of the network subsets to
+generate ORA results</p></li>
+<li><p><code>get_metrics</code> on the stored ORA results to calculate
+summary statistics for plotting</p></li>
+<li><p><code>plot_metrics</code> using the output of get_metrics<br><br><br>
 We will now walk through step-by-step evaluation of the network
 “np3_dtoTFs.tsv”, which has 56 TFs and a total of 629,832
 edges.</p></li>
 </ol>
-<p>1. subset_network</p>
+<p>1. <code>subset_network</code></p>
 <p>“np3_dtoTFs.tsv” is tab-separated and contains 3 columns: the TFs,
 the regulated genes, and the scores.</p>
 <p>This function sorts the input network in descending order by the
@@ -196,15 +235,15 @@ only the first two columns of the rows that have the highest scores.</p>
 <p>The result is that now the “data/np3_dtoTFs_subsets” folder contains
 10 files: “np3_8.tsv” through “np3_4096.tsv”.</p>
 <ol start="2" style="list-style-type: decimal">
-<li>webgestalt_network</li>
+<li><code>webgestalt_network</code></li>
 </ol>
-<p>Run ORA using the webgestalt_network function on each of the network
-subsets created in step 1. These files are tab-separated with the first
-column containing the TF names and the second column containing the
-regulated gene names. “h1_k562_overlap_universe.txt” contains one column
-of the names of all genes that could appear in the network. The
-network_name should be different for each subset, so I choose to use the
-subset file names without the extension.</p>
+<p>Run ORA using the <code>webgestalt_network</code> function on each of
+the network subsets created in step 1. These files are tab-separated
+with the first column containing the TF names and the second column
+containing the regulated gene names. “h1_k562_overlap_universe.txt”
+contains one column of the names of all genes that could appear in the
+network. The network_name should be different for each subset, so I
+choose to use the subset file names without the extension.</p>
 <p>Note organism = “hsapiens” and database =
 “geneontology_Biological_Process_noRedundant” is the default database
 for ORA.</p>
@@ -215,8 +254,8 @@ respectively.</p>
 hour, so this vignette does not actually evaluate the code. The run time
 is highly dependent on the number of subsets, the number of TFs in each
 of those subsets, and the number of permutations. The process can be
-sped up (in this case by 10x) by running webgestalt_network on each
-subset at the same time using a computing cluster or similar.</p>
+sped up by running <code>webgestalt_network</code> on each subset at the
+same time using a computing cluster or similar.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">for</span> <span class="op">(</span><span class="va">subset</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">data_dir</span>, <span class="st">"np3_dtoTFs_subsets"</span><span class="op">)</span>, full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="../reference/webgestalt_network.html">webgestalt_network</a></span><span class="op">(</span>network_path <span class="op">=</span> <span class="va">subset</span>,</span>
@@ -235,22 +274,22 @@ should run in just a few minutes.</p>
 <span>                   network_name <span class="op">=</span> <span class="st">"np3_8"</span>,</span>
 <span>                   permutations <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <ol start="3" style="list-style-type: decimal">
-<li>get_metrics</li>
+<li><code>get_metrics</code></li>
 </ol>
-<p>Run get_metrics to calculate the desired metrics based on the output
-from webgestalt_network. Note the arguments ‘get_sum’ and ‘get_size’ are
-TRUE by default.</p>
+<p>Run <code>get_metrics</code> to calculate the desired metrics based
+on the output from <code>webgestalt_network</code>. Note the arguments
+‘get_sum’ and ‘get_size’ are TRUE by default.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span>  <span class="co"># This would normally be in the 'out_dir' directory, but since this data was</span></span>
-<span>  <span class="co">#   premade due to time constraints, it is available in 'data_dir'</span></span>
+<span>  <span class="co">#   premade due to computation time constraints, it is available in 'data_dir'</span></span>
 <span>  <span class="va">output_folders</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">data_dir</span>, <span class="st">"np3_dtoTFs_summaries"</span><span class="op">)</span></span>
 <span></span>
 <span>  <span class="va">metric_dfs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_metrics.html">get_metrics</a></span><span class="op">(</span><span class="va">output_folders</span>, get_percent <span class="op">=</span> <span class="cn">TRUE</span>, get_mean <span class="op">=</span> <span class="cn">TRUE</span>, get_median <span class="op">=</span> <span class="cn">TRUE</span>, get_annotation_overlap <span class="op">=</span> <span class="cn">TRUE</span>, parallel <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
-<p>If you want to compare multiple networks, you can run get_metrics on
-both at the same time as shown below with the addition of the “EDN”
-network. When comparing multiple networks, the sizes for all must be
-based either on total edges or on edges per TF, but the exact subset
-sizes do not need to be the same.</p>
+<p>If you want to compare multiple networks, you can run
+<code>get_metrics</code> on both at the same time as shown below with
+the addition of the “EDN” network. When comparing multiple networks, the
+sizes for all must be based either on total edges or on edges per TF,
+but the exact subset sizes do not need to be the same.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span>  <span class="co"># Specify which folders contain the data for each network.</span></span>
 <span>  <span class="co"># Each element will be a folder used as the output folder for a call to webgestalt_network.</span></span>
@@ -259,16 +298,15 @@ sizes do not need to be the same.</p>
 <span></span>
 <span>  <span class="va">metric_dfs_by_net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mapply.html" class="external-link">mapply</a></span><span class="op">(</span><span class="va">get_metrics</span>, <span class="va">output_folders</span>, MoreArgs<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>get_percent <span class="op">=</span> <span class="cn">TRUE</span>, get_mean <span class="op">=</span> <span class="cn">TRUE</span>, get_median <span class="op">=</span> <span class="cn">TRUE</span>, get_annotation_overlap <span class="op">=</span> <span class="cn">TRUE</span>, parallel <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>, SIMPLIFY <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <ol start="4" style="list-style-type: decimal">
-<li>plot_metrics</li>
+<li><code>plot_metrics</code></li>
 </ol>
 <p>Set a title and subtitle for the plots.<br>
 Specify whether the subset sizes are based on total edges or edges per
 TF.<br>
-Set the metric booleans to the same values as those used in get_metrics
-to ensure proper plot labels.<br><br>
-plot_metrics also returns a list of the DataFrames used to plot. Each
-DataFrame contains values for one metric across all networks, subsets,
-and permutations</p>
+Set the metric booleans to the same values as those used in
+<code>get_metrics</code> to ensure proper plot labels.<br><br><code>plot_metrics</code> also returns a list of the data.frames used to
+plot. Each data.frame contains values for one metric across all
+networks, subsets, and permutations.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span>  <span class="co"># Specify the main titles of the output graphs</span></span>
 <span>  <span class="va">title_text</span> <span class="op">&lt;-</span> <span class="st">"NP3"</span></span>
@@ -277,7 +315,7 @@ and permutations</p>
 <span>  <span class="va">perTF</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
 <span>  </span>
 <span>  <span class="va">plot_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_metrics.html">plot_metrics</a></span><span class="op">(</span><span class="va">metric_dfs</span>, <span class="va">title_text</span>, <span class="va">subtitle_text</span>, <span class="va">perTF</span>, percent <span class="op">=</span> <span class="cn">TRUE</span>, mean <span class="op">=</span> <span class="cn">TRUE</span>, median <span class="op">=</span> <span class="cn">TRUE</span>, annotation_overlap <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<p><img src="GOeval_files/figure-html/unnamed-chunk-15-1.png" width="700"><img src="GOeval_files/figure-html/unnamed-chunk-15-2.png" width="700"><img src="GOeval_files/figure-html/unnamed-chunk-15-3.png" width="700"><img src="GOeval_files/figure-html/unnamed-chunk-15-4.png" width="700"><img src="GOeval_files/figure-html/unnamed-chunk-15-5.png" width="700"><img src="GOeval_files/figure-html/unnamed-chunk-15-6.png" width="700"></p>
+<p><img src="GOeval_files/figure-html/unnamed-chunk-16-1.png" width="700"><img src="GOeval_files/figure-html/unnamed-chunk-16-2.png" width="700"><img src="GOeval_files/figure-html/unnamed-chunk-16-3.png" width="700"><img src="GOeval_files/figure-html/unnamed-chunk-16-4.png" width="700"><img src="GOeval_files/figure-html/unnamed-chunk-16-5.png" width="700"><img src="GOeval_files/figure-html/unnamed-chunk-16-6.png" width="700"></p>
   </main>
 </div>
 
