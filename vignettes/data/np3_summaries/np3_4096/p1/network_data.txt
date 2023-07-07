@@ -1,4 +1,4 @@
-2 significant
+5 significant
 10 valid
 10 total
 4096 edges

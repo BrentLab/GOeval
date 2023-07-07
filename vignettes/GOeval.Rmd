@@ -65,7 +65,7 @@ out_dir <- "data"
 
 Run the `evaluate` function.
 
-```{r}
+```{r, eval = FALSE}
 net_1_data <- evaluate(network_path, reference_path, out_dir, network_name,
                       # some additional arguments
                       edges = c(512, 1024, 2048, 3174, 4096, 8192, 16384, 32768, 65536),
@@ -83,7 +83,7 @@ The run time of the evaluate function changes with the size of the network and t
 
 Now, let us compare with a second network. The "small_dto.tsv" network does not have edge scores, so no network subsets will be created. Generate the data for this network in a similar way as for the first one.
 
-```{r}
+```{r, eval = FALSE}
 net_2_data <- evaluate(file.path(data_dir, "small_dto.tsv"),
                        file.path(data_dir, "h1_k562_overlap_universe.txt"),
                        out_dir,
@@ -95,6 +95,12 @@ net_2_data <- evaluate(file.path(data_dir, "small_dto.tsv"),
 ```
 
 Use the output from both networks in the call to `plot_metrics`.
+
+```{r, echo = FALSE}
+net_1_data <- list(get_metrics(file.path(data_dir, "np3_summaries"), get_annotation_overlap = TRUE))
+
+net_2_data <- list(get_metrics(file.path(data_dir, "dto_summaries"), get_annotation_overlap = TRUE))
+```
 
 ```{r}
 # set main plot titles

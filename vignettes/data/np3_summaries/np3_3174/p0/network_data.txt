@@ -1,0 +1,4 @@
+7 significant
+10 valid
+10 total
+3174 edges
