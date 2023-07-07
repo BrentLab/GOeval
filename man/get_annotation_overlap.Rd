@@ -2,17 +2,19 @@
 % Please edit documentation in R/get_metrics.R
 \name{get_annotation_overlap}
 \alias{get_annotation_overlap}
-\title{calculate the percent of TFs that are annotated to a GO term for which their
-target genes are enriched}
+\title{Helper function for \code{get_metrics}}
 \usage{
-get_annotation_overlap(terms, organism, go_ann, go_reg)
+get_annotation_overlap(terms, organism, gene_id, go_ann, go_reg)
 }
 \arguments{
-\item{terms}{a data.frame obtained from calling get_terms on a folder of the
-summaries output by webgestalt_network}
+\item{terms}{a data.frame obtained from calling \code{get_terms} on a folder of the
+summaries output by \code{webgestalt_network}}
 
 \item{organism}{a string specifying the organism that the data is from, e.g.
 "hsapiens" or "scerevisiae"}
+
+\item{gene_id}{the naming system used for the input genes - see options with WebGestaltR::listIdType()
+and see webgestalt.org for examples of each type}
 
 \item{go_ann}{a data.frame of annotations of genes to GO terms. Obtain with
 WebGestaltR::loadGeneSet.}
@@ -20,7 +22,11 @@ WebGestaltR::loadGeneSet.}
 \item{go_reg}{a data.frame of the regulatory relationships between GO terms.
 Obtain with ontologyIndex::get_ontology.}
 }
-\description{
-calculate the percent of TFs that are annotated to a GO term for which their
-target genes are enriched
+\value{
+a list of source nodes
 }
+\description{
+This function calculates the percent of source nodes that are annotated to a GO term
+that either regulates or is the same as a GO term for which their target genes are enriched
+}
+\keyword{internal}

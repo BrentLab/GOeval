@@ -2,17 +2,20 @@
 % Please edit documentation in R/get_terms.R
 \name{get_terms}
 \alias{get_terms}
-\title{get_terms}
+\title{Gather ORA results from one folder of ORA summaries}
 \usage{
 get_terms(path, n)
 }
 \arguments{
 \item{path}{a folder containing .csv files of the ORA summaries output
-by webgestalt_network}
+by \code{webgestalt_network}}
 
-\item{n}{the number of terms from each summary to get data for}
+\item{n}{the number of terms from each summary for which to get data}
+}
+\value{
+a data.frame
 }
 \description{
-Get ORA data for the top n terms from each TF summary file in a folder
-output by the webgestalt_network function.
+Get Over-Representation Analysis (ORA) data for the top n terms from each source node summary file
+in a folder output by the \code{webgestalt_network} function.
 }

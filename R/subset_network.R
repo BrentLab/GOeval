@@ -1,19 +1,17 @@
-#' subset_network
-#'
-#' From a network with edge scores, sorts the network in descending order of score, and
-#'  creates subsets using the top given numbers of edges.
-#'  The input file should be tab-separated with three columns: source node (e.g. transcription factor),
-#'    target node (e.g. the regulated gene), and edge score.
-#'  The output files will be tab-separated with two columns: source node, target node.
-#'  The size of the subsets can either be determined by the total number of edges (if 'num_possible_TFs' is not specified)
-#'  or by the desired average number of target nodes from each possible source node (if 'num_possible_TFs' is set to a number > 0).
-#'  The latter option multiplies each element of 'edges' by 'num_possible_TFs' to get the number of
-#'    edges in each subset.
+#' Create network subsets with highest scored edges
 #'
 #' @importFrom dplyr desc
 #' @importFrom dplyr arrange
 #' @importFrom utils head
 #' @importFrom dplyr select
+#'
+#' @description
+#' Given a network with edge scores, `subset_network` sorts the network in descending order of score and
+#'  creates subsets using the top given numbers of edges.
+#' The size of the subsets can either be determined by the total number of edges (if 'num_possible_TFs' is not specified)
+#'  or by the desired average number of target nodes from each possible source node (if 'num_possible_TFs' is set to a number > 0).
+#' The latter option multiplies each element of 'edges' by 'num_possible_TFs' to get the number of
+#'    edges in each subset.
 #'
 #' @param input_file a file containing the network to create subsets from. The file should
 #'  be tab-separated with three columns: source node, target node, edge score
@@ -22,6 +20,13 @@
 #' @param edges list of total numbers of edges or average edges per TF to include in each subset
 #' @param num_possible_TFs if set to a number > 0, the elements of 'edges' will first be
 #'  multiplied by this number to get the number of edges for each subset
+#'
+#' @details
+#' The input file should be tab-separated with three columns: source node (e.g. transcription factor),
+#'    target node (e.g. the regulated gene), and edge score.
+#' The output files will be tab-separated with two columns: source node, target node.
+#'
+#' @return NULL
 #'
 #' @export
 subset_network <- function(input_file, output_directory, name, edges, num_possible_TFs = 0) {

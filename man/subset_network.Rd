@@ -2,7 +2,7 @@
 % Please edit documentation in R/subset_network.R
 \name{subset_network}
 \alias{subset_network}
-\title{subset_network}
+\title{Create network subsets with highest scored edges}
 \usage{
 subset_network(input_file, output_directory, name, edges, num_possible_TFs = 0)
 }
@@ -20,13 +20,15 @@ be tab-separated with three columns: source node, target node, edge score}
 multiplied by this number to get the number of edges for each subset}
 }
 \description{
-From a network with edge scores, sorts the network in descending order of score, and
+Given a network with edge scores, \code{subset_network} sorts the network in descending order of score and
 creates subsets using the top given numbers of edges.
-The input file should be tab-separated with three columns: source node (e.g. transcription factor),
-target node (e.g. the regulated gene), and edge score.
-The output files will be tab-separated with two columns: source node, target node.
 The size of the subsets can either be determined by the total number of edges (if 'num_possible_TFs' is not specified)
 or by the desired average number of target nodes from each possible source node (if 'num_possible_TFs' is set to a number > 0).
 The latter option multiplies each element of 'edges' by 'num_possible_TFs' to get the number of
 edges in each subset.
+}
+\details{
+The input file should be tab-separated with three columns: source node (e.g. transcription factor),
+target node (e.g. the regulated gene), and edge score.
+The output files will be tab-separated with two columns: source node, target node.
 }
