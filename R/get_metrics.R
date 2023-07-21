@@ -100,7 +100,7 @@ get_network_metrics <- function(full_terms, network_size, organism, gene_id, get
     neglogp <- -log10(terms$pValue)
     # cap -logp values due to rounding to 0 for pval < 1E-16
     neglogp <- ifelse(is.finite(neglogp), neglogp, 16)
-    #neglogp_zeros <- append(rep(0, network_size - length(terms$geneSet)), neglogp)
+    # neglogp_zeros <- append(rep(0, network_size - length(terms$geneSet)), neglogp)
     if (get_annotation_overlap) {
       prior_ann <- 100 * length(get_annotation_overlap(full_terms, organism, gene_id, go_ann = go_ann, go_reg = go_reg)) / network_size
     } else {
@@ -172,8 +172,8 @@ get_metrics <- function(directory, organism = "hsapiens", database = "geneontolo
     # Load regulatory relationships between GO terms for the calculation of overlap between TF GO
     # annotations and their targets' enriched GO terms.
     go <- as.data.frame(ontologyIndex::get_ontology(file = "http://purl.obolibrary.org/obo/go/go-basic.obo", extract_tags = "everything"))
-    go <- go[go$namespace == 'biological_process',]
-    go_reg <- go[c('id', 'regulates', 'negatively_regulates', 'positively_regulates')]
+    go <- go[go$namespace == "biological_process", ]
+    go_reg <- go[c("id", "regulates", "negatively_regulates", "positively_regulates")]
     rm(go)
 
     # Load gene annotations with WebGestaltR::loadGeneSet.
@@ -200,7 +200,7 @@ get_metrics <- function(directory, organism = "hsapiens", database = "geneontolo
     # but also sometimes it works, so possible race condition although I'm not sure how
     results <- parallel::mclapply(networks_list, function(net) {
       network_data_files <- list.files(net, recursive = TRUE, pattern = "network_data.txt", full.names = TRUE)
-      network_sizes <- lapply(network_data_files, function (f) {
+      network_sizes <- lapply(network_data_files, function(f) {
         size_line <- grep("valid", readLines(f), value = TRUE)
         return(as.integer(unlist(strsplit(size_line, " "))[1]))
       })
@@ -212,7 +212,7 @@ get_metrics <- function(directory, organism = "hsapiens", database = "geneontolo
     # non-parallel version
     results <- lapply(networks_list, function(net) {
       network_data_files <- list.files(net, recursive = TRUE, pattern = "network_data.txt", full.names = TRUE)
-      network_sizes <- lapply(network_data_files, function (f) {
+      network_sizes <- lapply(network_data_files, function(f) {
         size_line <- grep("valid", readLines(f), value = TRUE)
         return(as.integer(unlist(strsplit(size_line, " "))[1]))
       })

@@ -32,18 +32,18 @@
 subset_network <- function(input_file, output_directory, name, edges, num_possible_TFs = 0) {
   dir.create(output_directory, showWarnings = FALSE, recursive = TRUE)
 
-  network = read.table(file=input_file, sep='\t', header=FALSE)
+  network <- read.table(file = input_file, sep = "\t", header = FALSE)
 
   if (num_possible_TFs > 0) {
-    multiplier = num_possible_TFs
+    multiplier <- num_possible_TFs
   } else {
-    multiplier = 1
+    multiplier <- 1
   }
 
   # check that there is a third column
   # if not, don't subset
   if (length(colnames(network)) < 3) {
-    write.table(network, file.path(output_directory, paste0(name, "_", as.integer(length(network$V1)/multiplier), ".tsv")), quote = FALSE, sep = "\t", row.names = FALSE, col.names = FALSE)
+    write.table(network, file.path(output_directory, paste0(name, "_", as.integer(length(network$V1) / multiplier), ".tsv")), quote = FALSE, sep = "\t", row.names = FALSE, col.names = FALSE)
     return()
   }
 

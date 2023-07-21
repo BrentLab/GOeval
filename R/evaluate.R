@@ -1,4 +1,3 @@
-
 #' Perform the whole GOeval pipeline on one network
 #'
 #' @description
@@ -53,7 +52,6 @@
 evaluate <- function(network, reference_set, output_directory, network_name, organism = "hsapiens", database = "geneontology_Biological_Process_noRedundant", gene_id = "ensembl_gene_id",
                      edges = c(512, 1024, 2048, 4096, 8192, 16384, 32768, 65536), num_possible_TFs = 0, permutations = 3, penalty = 3, fdr_threshold = 0.05,
                      get_sum = TRUE, get_percent = FALSE, get_mean = FALSE, get_median = FALSE, get_annotation_overlap = FALSE, get_size = TRUE, plot = TRUE) {
-
   # first package function
   subset_network(network, file.path(output_directory, paste0(network_name, "_subsets")), network_name, edges, num_possible_TFs)
 
@@ -63,21 +61,23 @@ evaluate <- function(network, reference_set, output_directory, network_name, org
 
   # sequential loop over all created subsets
   for (subset in list.files(file.path(output_directory, paste0(network_name, "_subsets")), full.names = TRUE)) {
-   # second package function
-   webgestalt_network(network_path = subset,
-                       reference_set = reference_set,
-                       output_directory = file.path(output_directory, paste0(network_name, summaries_suffix)),
-                       # this just gets the name of each file minus the extension
-                       network_name = strsplit(basename(subset), "[.]")[[1]][1],
-                       organism = organism,
-                       database = database,
-                       gene_id = gene_id,
-                       permutations = permutations)
+    # second package function
+    webgestalt_network(
+      network_path = subset,
+      reference_set = reference_set,
+      output_directory = file.path(output_directory, paste0(network_name, summaries_suffix)),
+      # this just gets the name of each file minus the extension
+      network_name = strsplit(basename(subset), "[.]")[[1]][1],
+      organism = organism,
+      database = database,
+      gene_id = gene_id,
+      permutations = permutations
+    )
   }
 
   # third package function
   # mapply returns a list of length 1 containing the output of get_metrics
-  metric_dfs_by_net <- mapply(get_metrics, file.path(output_directory, paste0(network_name, summaries_suffix)), MoreArgs=list(organism = organism, database = database, gene_id = gene_id, get_sum = get_sum, get_percent = get_percent, get_mean = get_mean, get_median = get_median, get_annotation_overlap = get_annotation_overlap, get_size = get_size, penalty = penalty, fdr_threshold = fdr_threshold, parallel = FALSE), SIMPLIFY = FALSE)
+  metric_dfs_by_net <- mapply(get_metrics, file.path(output_directory, paste0(network_name, summaries_suffix)), MoreArgs = list(organism = organism, database = database, gene_id = gene_id, get_sum = get_sum, get_percent = get_percent, get_mean = get_mean, get_median = get_median, get_annotation_overlap = get_annotation_overlap, get_size = get_size, penalty = penalty, fdr_threshold = fdr_threshold, parallel = FALSE), SIMPLIFY = FALSE)
 
   if (plot) {
     pdf(file.path(output_directory, paste0(network_name, "_ORA_metrics_plots_", formatted_time, ".pdf")), 7, 5)
