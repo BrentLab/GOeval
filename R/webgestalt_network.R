@@ -41,6 +41,44 @@
 #'
 #' @export
 webgestalt_network <- function(network_path, reference_set, output_directory, network_name, organism = "hsapiens", database = "geneontology_Biological_Process_noRedundant", gene_id = "ensembl_gene_id", permutations = 10) {
+
+  # check existence and format of `network_path`
+  if(!file.exists(network_path)) {
+    stop("Network file not found.")
+  }
+
+  net_first_line <- tryCatch({
+    read.table(network_path, sep = "\t", nrows = 1)
+  }, error = function(e) {
+    stop("Error reading the network file.")
+  })
+
+  net_num_columns <- ncol(net_first_line)
+  if (net_num_columns != 2) {
+    stop("Network file should contain two columns.")
+  }
+
+  # check existence and format of `reference_set`
+  if(!file.exists(reference_set)) {
+    stop("Reference set file not found.")
+  }
+
+  ref_first_line <- tryCatch({
+    read.table(reference_set, nrows = 1)
+  }, error = function(e) {
+    stop("Error reading the reference set file.")
+  })
+
+  ref_num_columns <- ncol(ref_first_line)
+  if (ref_num_columns != 1) {
+    stop("Reference set file should contain only one column.")
+  }
+
+  # check format of `network_name`
+  if(!is.character(network_name) || grepl(" ", network_name)) {
+    stop("Network name must be a string with no spaces.")
+  }
+
   METHOD <- "ORA" # ORA | GSEA | NTA
   # reports are more in-depth than summaries - advisable to keep reports FALSE if not needed
   REPORTS_PATH <- output_directory # only used if GENERATE_REPORT=TRUE
@@ -61,7 +99,7 @@ webgestalt_network <- function(network_path, reference_set, output_directory, ne
     }
 
     # finds the subset of genes in the reference set that are annotated to valid GO terms
-    ref_genes <- WebGestaltR::idMapping(organism = organism, inputGene = read.table(reference_set)$V1, sourceIdType = gene_id, targetIdType = "entrezgene", host = "https://www.webgestalt.org/")
+    ref_genes <- WebGestaltR::idMapping(organism = organism, inputGene = read.table(reference_set)$V1, sourceIdType = gene_id, targetIdType = "entrezgene")
     annotations <- suppressWarnings(WebGestaltR::loadGeneSet(organism = organism, enrichDatabase = database))
     genes_per_term <- table(annotations$geneSet$geneSet)
     annotations_proper_size <- annotations$geneSet[(genes_per_term[annotations$geneSet$geneSet] >= 10 & genes_per_term[annotations$geneSet$geneSet] <= 500), ]
@@ -104,26 +142,40 @@ webgestalt_network <- function(network_path, reference_set, output_directory, ne
       }
 
       # perform ORA
-      enrich_df <- WebGestaltR::WebGestaltRBatch(
-        enrichMethod = METHOD,
-        organism = organism,
-        enrichDatabase = database,
-        interestGeneFolder = file.path(work_dir, paste0("p", i - 1)),
-        interestGeneType = gene_id,
-        referenceGene = annotated_ref_genes$userId,
-        referenceGeneType = gene_id,
-        minNum = 10, # default 10
-        maxNum = 500, # default 500
-        reportNum = 20, # default 20
-        isOutput = GENERATE_REPORT,
-        outputDirectory = REPORTS_PATH,
-        projectName = paste0(network_name, "_p", i - 1),
-        sigMethod = "top",
-        topThr = 16, # top 0.1%
-        isParallel = TRUE,
-        nThreads = ifelse(nzchar(Sys.getenv("_R_CHECK_LIMIT_CORES_", "")) && Sys.getenv("_R_CHECK_LIMIT_CORES_", "") == "TRUE", 2, parallelly::availableCores()),
-        hostName = "https://www.webgestalt.org/"
+      enrich_df <- tryCatch(
+        {
+          WebGestaltR::WebGestaltRBatch(
+          enrichMethod = METHOD,
+          organism = organism,
+          enrichDatabase = database,
+          interestGeneFolder = file.path(work_dir, paste0("p", i - 1)),
+          interestGeneType = gene_id,
+          referenceGene = annotated_ref_genes$userId,
+          referenceGeneType = gene_id,
+          minNum = 10, # default 10
+          maxNum = 500, # default 500
+          reportNum = 20, # default 20
+          isOutput = GENERATE_REPORT,
+          outputDirectory = REPORTS_PATH,
+          projectName = paste0(network_name, "_p", i - 1),
+          sigMethod = "top",
+          topThr = 16, # roughly top 0.1%
+          isParallel = TRUE,
+          nThreads = ifelse(nzchar(Sys.getenv("_R_CHECK_LIMIT_CORES_", "")) && Sys.getenv("_R_CHECK_LIMIT_CORES_", "") == "TRUE", 2, parallelly::availableCores())
+          )
+        },
+        error = function(msg) {
+          message(paste0(msg))
+          message(paste("If the connection with www.webgestalt.org timed out,",
+                        "try re-submitting your request. Their servers",
+                        "sometimes get busy."))
+          return(NA)
+        }
       )
+
+      if (any(is.na(enrich_df))) {
+        return()
+      }
 
       sig_counter <- 0
       for (set in enrich_df) {
@@ -150,6 +202,6 @@ webgestalt_network <- function(network_path, reference_set, output_directory, ne
       )
     }
   } else {
-    print(paste(network_path, "must be an existing file."))
+    message(paste(network_path, "must be an existing file."))
   }
 }

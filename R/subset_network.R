@@ -30,6 +30,27 @@
 #'
 #' @export
 subset_network <- function(input_file, output_directory, name, edges, num_possible_TFs = 0) {
+
+  # check existence and format of input_file
+  if(!file.exists(input_file)) {
+    stop("Network file not found.")
+  }
+
+  net_first_line <- tryCatch({
+    read.table(input_file, sep = "\t", nrows = 1)
+  }, error = function(e) {
+    stop("Error reading the network file.")
+  })
+
+  net_num_columns <- ncol(net_first_line)
+  if (net_num_columns != 2 && net_num_columns != 3) {
+    stop("Network file should contain three columns.")
+  }
+
+  if(!is.character(name) || grepl(" ", name)) {
+    stop("Network name must be a string with no spaces.")
+  }
+
   dir.create(output_directory, showWarnings = FALSE, recursive = TRUE)
 
   network <- read.table(file = input_file, sep = "\t", header = FALSE)

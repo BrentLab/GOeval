@@ -38,6 +38,9 @@
 #'
 #' @export
 plot_metrics <- function(metric_dfs_by_net, title_text, subtitle_text = "", perTF, sum = TRUE, percent = FALSE, mean = FALSE, median = FALSE, annotation_overlap = FALSE, size = TRUE) {
+
+  ### Should check format of `metric_dfs_by_net`
+
   # determine if any of the input networks have only one size
   # if yes, metrics for permuted networks will be shown with box plots instead of line plots
   plot_with_boxes <- FALSE

@@ -167,6 +167,11 @@ get_network_metrics <- function(full_terms, network_size, organism, gene_id, get
 #'
 #' @export
 get_metrics <- function(directory, organism = "hsapiens", database = "geneontology_Biological_Process_noRedundant", gene_id = "ensembl_gene_id", get_sum = TRUE, get_percent = FALSE, get_mean = FALSE, get_median = FALSE, get_annotation_overlap = FALSE, get_size = TRUE, penalty = 3, fdr_threshold = 0.05, parallel = FALSE) {
+
+  if (!dir.exists(directory)) {
+    stop("Directory not found.")
+  }
+
   # GO regulatory relationships only needed if get_annotation_overlap = TRUE
   if (get_annotation_overlap) {
     # Load regulatory relationships between GO terms for the calculation of overlap between TF GO
