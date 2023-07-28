@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">GOeval</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -72,9 +72,9 @@
 package, so it might be the better option if you do not want to install
 all of “devtools.”</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"westbrooktm/GOeval"</span>, ref <span class="op">=</span> <span class="st">"dev"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"westbrooktm/GOeval"</span><span class="op">)</span></span>
 <span><span class="co"># OR</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"westbrooktm/GOeval"</span>, ref <span class="op">=</span> <span class="st">"dev"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"westbrooktm/GOeval"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://westbrooktm.github.io/GOeval/">"GOeval"</a></span><span class="op">)</span></span></code></pre></div>
 <p>Now that the package is loaded, we need a network as a tab-separated
@@ -84,7 +84,7 @@ scores.</p>
 <p>To run the following examples, access the example data stored in
 “vignette_data.tar.gz” and extract it into a local folder.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">data_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"GOeval"</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"data"</span>, <span class="st">"vignette_data.tar.gz"</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">data_path</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/system.file.html" class="external-link">system.file</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"GOeval"</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="st">"vignette_data.tar.gz"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># wherever you want to store the example data</span></span>
 <span><span class="va">data_dir</span> <span class="op">&lt;-</span> <span class="st">"GOeval_data"</span></span>
@@ -106,10 +106,11 @@ scores.</p>
 <p>Run the <code>evaluate</code> function.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">net_1_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/evaluate.html">evaluate</a></span><span class="op">(</span><span class="va">network_path</span>, <span class="va">reference_path</span>, <span class="va">out_dir</span>, <span class="va">network_name</span>,</span>
-<span>                      <span class="co"># some additional arguments</span></span>
-<span>                      edges <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">512</span>, <span class="fl">1024</span>, <span class="fl">2048</span>, <span class="fl">3174</span>, <span class="fl">4096</span>, <span class="fl">8192</span>, <span class="fl">16384</span>, <span class="fl">32768</span>, <span class="fl">65536</span><span class="op">)</span>,</span>
-<span>                      permutations <span class="op">=</span> <span class="fl">1</span>,</span>
-<span>                      get_annotation_overlap <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="co"># some additional arguments</span></span>
+<span>  edges <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">512</span>, <span class="fl">1024</span>, <span class="fl">2048</span>, <span class="fl">3174</span>, <span class="fl">4096</span>, <span class="fl">8192</span>, <span class="fl">16384</span>, <span class="fl">32768</span>, <span class="fl">65536</span><span class="op">)</span>,</span>
+<span>  permutations <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  get_annotation_overlap <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>It is possible to customize the behavior of the <code>evaluate</code>
 function by using arguments in addition to the four required ones. In
 the above example, the ‘edges’ argument modifies the sizes of subsets to
@@ -118,8 +119,8 @@ time than the default “permutations = 3” at the cost of running the
 analyses on fewer permuted versions of the input network.
 “get_annotation_overlap = TRUE” indicates that the “annotation_overlap”
 metric should be calculated.</p>
-<p>The available arguments for all functions can be found at the
-“Reference” tab at the top of this page or <a href="https://westbrooktm.github.io/GOeval/reference/index.html" class="uri">https://westbrooktm.github.io/GOeval/reference/index.html</a>.</p>
+<p>The available arguments for all functions can be found at the <a href="https://westbrooktm.github.io/GOeval/reference/index.html">Reference</a>
+tab at the top of this page.</p>
 <p>After <code>evaluate</code> runs for a couple minutes, the directory
 at out_dir should contain a folder of subsets of the original network, a
 folder that contains the ORA summaries and sets of target genes, and a
@@ -139,13 +140,14 @@ created. Generate the data for this network in a similar way as for the
 first one.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">net_2_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/evaluate.html">evaluate</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">data_dir</span>, <span class="st">"small_dto.tsv"</span><span class="op">)</span>,</span>
-<span>                       <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">data_dir</span>, <span class="st">"h1_k562_overlap_universe.txt"</span><span class="op">)</span>,</span>
-<span>                       <span class="va">out_dir</span>,</span>
-<span>                       <span class="st">"dto"</span>,</span>
-<span>                       permutations <span class="op">=</span> <span class="fl">1</span>, get_annotation_overlap <span class="op">=</span> <span class="cn">TRUE</span>,</span>
-<span>                       <span class="co"># without multiple subsets, the plot would just be one dot</span></span>
-<span>                       <span class="co"># so we can tell it not to bother</span></span>
-<span>                       plot <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">data_dir</span>, <span class="st">"h1_k562_overlap_universe.txt"</span><span class="op">)</span>,</span>
+<span>  <span class="va">out_dir</span>,</span>
+<span>  <span class="st">"dto"</span>,</span>
+<span>  permutations <span class="op">=</span> <span class="fl">1</span>, get_annotation_overlap <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="co"># without multiple subsets, the plot would just be one dot</span></span>
+<span>  <span class="co"># so we can tell it not to bother</span></span>
+<span>  plot <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <p>Use the output from both networks in the call to
 <code>plot_metrics</code>.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
@@ -218,20 +220,20 @@ the regulated genes, and the scores.</p>
 values in the third column and creates files in the output_folder with
 only the first two columns of the rows that have the highest scores.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span>  <span class="va">input_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">data_dir</span>, <span class="st">"np3_dtoTFs.tsv"</span><span class="op">)</span></span>
-<span>  </span>
-<span>  <span class="va">output_directory</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">out_dir</span>, <span class="st">"np3_dtoTFs_subsets"</span><span class="op">)</span></span>
-<span>  </span>
-<span>  <span class="va">name</span> <span class="op">&lt;-</span> <span class="st">"np3"</span></span>
-<span>  </span>
-<span>  <span class="co"># Since we are setting num_possible_TFs, this will be the average number of</span></span>
-<span>  <span class="co">#   edges from each TF in each subset.</span></span>
-<span>  <span class="va">edges</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">8</span>, <span class="fl">16</span>, <span class="fl">32</span>, <span class="fl">64</span>, <span class="fl">128</span>, <span class="fl">256</span>, <span class="fl">512</span>, <span class="fl">1024</span>, <span class="fl">2048</span>, <span class="fl">4096</span><span class="op">)</span></span>
-<span>  </span>
-<span>  <span class="co"># The "np3_dtoTFs.tsv" network was made to include only 56 TFs.</span></span>
-<span>  <span class="va">num_possible_TFs</span> <span class="op">&lt;-</span> <span class="fl">56</span></span>
-<span>  </span>
-<span>  <span class="fu"><a href="../reference/subset_network.html">subset_network</a></span><span class="op">(</span><span class="va">input_file</span>, <span class="va">output_directory</span>, <span class="va">name</span>, <span class="va">edges</span>, <span class="va">num_possible_TFs</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">input_file</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">data_dir</span>, <span class="st">"np3_dtoTFs.tsv"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">output_directory</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">out_dir</span>, <span class="st">"np3_dtoTFs_subsets"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">name</span> <span class="op">&lt;-</span> <span class="st">"np3"</span></span>
+<span></span>
+<span><span class="co"># Since we are setting num_possible_TFs, this will be the average number of</span></span>
+<span><span class="co">#   edges from each TF in each subset.</span></span>
+<span><span class="va">edges</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">8</span>, <span class="fl">16</span>, <span class="fl">32</span>, <span class="fl">64</span>, <span class="fl">128</span>, <span class="fl">256</span>, <span class="fl">512</span>, <span class="fl">1024</span>, <span class="fl">2048</span>, <span class="fl">4096</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># The "np3_dtoTFs.tsv" network was made to include only 56 TFs.</span></span>
+<span><span class="va">num_possible_TFs</span> <span class="op">&lt;-</span> <span class="fl">56</span></span>
+<span></span>
+<span><span class="fu"><a href="../reference/subset_network.html">subset_network</a></span><span class="op">(</span><span class="va">input_file</span>, <span class="va">output_directory</span>, <span class="va">name</span>, <span class="va">edges</span>, <span class="va">num_possible_TFs</span><span class="op">)</span></span></code></pre></div>
 <p>The result is that now the “data/np3_dtoTFs_subsets” folder contains
 10 files: “np3_8.tsv” through “np3_4096.tsv”.</p>
 <ol start="2" style="list-style-type: decimal">
@@ -258,21 +260,25 @@ sped up by running <code>webgestalt_network</code> on each subset at the
 same time using a computing cluster or similar.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">for</span> <span class="op">(</span><span class="va">subset</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/list.files.html" class="external-link">list.files</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">data_dir</span>, <span class="st">"np3_dtoTFs_subsets"</span><span class="op">)</span>, full.names <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu"><a href="../reference/webgestalt_network.html">webgestalt_network</a></span><span class="op">(</span>network_path <span class="op">=</span> <span class="va">subset</span>,</span>
-<span>                     reference_set <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">data_dir</span>, <span class="st">"h1_k562_overlap_universe.txt"</span><span class="op">)</span>,</span>
-<span>                     output_directory <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">out_dir</span>, <span class="st">"np3_dtoTFs_summaries"</span><span class="op">)</span>,</span>
-<span>                     <span class="co"># this just gets the name of each file minus the extension</span></span>
-<span>                     network_name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/strsplit.html" class="external-link">strsplit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename</a></span><span class="op">(</span><span class="va">subset</span><span class="op">)</span>, <span class="st">"[.]"</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,</span>
-<span>                     permutations <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span>  <span class="fu"><a href="../reference/webgestalt_network.html">webgestalt_network</a></span><span class="op">(</span></span>
+<span>    network_path <span class="op">=</span> <span class="va">subset</span>,</span>
+<span>    reference_set <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">data_dir</span>, <span class="st">"h1_k562_overlap_universe.txt"</span><span class="op">)</span>,</span>
+<span>    output_directory <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">out_dir</span>, <span class="st">"np3_dtoTFs_summaries"</span><span class="op">)</span>,</span>
+<span>    <span class="co"># this just gets the name of each file minus the extension</span></span>
+<span>    network_name <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/strsplit.html" class="external-link">strsplit</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/basename.html" class="external-link">basename</a></span><span class="op">(</span><span class="va">subset</span><span class="op">)</span>, <span class="st">"[.]"</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,</span>
+<span>    permutations <span class="op">=</span> <span class="fl">3</span></span>
+<span>  <span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
 <p>To test the very basics on a personal computer, the following code
 should run in just a few minutes.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/webgestalt_network.html">webgestalt_network</a></span><span class="op">(</span>network_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">data_dir</span>, <span class="st">"np3_dtoTFs_subsets"</span>, <span class="st">"np3_8.tsv"</span><span class="op">)</span>,</span>
-<span>                   reference_set <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">data_dir</span>, <span class="st">"h1_k562_overlap_universe.txt"</span><span class="op">)</span>,</span>
-<span>                   output_directory <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">out_dir</span>, <span class="st">"np3_dtoTFs_single_permutation"</span><span class="op">)</span>,</span>
-<span>                   network_name <span class="op">=</span> <span class="st">"np3_8"</span>,</span>
-<span>                   permutations <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/webgestalt_network.html">webgestalt_network</a></span><span class="op">(</span></span>
+<span>  network_path <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">data_dir</span>, <span class="st">"np3_dtoTFs_subsets"</span>, <span class="st">"np3_8.tsv"</span><span class="op">)</span>,</span>
+<span>  reference_set <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">data_dir</span>, <span class="st">"h1_k562_overlap_universe.txt"</span><span class="op">)</span>,</span>
+<span>  output_directory <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">out_dir</span>, <span class="st">"np3_dtoTFs_single_permutation"</span><span class="op">)</span>,</span>
+<span>  network_name <span class="op">=</span> <span class="st">"np3_8"</span>,</span>
+<span>  permutations <span class="op">=</span> <span class="fl">1</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 <ol start="3" style="list-style-type: decimal">
 <li><code>get_metrics</code></li>
 </ol>
@@ -280,23 +286,23 @@ should run in just a few minutes.</p>
 on the output from <code>webgestalt_network</code>. Note the arguments
 ‘get_sum’ and ‘get_size’ are TRUE by default.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span>  <span class="co"># This would normally be in the 'out_dir' directory, but since this data was</span></span>
-<span>  <span class="co">#   premade due to computation time constraints, it is available in 'data_dir'</span></span>
-<span>  <span class="va">output_folders</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">data_dir</span>, <span class="st">"np3_dtoTFs_summaries"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="co"># This would normally be in the 'out_dir' directory, but since this data was</span></span>
+<span><span class="co">#   premade due to computation time constraints, it is available in 'data_dir'</span></span>
+<span><span class="va">output_folders</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">data_dir</span>, <span class="st">"np3_dtoTFs_summaries"</span><span class="op">)</span></span>
 <span></span>
-<span>  <span class="va">metric_dfs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_metrics.html">get_metrics</a></span><span class="op">(</span><span class="va">output_folders</span>, get_percent <span class="op">=</span> <span class="cn">TRUE</span>, get_mean <span class="op">=</span> <span class="cn">TRUE</span>, get_median <span class="op">=</span> <span class="cn">TRUE</span>, get_annotation_overlap <span class="op">=</span> <span class="cn">TRUE</span>, parallel <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">metric_dfs</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get_metrics.html">get_metrics</a></span><span class="op">(</span><span class="va">output_folders</span>, get_percent <span class="op">=</span> <span class="cn">TRUE</span>, get_mean <span class="op">=</span> <span class="cn">TRUE</span>, get_median <span class="op">=</span> <span class="cn">TRUE</span>, get_annotation_overlap <span class="op">=</span> <span class="cn">TRUE</span>, parallel <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <p>If you want to compare multiple networks, you can run
 <code>get_metrics</code> on both at the same time as shown below with
 the addition of the “EDN” network. When comparing multiple networks, the
 sizes for all must be based either on total edges or on edges per TF,
 but the exact subset sizes do not need to be the same.</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span>  <span class="co"># Specify which folders contain the data for each network.</span></span>
-<span>  <span class="co"># Each element will be a folder used as the output folder for a call to webgestalt_network.</span></span>
-<span>  <span class="co"># Again, these are normally in 'out_dir' but here they are in 'data_dir' for convenience</span></span>
-<span>  <span class="va">output_folders</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">data_dir</span>, <span class="st">"np3_dtoTFs_summaries"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">data_dir</span>, <span class="st">"EDN_summaries"</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="co"># Specify which folders contain the data for each network.</span></span>
+<span><span class="co"># Each element will be a folder used as the output folder for a call to webgestalt_network.</span></span>
+<span><span class="co"># Again, these are normally in 'out_dir' but here they are in 'data_dir' for convenience</span></span>
+<span><span class="va">output_folders</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">data_dir</span>, <span class="st">"np3_dtoTFs_summaries"</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/file.path.html" class="external-link">file.path</a></span><span class="op">(</span><span class="va">data_dir</span>, <span class="st">"EDN_summaries"</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span>  <span class="va">metric_dfs_by_net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mapply.html" class="external-link">mapply</a></span><span class="op">(</span><span class="va">get_metrics</span>, <span class="va">output_folders</span>, MoreArgs<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>get_percent <span class="op">=</span> <span class="cn">TRUE</span>, get_mean <span class="op">=</span> <span class="cn">TRUE</span>, get_median <span class="op">=</span> <span class="cn">TRUE</span>, get_annotation_overlap <span class="op">=</span> <span class="cn">TRUE</span>, parallel <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>, SIMPLIFY <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">metric_dfs_by_net</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/mapply.html" class="external-link">mapply</a></span><span class="op">(</span><span class="va">get_metrics</span>, <span class="va">output_folders</span>, MoreArgs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>get_percent <span class="op">=</span> <span class="cn">TRUE</span>, get_mean <span class="op">=</span> <span class="cn">TRUE</span>, get_median <span class="op">=</span> <span class="cn">TRUE</span>, get_annotation_overlap <span class="op">=</span> <span class="cn">TRUE</span>, parallel <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>, SIMPLIFY <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
 <ol start="4" style="list-style-type: decimal">
 <li><code>plot_metrics</code></li>
 </ol>
@@ -308,13 +314,13 @@ Set the metric booleans to the same values as those used in
 plot. Each data.frame contains values for one metric across all
 networks, subsets, and permutations.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span>  <span class="co"># Specify the main titles of the output graphs</span></span>
-<span>  <span class="va">title_text</span> <span class="op">&lt;-</span> <span class="st">"NP3"</span></span>
-<span>  <span class="va">subtitle_text</span> <span class="op">&lt;-</span> <span class="st">"subset for TFs accepted by DTO"</span></span>
-<span>  </span>
-<span>  <span class="va">perTF</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
-<span>  </span>
-<span>  <span class="va">plot_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_metrics.html">plot_metrics</a></span><span class="op">(</span><span class="va">metric_dfs</span>, <span class="va">title_text</span>, <span class="va">subtitle_text</span>, <span class="va">perTF</span>, percent <span class="op">=</span> <span class="cn">TRUE</span>, mean <span class="op">=</span> <span class="cn">TRUE</span>, median <span class="op">=</span> <span class="cn">TRUE</span>, annotation_overlap <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># Specify the main titles of the output graphs</span></span>
+<span><span class="va">title_text</span> <span class="op">&lt;-</span> <span class="st">"NP3"</span></span>
+<span><span class="va">subtitle_text</span> <span class="op">&lt;-</span> <span class="st">"subset for TFs accepted by DTO"</span></span>
+<span></span>
+<span><span class="va">perTF</span> <span class="op">&lt;-</span> <span class="cn">TRUE</span></span>
+<span></span>
+<span><span class="va">plot_data</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/plot_metrics.html">plot_metrics</a></span><span class="op">(</span><span class="va">metric_dfs</span>, <span class="va">title_text</span>, <span class="va">subtitle_text</span>, <span class="va">perTF</span>, percent <span class="op">=</span> <span class="cn">TRUE</span>, mean <span class="op">=</span> <span class="cn">TRUE</span>, median <span class="op">=</span> <span class="cn">TRUE</span>, annotation_overlap <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="GOeval_files/figure-html/unnamed-chunk-16-1.png" width="700"><img src="GOeval_files/figure-html/unnamed-chunk-16-2.png" width="700"><img src="GOeval_files/figure-html/unnamed-chunk-16-3.png" width="700"><img src="GOeval_files/figure-html/unnamed-chunk-16-4.png" width="700"><img src="GOeval_files/figure-html/unnamed-chunk-16-5.png" width="700"><img src="GOeval_files/figure-html/unnamed-chunk-16-6.png" width="700"></p>
   </main>
 </div>
