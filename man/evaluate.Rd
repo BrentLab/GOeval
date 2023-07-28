@@ -27,60 +27,75 @@ evaluate(
 )
 }
 \arguments{
-\item{network}{path to the file containing the network to create subsets from. The file should
-be tab-separated with three columns: source node, target node, edge score}
+\item{network}{path to the file containing the network to create subsets
+from. The file should be tab-separated with three columns: source node,
+target node, edge score}
 
-\item{reference_set}{path to the set of all genes possibly included in the network. Must be a .txt
-file containing exactly one column of the genes that could possibly appear in the network.}
+\item{reference_set}{path to the set of all genes possibly included in the
+network. Must be a .txt file containing exactly one column of the genes that
+could possibly appear in the network.}
 
-\item{output_directory}{path to the directory in which to store the generated network subsets,
-ORA summaries, and plots}
+\item{output_directory}{path to the directory in which to store the generated
+network subsets, ORA summaries, and plots}
 
-\item{network_name}{short name for the network - used in file naming so may not contain spaces}
+\item{network_name}{short name for the network - used in file naming so may
+not contain spaces}
 
 \item{organism}{a string specifying the organism that the data is from, e.g.
 "hsapiens" or "scerevisiae" - see options with WebGestaltR::listOrganism()}
 
-\item{database}{the gene set database to search for enrichment - see options with WebGestaltR::listGeneSet().
-Must be a Gene Ontology "biological process" database if get_annotation_overlap = TRUE.}
+\item{database}{the gene set database to search for enrichment - see options
+with WebGestaltR::listGeneSet(). Must be a Gene Ontology
+"biological process" database if get_annotation_overlap = TRUE.}
 
-\item{gene_id}{the naming system used for the input genes - see options with WebGestaltR::listIdType()
-and see webgestalt.org for examples of each type}
+\item{gene_id}{the naming system used for the input genes - see options with
+WebGestaltR::listIdType() and see webgestalt.org for examples of each type}
 
-\item{edges}{list of total numbers of edges or average edges per TF to include in each subset}
+\item{edges}{list of total numbers of edges or average edges per TF to
+include in each subset}
 
-\item{num_possible_TFs}{if set to a number > 0, the elements of 'edges' will first be
-multiplied by this number to get the number of edges for each subset}
+\item{num_possible_TFs}{if set to a number > 0, the elements of 'edges' will
+first be multiplied by this number to get the number of edges for each
+subset}
 
-\item{permutations}{the number of randomly permuted networks to create and run ORA on}
+\item{permutations}{the number of randomly permuted networks to create and
+run ORA on}
 
-\item{penalty}{the penalty applied to the 'sum' metric for each TF in the network}
+\item{penalty}{the penalty applied to the 'sum' metric for each TF in the
+network}
 
-\item{fdr_threshold}{the FDR threshold for a gene set term to be considered significantly
-over-represented for the purposes of calculating the 'percent' metric}
+\item{fdr_threshold}{the FDR threshold for a gene set term to be considered
+significantly over-represented for the purposes of calculating the 'percent'
+metric}
 
-\item{get_sum}{boolean whether to get and plot the 'sum' metric, which is the sum of the negative
-log base 10 of the p-value for the top term of each source node minus 'penalty' times the total
-number of source nodes.}
+\item{get_sum}{boolean whether to get and plot the 'sum' metric, which is the
+sum of the negative log base 10 of the p-value for the top term of each
+source node minus 'penalty' times the total number of source nodes.}
 
-\item{get_percent}{boolean whether to get and plot the 'percent' metric, which is the
-percent of source nodes with at least one term with a FDR below the 'fdr_threshold'}
+\item{get_percent}{boolean whether to get and plot the 'percent' metric,
+which is the percent of source nodes with at least one term with a FDR below
+the 'fdr_threshold'}
 
-\item{get_mean}{boolean whether to get and plot the 'mean' metric, which is the mean negative
-log base 10 of the p-value for the top term of each source node regardless of significance}
+\item{get_mean}{boolean whether to get and plot the 'mean' metric, which is
+the mean negative log base 10 of the p-value for the top term of each source
+node regardless of significance}
 
-\item{get_median}{boolean whether to get and plot the 'median' metric, which is the median negative
-log base 10 of the p-value for the top term of each source node regardless of significance}
+\item{get_median}{boolean whether to get and plot the 'median' metric, which
+is the median negative log base 10 of the p-value for the top term of each
+source node regardless of significance}
 
-\item{get_annotation_overlap}{boolean whether to get and plot the 'annotation_overlap' metric,
-which is the percent of source nodes that are annotated to at least one of the 16 GO terms for
-which their target genes are most enriched}
+\item{get_annotation_overlap}{boolean whether to get and plot the
+'annotation_overlap' metric, which is the percent of source nodes that are
+annotated to at least one of the 16 GO terms for which their target genes
+are most enriched}
 
-\item{get_size}{boolean whether to get and plot the 'size' metric, which is the number of
-source nodes in the network subset that have more than one target gene with annotations. This number is
-used in the calculation of all other metrics.}
+\item{get_size}{boolean whether to get and plot the 'size' metric, which is
+the number of source nodes in the network subset that have more than one
+target gene with annotations. This number is used in the calculation of all
+other metrics.}
 
-\item{plot}{boolean whether to make plots of the calculated metrics and write them to a pdf}
+\item{plot}{boolean whether to make plots of the calculated metrics and write
+them to a pdf}
 }
 \value{
 output of \code{get_metrics}. Can be used as input to \code{plot_metrics}.
@@ -88,9 +103,11 @@ output of \code{get_metrics}. Can be used as input to \code{plot_metrics}.
 \description{
 Given one network, \code{evaluate} will first make subsets with \code{subset_network},
 then run Over-Representation Analysis (ORA) with \code{webgestalt_network},
-followed by \code{get_metrics} and \code{plot_metrics} to plot selected summary statistics.
+followed by \code{get_metrics} and \code{plot_metrics} to plot selected summary
+statistics.
 }
 \details{
-The input file should be tab-separated with two or three columns: source node (e.g. transcription factor),
-target node (e.g. the regulated gene), and, optionally, edge score.
+The input file should be tab-separated with two or three columns: source node
+(e.g. transcription factor), target node (e.g. the regulated gene), and,
+optionally, edge score.
 }

@@ -30,20 +30,41 @@
 #'
 #' @export
 subset_network <- function(input_file, output_directory, name, edges, num_possible_TFs = 0) {
+
+  # check existence and format of input_file
+  if(!file.exists(input_file)) {
+    stop("Network file not found.")
+  }
+
+  net_first_line <- tryCatch({
+    read.table(input_file, sep = "\t", nrows = 1)
+  }, error = function(e) {
+    stop("Error reading the network file.")
+  })
+
+  net_num_columns <- ncol(net_first_line)
+  if (net_num_columns != 2 && net_num_columns != 3) {
+    stop("Network file should contain three columns.")
+  }
+
+  if(!is.character(name) || grepl(" ", name)) {
+    stop("Network name must be a string with no spaces.")
+  }
+
   dir.create(output_directory, showWarnings = FALSE, recursive = TRUE)
 
-  network = read.table(file=input_file, sep='\t', header=FALSE)
+  network <- read.table(file = input_file, sep = "\t", header = FALSE)
 
   if (num_possible_TFs > 0) {
-    multiplier = num_possible_TFs
+    multiplier <- num_possible_TFs
   } else {
-    multiplier = 1
+    multiplier <- 1
   }
 
   # check that there is a third column
   # if not, don't subset
   if (length(colnames(network)) < 3) {
-    write.table(network, file.path(output_directory, paste0(name, "_", as.integer(length(network$V1)/multiplier), ".tsv")), quote = FALSE, sep = "\t", row.names = FALSE, col.names = FALSE)
+    write.table(network, file.path(output_directory, paste0(name, "_", as.integer(length(network$V1) / multiplier), ".tsv")), quote = FALSE, sep = "\t", row.names = FALSE, col.names = FALSE)
     return()
   }
 

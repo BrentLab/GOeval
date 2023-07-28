@@ -38,16 +38,19 @@
 #'
 #' @export
 plot_metrics <- function(metric_dfs_by_net, title_text, subtitle_text = "", perTF, sum = TRUE, percent = FALSE, mean = FALSE, median = FALSE, annotation_overlap = FALSE, size = TRUE) {
+
+  ### Should check format of `metric_dfs_by_net`
+
   # determine if any of the input networks have only one size
   # if yes, metrics for permuted networks will be shown with box plots instead of line plots
   plot_with_boxes <- FALSE
   if (inherits(metric_dfs_by_net[[1]], "list")) {
     for (df_list in metric_dfs_by_net) {
-      if (length(df_list[[1]][1,]) == 1) {
+      if (length(df_list[[1]][1, ]) == 1) {
         plot_with_boxes <- TRUE
       }
     }
-  } else if (length(metric_dfs_by_net[[1]][1,]) == 1) {
+  } else if (length(metric_dfs_by_net[[1]][1, ]) == 1) {
     plot_with_boxes <- TRUE
     metric_dfs_by_net <- list(metric_dfs_by_net)
   } else {
@@ -62,9 +65,11 @@ plot_metrics <- function(metric_dfs_by_net, title_text, subtitle_text = "", perT
 
   # assemble y-axis labels
   to_plot <- c(sum, percent, mean, median, annotation_overlap, size)
-  label_text <- c("Sum of (top -log(p-value) - 3) across TFs", "Percent of TFs with a significant GO term (FDR < 0.05)",
-                  "Mean of top -log(p-value)", "Median of top -log(p-value)", "Percent of TFs annotated to a significant GO term (FDR < 0.05)",
-                  "Number of TFs with > 1 annotated target gene")[to_plot]
+  label_text <- c(
+    "Sum of (top -log(p-value) - 3) across TFs", "Percent of TFs with a significant GO term (FDR < 0.05)",
+    "Mean of top -log(p-value)", "Median of top -log(p-value)", "Percent of TFs annotated to a significant GO term (FDR < 0.05)",
+    "Number of TFs with > 1 annotated target gene"
+  )[to_plot]
 
   # this won't catch when correct amount but wrong selection of metrics
   if (length(label_text) != length(metric_dfs)) {
@@ -73,35 +78,39 @@ plot_metrics <- function(metric_dfs_by_net, title_text, subtitle_text = "", perT
 
   for (m in 1:length(metric_dfs)) {
     # gather dfs into format usable by ggplot2
-    gathered = tidyr::gather(metric_dfs[[m]], network, metric)
+    gathered <- tidyr::gather(metric_dfs[[m]], network, metric)
     gathered <- tidyr::separate_wider_regex(gathered, network, c(method = ".*", "_", size = ".*"), cols_remove = FALSE)
-    gathered$network = factor(gathered$network, levels=unique(gathered$network))
+    gathered$network <- factor(gathered$network, levels = unique(gathered$network))
 
     # split metrics based on whether they came from real or permuted data
-    real = gathered[!duplicated(gathered$network), ]
+    real <- gathered[!duplicated(gathered$network), ]
     real$size <- as.numeric(real$size)
     real$ltype <- "Original network"
-    permuted = gathered[duplicated(gathered$network), ]
+    permuted <- gathered[duplicated(gathered$network), ]
     permuted$size <- as.numeric(permuted$size)
 
     if (plot_with_boxes) {
-      plt <- ggplot2::ggplot(real, mapping=ggplot2::aes(x = size, y = metric, color = method, shape = method))
+      plt <- ggplot2::ggplot(real, mapping = ggplot2::aes(x = size, y = metric, color = method, shape = method))
     } else {
-      plt <- ggplot2::ggplot(real, mapping=ggplot2::aes(x = size, y = metric, color = method, shape = method, linetype = ltype))
+      plt <- ggplot2::ggplot(real, mapping = ggplot2::aes(x = size, y = metric, color = method, shape = method, linetype = ltype))
     }
 
     plt <- plt + ggplot2::geom_line(linewidth = 1) +
       ggplot2::geom_point(size = 2.5) +
       ggplot2::ggtitle(title_text, subtitle_text) +
-      ggplot2::guides(linetype = ggplot2::guide_legend(override.aes = list(size = 0.5)),
-             color = ggplot2::guide_legend(override.aes = list(size = 0.5))) +
-      ggplot2::theme(axis.line = ggplot2::element_line(colour = "black"),
-            panel.background = ggplot2::element_blank(),
-            plot.title=ggplot2::element_text(hjust=0.5),
-            plot.subtitle=ggplot2::element_text(hjust=0.5)) +
+      ggplot2::guides(
+        linetype = ggplot2::guide_legend(override.aes = list(size = 0.5)),
+        color = ggplot2::guide_legend(override.aes = list(size = 0.5))
+      ) +
+      ggplot2::theme(
+        axis.line = ggplot2::element_line(colour = "black"),
+        panel.background = ggplot2::element_blank(),
+        plot.title = ggplot2::element_text(hjust = 0.5),
+        plot.subtitle = ggplot2::element_text(hjust = 0.5)
+      ) +
       ggplot2::scale_x_continuous(n.breaks = 10, trans = "log2")
 
-     # set lower limit of y axis to 0 if graphing a percent
+    # set lower limit of y axis to 0 if graphing a percent
     if (grepl("Percent", label_text[m])) {
       plt <- plt + ggplot2::scale_y_continuous(limits = c(0, NA))
     }
@@ -115,16 +124,16 @@ plot_metrics <- function(metric_dfs_by_net, title_text, subtitle_text = "", perT
     # if any of the networks whose metrics are being plotted has only one size,
     # plotting with box plots for the permuted networks looks better
     if (plot_with_boxes) {
-      plt <- plt + ggplot2::geom_boxplot(permuted, mapping=ggplot2::aes(x=size, y=metric, color = method, group = interaction(method, size))) +
+      plt <- plt + ggplot2::geom_boxplot(permuted, mapping = ggplot2::aes(x = size, y = metric, color = method, group = interaction(method, size))) +
         ggplot2::labs(x = ifelse(perTF, "Edges per TF", "Edges"), y = label_text[m], color = "Network", shape = "Network")
     } else {
-      medians = dplyr::summarise(group_by(permuted, network), median = median(metric))
+      medians <- dplyr::summarise(group_by(permuted, network), median = median(metric))
       medians <- tidyr::separate_wider_regex(medians, network, c(method = ".*", "_", size = ".*"), cols_remove = FALSE)
       medians$size <- as.numeric(medians$size)
       medians$ltype <- "Randomized network"
 
-      for(net in unique(permuted$method)) {
-        plt <- plt + ggplot2::geom_line(medians[medians$method == net,], mapping = ggplot2::aes(x = size, y = median, color = method, linetype = ltype), linewidth = 1.5)
+      for (net in unique(permuted$method)) {
+        plt <- plt + ggplot2::geom_line(medians[medians$method == net, ], mapping = ggplot2::aes(x = size, y = median, color = method, linetype = ltype), linewidth = 1.5)
       }
       plt <- plt + ggplot2::labs(x = ifelse(perTF, "Edges per TF", "Edges"), y = label_text[m], color = "Network", shape = "Network", linetype = "Data")
     }
