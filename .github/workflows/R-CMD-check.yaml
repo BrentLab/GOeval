@@ -32,6 +32,15 @@ jobs:
 
       - uses: r-lib/actions/setup-pandoc@v2
 
+      - name: Set environment variables for macos
+        if: matrix.config.os == 'macos-latest'
+        run: |
+          export CFLAGS=-I/opt/homebrew/include
+          export CPPFLAGS=-I/opt/homebrew/include
+          export CXXFLAGS=-I/opt/homebrew/include
+          export CXX11FLAGS=-I/opt/homebrew/include
+          export LDFLAGS=-L/opt/homebrew/lib
+
       - uses: r-lib/actions/setup-r@v2
         with:
           r-version: ${{ matrix.config.r }}
