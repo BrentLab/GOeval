@@ -2,8 +2,8 @@
 # GOeval
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/westbrooktm/GOeval/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/westbrooktm/GOeval/actions/workflows/R-CMD-check.yaml)
-[![Codecov test coverage](https://codecov.io/gh/westbrooktm/GOeval/branch/main/graph/badge.svg)](https://app.codecov.io/gh/westbrooktm/GOeval?branch=main)
+[![R-CMD-check](https://github.com/BrentLab/GOeval/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/BrentLab/GOeval/actions/workflows/R-CMD-check.yaml)
+[![Codecov test coverage](https://codecov.io/gh/BrentLab/GOeval/branch/main/graph/badge.svg)](https://app.codecov.io/gh/BrentLab/GOeval?branch=main)
 <!-- badges: end -->
 
 Welcome to GOeval - a package for gene regulatory network evaluation using Gene Ontology and other gene set databases.
@@ -12,10 +12,10 @@ This package provides functions to systematically run over-representation analys
 
 ## Installation
 
-You can install the development version of GOeval like so:
+You can install GOeval with:
 
 ``` r
-devtools::install_github("westbrooktm/GOeval", ref = "dev")
+devtools::install_github("BrentLab/GOeval")
 ```
 
 You can then load the package with:
@@ -26,4 +26,4 @@ library("GOeval")
 
 ## Documentation
 
-https://westbrooktm.github.io/GOeval/
+https://BrentLab.github.io/GOeval/
