@@ -1,10 +1,10 @@
-pandoc: 2.19.2
+pandoc: 3.1.11
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
   GOeval: GOeval.html
-last_built: 2023-07-28T21:21Z
+last_built: 2024-05-29T14:35Z
 urls:
-  reference: https://westbrooktm.github.io/GOeval/reference
-  article: https://westbrooktm.github.io/GOeval/articles
+  reference: https://BrentLab.github.io/GOeval/reference
+  article: https://BrentLab.github.io/GOeval/articles
 

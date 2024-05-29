@@ -72,11 +72,11 @@
 package, so it might be the better option if you do not want to install
 all of “devtools.”</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"westbrooktm/GOeval"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"BrentLab/GOeval"</span><span class="op">)</span></span>
 <span><span class="co"># OR</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"westbrooktm/GOeval"</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"BrentLab/GOeval"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://westbrooktm.github.io/GOeval/">"GOeval"</a></span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://BrentLab.github.io/GOeval/">"GOeval"</a></span><span class="op">)</span></span></code></pre></div>
 <p>Now that the package is loaded, we need a network as a tab-separated
 .tsv file where the first column is the source nodes, the second column
 is the target nodes, and the optional third column is the edge
@@ -119,7 +119,7 @@ time than the default “permutations = 3” at the cost of running the
 analyses on fewer permuted versions of the input network.
 “get_annotation_overlap = TRUE” indicates that the “annotation_overlap”
 metric should be calculated.</p>
-<p>The available arguments for all functions can be found at the <a href="https://westbrooktm.github.io/GOeval/reference/index.html">Reference</a>
+<p>The available arguments for all functions can be found at the <a href="https://BrentLab.github.io/GOeval/reference/index.html">Reference</a>
 tab at the top of this page.</p>
 <p>After <code>evaluate</code> runs for a couple minutes, the directory
 at out_dir should contain a folder of subsets of the original network, a
