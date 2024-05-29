@@ -1209,7 +1209,7 @@
     },
     "svglite": {
       "Package": "svglite",
-      "Version": "1.2.3",
+      "Version": "2.1.1",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [

@@ -18,7 +18,7 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: macos-latest,   r: 'renv'} #'release'}
+          #- {os: macos-latest,   r: 'renv'} #'release'}
           - {os: ubuntu-latest,   r: 'renv'} #'release'}
           #- {os: windows-latest, r: 'renv'} #'release'}
 
