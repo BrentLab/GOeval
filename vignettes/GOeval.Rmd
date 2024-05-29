@@ -17,9 +17,9 @@ knitr::opts_chunk$set(
 First, install and load this package. It is easiest to use either the "devtools" or "remotes" package to do so. "remotes" is a smaller package, so it might be the better option if you do not want to install all of "devtools."
 
 ```{r, eval = FALSE}
-devtools::install_github("westbrooktm/GOeval")
+devtools::install_github("BrentLab/GOeval")
 # OR
-remotes::install_github("westbrooktm/GOeval")
+remotes::install_github("BrentLab/GOeval")
 ```
 
 ```{r setup}
@@ -76,7 +76,7 @@ net_1_data <- evaluate(network_path, reference_path, out_dir, network_name,
 
 It is possible to customize the behavior of the `evaluate` function by using arguments in addition to the four required ones. In the above example, the 'edges' argument modifies the sizes of subsets to analyze from the input network. "permutations = 1" allows a faster run time than the default "permutations = 3" at the cost of running the analyses on fewer permuted versions of the input network. "get_annotation_overlap = TRUE" indicates that the "annotation_overlap" metric should be calculated.
 
-The available arguments for all functions can be found at the [Reference](https://westbrooktm.github.io/GOeval/reference/index.html) tab at the top of this page.
+The available arguments for all functions can be found at the [Reference](https://BrentLab.github.io/GOeval/reference/index.html) tab at the top of this page.
 
 After `evaluate` runs for a couple minutes, the directory at out_dir should contain a folder of subsets of the original network, a folder that contains the ORA summaries and sets of target genes, and a .pdf file with plots of metrics calculated from those summaries. The evaluate function returns the data used to make the plots as a list of data.frames.
 

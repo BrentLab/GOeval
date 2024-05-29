@@ -6,11 +6,6 @@ ENV RENV_VERSION 0.16.0
 RUN R -e "install.packages(c('remotes'), repos = c(CRAN = 'https://cran.wustl.edu'))"
 RUN R -e "remotes::install_github('rstudio/renv@${RENV_VERSION}')"
 
-# it would be a good idea to figure out what
-# each of these do. My method of dealing with this
-# is to reduce it, try installing, and then add
-# packages to deal with errors. I don't adjust this
-# as frequently as I should.
 RUN  apt-get update && \
      apt-get install -y --no-install-recommends \
       software-properties-common \

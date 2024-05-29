@@ -18,7 +18,7 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: macos-latest,   r: 'renv'} #'release'}
+          #- {os: macos-latest,   r: 'renv'} #'release'}
           - {os: ubuntu-latest,   r: 'renv'} #'release'}
           #- {os: windows-latest, r: 'renv'} #'release'}
 
@@ -28,7 +28,7 @@ jobs:
       RENV_PATHS_ROOT: ~/.local/share/renv
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - uses: r-lib/actions/setup-pandoc@v2
 
@@ -47,7 +47,7 @@ jobs:
         run: choco install glpk -y
 
       - name: Cache packages
-        uses: actions/cache@v1
+        uses: actions/cache@v4
         with:
           path: ${{ env.RENV_PATHS_ROOT }}
           key: ${{ runner.os }}-renv-${{ hashFiles('**/renv.lock') }}
